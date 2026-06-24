@@ -1,0 +1,29 @@
+<div class="ui-input">
+
+  @if (label) {
+  <label class="ui-input-label">
+    {{ label }}
+
+    @if (required) {
+    <span class="required">*</span>
+    }
+  </label>
+  }
+
+  <input [type]="type" [value]="value" [placeholder]="placeholder" [disabled]="disabled" [class.error]="error"
+    [class.size-small]="size === 'small'" [class.size-medium]="size === 'medium'" [class.size-large]="size === 'large'"
+    (input)="onInput($event)" (blur)="onBlur()" />
+
+  @if (error && errorText) {
+  <div class="error-text">
+    {{ errorText }}
+  </div>
+  }
+
+  @else if (helperText) {
+  <div class="helper-text">
+    {{ helperText }}
+  </div>
+  }
+
+</div>

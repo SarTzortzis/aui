@@ -1,0 +1,28 @@
+<div class="ui-textarea">
+
+  @if (label) {
+  <label class="ui-textarea-label">
+    {{ label }}
+
+    @if (required) {
+    <span class="required">*</span>
+    }
+  </label>
+  }
+
+  <textarea [value]="value" [rows]="rows" [placeholder]="placeholder" [disabled]="disabled" [ngClass]="[
+      'size-' + size,
+      error ? 'error' : ''
+    ]" (input)="onInput($event)" (blur)="onBlur()"></textarea>
+
+  @if (error && errorText) {
+  <div class="error-text">
+    {{ errorText }}
+  </div>
+  } @else if (helperText) {
+  <div class="helper-text">
+    {{ helperText }}
+  </div>
+  }
+
+</div>

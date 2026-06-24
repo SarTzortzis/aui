@@ -1,0 +1,8 @@
+<button [disabled]="disabled" (click)="clicked.emit($event)" [class]="classes.join(' ')">
+
+  @if (loading) {
+  <span class="spinner"></span>
+  }
+  <ng-content></ng-content>
+
+</button>

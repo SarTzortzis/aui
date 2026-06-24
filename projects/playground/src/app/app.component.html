@@ -1,0 +1,150 @@
+<h2>Buttons</h2>
+<ui-card>
+
+  <ui-button>Default</ui-button>
+
+  <ui-button variant="contained">
+    Contained
+  </ui-button>
+
+  <ui-button variant="outlined">
+    Outlined
+  </ui-button>
+
+  <ui-button color="danger">
+    Delete
+  </ui-button>
+
+  <ui-button size="large" (clicked)="onLargeButtonClick()">
+    Large on Click
+  </ui-button>
+
+  <ui-button variant="contained" [disabled]=true>
+    Disabled
+  </ui-button>
+
+  <ui-button variant="contained" [loading]=true>
+    Loading...
+  </ui-button>
+  <ui-button [fullWidth]="true">
+    Submit
+  </ui-button>
+</ui-card>
+<br />
+<ui-divider></ui-divider>
+<br />
+<ui-card>
+
+  <h2>Inputs</h2>
+
+  <ui-input label="Username" placeholder="Enter username">
+  </ui-input>
+
+  <br />
+
+  <ui-input label="Email" placeholder="Enter email" helperText="We'll never share your email">
+  </ui-input>
+
+  <br />
+
+  <ui-input label="Email" [error]="true" errorText="Invalid email">
+  </ui-input>
+</ui-card>
+<br />
+<ui-divider></ui-divider>
+<br />
+<ui-card>
+  <h2>Textarea</h2>
+
+  <ui-textarea label="Description" placeholder="Write something..."></ui-textarea>
+
+  <br />
+
+  <ui-textarea label="Notes" [rows]="6" helperText="Maximum 500 characters"></ui-textarea>
+
+  <br />
+
+  <ui-textarea label="Feedback" [error]="true" errorText="This field is required"></ui-textarea>
+
+</ui-card>
+<br />
+<ui-divider></ui-divider>
+<br />
+<ui-card>
+  <h2>Checkboxes</h2>
+
+  <ui-checkbox>
+    Accept terms and conditions
+  </ui-checkbox>
+
+  <br />
+  <br />
+
+  <ui-checkbox [disabled]="true">
+    Disabled checkbox
+  </ui-checkbox>
+</ui-card>
+<br />
+<ui-divider></ui-divider>
+<br />
+<ui-card>
+  <h2>Switches</h2>
+
+  <ui-switch></ui-switch>
+
+  <br />
+  <br />
+
+  <ui-switch [disabled]="true"></ui-switch>
+</ui-card>
+<br />
+<ui-divider></ui-divider>
+<br />
+<ui-card>
+  <h3>User Information</h3>
+
+  <p>
+    This content is inside a card.
+  </p>
+
+  <ui-button>
+    Save
+  </ui-button>
+</ui-card>
+<br />
+<ui-divider></ui-divider>
+<br />
+<ui-card>
+  <h3>Badges</h3>
+
+  <ui-badge>
+    Primary
+  </ui-badge>
+
+  <ui-badge color="success">
+    Active
+  </ui-badge>
+
+  <ui-badge color="danger">
+    Deleted
+  </ui-badge>
+
+  <ui-badge color="warning">
+    Pending
+  </ui-badge>
+</ui-card>
+<br />
+<ui-divider></ui-divider>
+<br />
+<ui-card>
+  <h3>User Details</h3>
+
+  <p>Name: John Doe</p>
+
+  <ui-divider></ui-divider>
+
+  <p>Email: john&#64;test.com</p>
+</ui-card>
+<br />
+<ui-divider></ui-divider>
+<br />

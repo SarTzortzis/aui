@@ -1,0 +1,15 @@
+<label class="ui-checkbox" [class.disabled]="disabled">
+
+  <input type="checkbox" [checked]="checked" [disabled]="disabled" (change)="toggle()" />
+
+  <span class="checkbox-box">
+    @if (checked) {
+    ✓
+    }
+  </span>
+
+  <span class="checkbox-label">
+    <ng-content></ng-content>
+  </span>
+
+</label>

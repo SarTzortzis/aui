@@ -1,0 +1,55 @@
+span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 999px;
+
+  font-weight: var(--ui-font-weight-medium);
+
+  white-space: nowrap;
+}
+
+/* Sizes */
+
+.size-small {
+  padding: 2px 8px;
+  font-size: var(--ui-font-size-sm);
+}
+
+.size-medium {
+  padding: 4px 10px;
+  font-size: var(--ui-font-size-md);
+}
+
+.size-large {
+  padding: 6px 12px;
+  font-size: var(--ui-font-size-lg);
+}
+
+/* Colors */
+
+.color-primary {
+  background: var(--ui-color-primary);
+  color: white;
+}
+
+.color-secondary {
+  background: var(--ui-color-secondary);
+  color: white;
+}
+
+.color-success {
+  background: var(--ui-color-success);
+  color: white;
+}
+
+.color-danger {
+  background: var(--ui-color-danger);
+  color: white;
+}
+
+.color-warning {
+  background: var(--ui-color-warning);
+  color: white;
+}
