@@ -11,6 +11,7 @@ import {
   DividerComponent,
   SpinnerComponent,
   RadioGroupComponent,
+  SelectComponent,
 } from "ui-kit";
 
 @Component({
@@ -28,13 +29,27 @@ import {
     DividerComponent,
     SpinnerComponent,
     RadioGroupComponent,
+    SelectComponent,
   ],
   templateUrl: "./app.component.html",
   styleUrl: "./app.component.css",
 })
 export class AppComponent {
   title = "playground";
-
+  countries = [
+    {
+      label: "Greece",
+      value: "gr",
+    },
+    {
+      label: "Germany",
+      value: "de",
+    },
+    {
+      label: "France",
+      value: "fr",
+    },
+  ];
   statusOptions = [
     {
       label: "Draft",

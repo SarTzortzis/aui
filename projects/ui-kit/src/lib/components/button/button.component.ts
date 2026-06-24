@@ -1,16 +1,18 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Color, Size, Variant } from '../../models';
+import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Color, Size, Variant } from "../../models";
+import { SpinnerComponent } from "../spinner";
 
 @Component({
-  selector: 'ui-button',
+  selector: "ui-button",
   standalone: true,
-  templateUrl: './button.component.html',
-  styleUrls: ['./button.component.scss'],
+  templateUrl: "./button.component.html",
+  styleUrls: ["./button.component.scss"],
+  imports: [SpinnerComponent],
 })
 export class ButtonComponent {
-  @Input() variant: Variant = 'contained';
-  @Input() color: Color = 'primary';
-  @Input() size: Size = 'medium';
+  @Input() variant: Variant = "contained";
+  @Input() color: Color = "primary";
+  @Input() size: Size = "medium";
 
   @Output() clicked = new EventEmitter<MouseEvent>();
 
@@ -23,7 +25,7 @@ export class ButtonComponent {
       `variant-${this.variant}`,
       `color-${this.color}`,
       `size-${this.size}`,
-      this.fullWidth ? 'full-width' : '',
+      this.fullWidth ? "full-width" : "",
     ].filter(Boolean);
   }
 }

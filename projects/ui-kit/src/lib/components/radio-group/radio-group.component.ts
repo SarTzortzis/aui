@@ -20,6 +20,7 @@ import { BaseControlValueAccessor } from "../../shared";
 })
 export class RadioGroupComponent extends BaseControlValueAccessor<string> {
   @Input() options: RadioOption[] = [];
+  @Input() override disabled = false;
 
   select(value: string): void {
     if (this.disabled) {

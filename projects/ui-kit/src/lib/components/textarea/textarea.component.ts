@@ -23,6 +23,7 @@ import { BaseControlValueAccessor } from "../../shared";
 export class TextareaComponent extends BaseControlValueAccessor<string> {
   @Input() label = "";
   @Input() placeholder = "";
+  @Input() override disabled = false;
 
   @Input() helperText = "";
   @Input() errorText = "";

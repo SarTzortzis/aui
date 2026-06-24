@@ -18,6 +18,7 @@ import { BaseControlValueAccessor } from "../../shared";
 })
 export class CheckboxComponent extends BaseControlValueAccessor<boolean> {
   checked = false;
+  @Input() override disabled = false;
 
   toggle(): void {
     if (this.disabled) {

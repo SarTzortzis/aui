@@ -23,6 +23,7 @@ export class InputComponent extends BaseControlValueAccessor<string> {
   @Input() placeholder = "";
   @Input() helperText = "";
   @Input() errorText = "";
+  @Input() override disabled = false;
 
   @Input() required = false;
   @Input() error = false;

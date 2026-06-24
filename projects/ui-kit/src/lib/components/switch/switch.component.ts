@@ -17,6 +17,8 @@ import { BaseControlValueAccessor } from "../../shared";
   ],
 })
 export class SwitchComponent extends BaseControlValueAccessor<boolean> {
+  @Input() override disabled = false;
+
   checked = false;
 
   toggle(): void {
