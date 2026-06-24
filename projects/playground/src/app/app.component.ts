@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from "@angular/core";
+import { RouterOutlet } from "@angular/router";
 import {
   ButtonComponent,
   InputComponent,
@@ -9,10 +9,12 @@ import {
   CardComponent,
   BadgeComponent,
   DividerComponent,
-} from 'ui-kit';
+  SpinnerComponent,
+  RadioGroupComponent,
+} from "ui-kit";
 
 @Component({
-  selector: 'app-root',
+  selector: "app-root",
   standalone: true,
   imports: [
     RouterOutlet,
@@ -24,14 +26,31 @@ import {
     CardComponent,
     BadgeComponent,
     DividerComponent,
+    SpinnerComponent,
+    RadioGroupComponent,
   ],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  templateUrl: "./app.component.html",
+  styleUrl: "./app.component.css",
 })
 export class AppComponent {
-  title = 'playground';
+  title = "playground";
+
+  statusOptions = [
+    {
+      label: "Draft",
+      value: "draft",
+    },
+    {
+      label: "Published",
+      value: "published",
+    },
+    {
+      label: "Archived",
+      value: "archived",
+    },
+  ];
 
   onLargeButtonClick() {
-    console.log('Large button clicked!');
+    console.log("Large button clicked!");
   }
 }

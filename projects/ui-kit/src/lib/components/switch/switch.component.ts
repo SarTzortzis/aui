@@ -1,12 +1,13 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { Component, forwardRef, Input } from "@angular/core";
 
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NG_VALUE_ACCESSOR } from "@angular/forms";
+import { BaseControlValueAccessor } from "../../shared";
 
 @Component({
-  selector: 'ui-switch',
+  selector: "ui-switch",
   standalone: true,
-  templateUrl: './switch.component.html',
-  styleUrls: ['./switch.component.scss'],
+  templateUrl: "./switch.component.html",
+  styleUrls: ["./switch.component.scss"],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -15,29 +16,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     },
   ],
 })
-export class SwitchComponent implements ControlValueAccessor {
-  @Input() disabled = false;
-
+export class SwitchComponent extends BaseControlValueAccessor<boolean> {
   checked = false;
-
-  private onChange = (_value: boolean) => {};
-  private onTouched = () => {};
-
-  writeValue(value: boolean): void {
-    this.checked = !!value;
-  }
-
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
-
-  setDisabledState(isDisabled: boolean): void {
-    this.disabled = isDisabled;
-  }
 
   toggle(): void {
     if (this.disabled) {

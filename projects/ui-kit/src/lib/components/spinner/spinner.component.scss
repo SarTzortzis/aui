@@ -1,0 +1,40 @@
+span {
+  display: inline-block;
+
+  border-radius: 50%;
+
+  border-style: solid;
+  border-color: currentColor;
+  border-top-color: transparent;
+
+  animation: spin 0.8s linear infinite;
+}
+
+/* Sizes */
+
+.size-small {
+  width: 14px;
+  height: 14px;
+
+  border-width: 2px;
+}
+
+.size-medium {
+  width: 18px;
+  height: 18px;
+
+  border-width: 2px;
+}
+
+.size-large {
+  width: 24px;
+  height: 24px;
+
+  border-width: 3px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

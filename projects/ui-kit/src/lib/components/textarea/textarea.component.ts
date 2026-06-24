@@ -1,16 +1,17 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { Component, forwardRef, Input } from "@angular/core";
 
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NG_VALUE_ACCESSOR } from "@angular/forms";
 
-import { NgClass } from '@angular/common';
-import { TextareaSize } from './textarea.types';
+import { NgClass } from "@angular/common";
+import { TextareaSize } from "./textarea.types";
+import { BaseControlValueAccessor } from "../../shared";
 
 @Component({
-  selector: 'ui-textarea',
+  selector: "ui-textarea",
   standalone: true,
   imports: [NgClass],
-  templateUrl: './textarea.component.html',
-  styleUrls: ['./textarea.component.scss'],
+  templateUrl: "./textarea.component.html",
+  styleUrls: ["./textarea.component.scss"],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -19,40 +20,18 @@ import { TextareaSize } from './textarea.types';
     },
   ],
 })
-export class TextareaComponent implements ControlValueAccessor {
-  @Input() label = '';
-  @Input() placeholder = '';
+export class TextareaComponent extends BaseControlValueAccessor<string> {
+  @Input() label = "";
+  @Input() placeholder = "";
 
-  @Input() helperText = '';
-  @Input() errorText = '';
+  @Input() helperText = "";
+  @Input() errorText = "";
 
   @Input() required = false;
   @Input() error = false;
 
   @Input() rows = 4;
-  @Input() size: TextareaSize = 'medium';
-
-  value = '';
-  disabled = false;
-
-  private onChange = (value: string) => {};
-  private onTouched = () => {};
-
-  writeValue(value: string): void {
-    this.value = value ?? '';
-  }
-
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
-
-  setDisabledState(isDisabled: boolean): void {
-    this.disabled = isDisabled;
-  }
+  @Input() size: TextareaSize = "medium";
 
   onInput(event: Event): void {
     const value = (event.target as HTMLTextAreaElement).value;

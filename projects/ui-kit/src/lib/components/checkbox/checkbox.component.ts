@@ -1,12 +1,13 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { Component, forwardRef, Input } from "@angular/core";
 
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NG_VALUE_ACCESSOR } from "@angular/forms";
+import { BaseControlValueAccessor } from "../../shared";
 
 @Component({
-  selector: 'ui-checkbox',
+  selector: "ui-checkbox",
   standalone: true,
-  templateUrl: './checkbox.component.html',
-  styleUrls: ['./checkbox.component.scss'],
+  templateUrl: "./checkbox.component.html",
+  styleUrls: ["./checkbox.component.scss"],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -15,29 +16,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     },
   ],
 })
-export class CheckboxComponent implements ControlValueAccessor {
-  @Input() disabled = false;
-
+export class CheckboxComponent extends BaseControlValueAccessor<boolean> {
   checked = false;
-
-  private onChange = (_value: boolean) => {};
-  private onTouched = () => {};
-
-  writeValue(value: boolean): void {
-    this.checked = !!value;
-  }
-
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
-
-  setDisabledState(isDisabled: boolean): void {
-    this.disabled = isDisabled;
-  }
 
   toggle(): void {
     if (this.disabled) {
