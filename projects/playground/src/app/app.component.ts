@@ -15,6 +15,7 @@ import {
   SpinnerComponent,
   SwitchComponent,
   TextareaComponent,
+  ThemeService,
 } from "ui-kit";
 
 @Component({
@@ -43,47 +44,29 @@ import {
 export class AppComponent {
   title = "playground";
 
-  darkMode = false;
-
   dialogOpen = false;
 
-  countries = [
-    {
-      label: "Greece",
-      value: "gr",
-    },
-    {
-      label: "Germany",
-      value: "de",
-    },
-    {
-      label: "France",
-      value: "fr",
-    },
-  ];
+  constructor(public readonly theme: ThemeService) {}
 
-  statusOptions = [
-    {
-      label: "Draft",
-      value: "draft",
-    },
-    {
-      label: "Published",
-      value: "published",
-    },
-    {
-      label: "Archived",
-      value: "archived",
-    },
-  ];
-
-  toggleTheme(): void {
-    this.darkMode = !this.darkMode;
+  get darkMode(): boolean {
+    return this.theme.theme() === "dark";
   }
 
   onThemeChanged(isDark: boolean): void {
-    this.darkMode = isDark;
+    this.theme.setTheme(isDark ? "dark" : "light");
   }
+
+  countries = [
+    { label: "Greece", value: "gr" },
+    { label: "Germany", value: "de" },
+    { label: "France", value: "fr" },
+  ];
+
+  statusOptions = [
+    { label: "Draft", value: "draft" },
+    { label: "Published", value: "published" },
+    { label: "Archived", value: "archived" },
+  ];
 
   onLargeButtonClick(): void {
     console.log("Large button clicked!");

@@ -18,9 +18,9 @@ export class ThemeService {
   // State
   //------------------------------------------
 
-  private readonly theme = signal<UiTheme>("light");
+  private readonly _theme = signal<UiTheme>("light");
 
-  readonly currentTheme = this.theme.asReadonly();
+  readonly theme = this._theme.asReadonly();
 
   //------------------------------------------
   // Constructor
@@ -42,19 +42,11 @@ export class ThemeService {
 
     this.storage.set(this.storageKey, theme);
 
-    this.theme.set(theme);
+    this._theme.set(theme);
   }
 
   toggle(): void {
-    this.setTheme(this.isDark() ? "light" : "dark");
-  }
-
-  isDark(): boolean {
-    return this.theme() === "dark";
-  }
-
-  isLight(): boolean {
-    return this.theme() === "light";
+    this.setTheme(this._theme() === "dark" ? "light" : "dark");
   }
 
   //------------------------------------------

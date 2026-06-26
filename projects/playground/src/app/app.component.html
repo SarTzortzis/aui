@@ -1,4 +1,4 @@
-<div class="playground" [attr.data-ui-theme]="darkMode ? 'dark' : 'light'">
+<div class="playground">
 
   <div class="theme-toolbar">
 
@@ -6,17 +6,8 @@
       {{ darkMode ? '🌙 Dark Theme' : '☀️ Light Theme' }}
     </span>
 
-    <div class="theme-toolbar">
-
-      <span>
-        Theme
-      </span>
-
-      <ui-switch [value]="darkMode" (valueChange)="toggleTheme()">
-      </ui-switch>
-
-    </div>
-
+    <ui-switch [value]="darkMode" (valueChange)="onThemeChanged($event)">
+    </ui-switch>
 
   </div>
 
@@ -159,6 +150,7 @@
   <ui-divider></ui-divider>
   <br />
   <ui-card>
+
     <h3>User Details</h3>
 
     <p>Name: John Doe</p>
@@ -288,5 +280,3 @@
   <br />
   <ui-divider></ui-divider>
   <br />
-
-</div>
