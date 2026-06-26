@@ -6,13 +6,13 @@
 
     <div class="dialog-header">
 
-      @if (title) {
-      <h2>{{ title }}</h2>
-      }
+      <div class="dialog-title">
+        <ng-content select="[dialog-title]"></ng-content>
+      </div>
 
       <button class="close-button" type="button" (click)="close()">
 
-        <ui-icon>
+        <ui-icon size="small">
           ✕
         </ui-icon>
 
@@ -21,9 +21,11 @@
     </div>
 
     <div class="dialog-content">
+      <ng-content select="[dialog-content]"></ng-content>
+    </div>
 
-      <ng-content></ng-content>
-
+    <div class="dialog-actions">
+      <ng-content select="[dialog-actions]"></ng-content>
     </div>
 
   </div>

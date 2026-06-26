@@ -20,8 +20,6 @@ import { IconComponent } from "../../feedback/icon";
 export class DialogComponent {
   @Input() open = false;
 
-  @Input() title = "";
-
   @Input() closeOnBackdrop = true;
 
   @Input() closeOnEscape = true;

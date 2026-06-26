@@ -1,6 +1,5 @@
 .dialog-overlay {
   position: fixed;
-
   inset: 0;
 
   display: flex;
@@ -17,9 +16,12 @@
 }
 
 .dialog {
-  width: 520px;
+  display: flex;
+  flex-direction: column;
 
-  max-width: 100%;
+  width: 520px;
+  max-width: 90vw;
+  max-height: 90vh;
 
   background: var(--ui-color-background);
 
@@ -32,44 +34,70 @@
   animation: scale-in 180ms ease;
 }
 
+/* Header */
+
 .dialog-header {
   display: flex;
-
-  justify-content: space-between;
-
   align-items: center;
+  justify-content: space-between;
+  gap: var(--ui-spacing-md);
 
   padding: var(--ui-spacing-lg);
 
   border-bottom: 1px solid var(--ui-color-border);
 }
 
-.dialog-header h2 {
-  margin: 0;
+.dialog-title {
+  flex: 1;
+
+  display: flex;
+  align-items: center;
+  gap: var(--ui-spacing-sm);
 
   font-size: var(--ui-font-size-lg);
-
   font-weight: var(--ui-font-weight-medium);
+
+  color: var(--ui-color-text);
 }
+
+/* Content */
 
 .dialog-content {
+  flex: 1;
+
   padding: var(--ui-spacing-lg);
+
+  overflow: auto;
+
+  color: var(--ui-color-text);
 }
 
-.close-button {
+/* Footer */
+
+.dialog-actions {
   display: flex;
+  justify-content: flex-end;
+  gap: var(--ui-spacing-sm);
 
+  padding: var(--ui-spacing-lg);
+
+  border-top: 1px solid var(--ui-color-border);
+}
+
+/* Close button */
+
+.close-button {
+  display: inline-flex;
   align-items: center;
-
   justify-content: center;
 
-  padding: var(--ui-spacing-xs);
+  width: 36px;
+  height: 36px;
 
   border: none;
+  border-radius: var(--ui-radius-sm);
 
   background: transparent;
-
-  border-radius: var(--ui-radius-sm);
 
   cursor: pointer;
 
@@ -79,6 +107,8 @@
 .close-button:hover {
   background: rgba(0, 0, 0, 0.05);
 }
+
+/* Animations */
 
 @keyframes fade-in {
   from {
@@ -93,13 +123,11 @@
 @keyframes scale-in {
   from {
     opacity: 0;
-
-    transform: scale(.96);
+    transform: scale(0.96);
   }
 
   to {
     opacity: 1;
-
     transform: scale(1);
   }
 }
