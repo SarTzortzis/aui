@@ -1,4 +1,10 @@
-import { Component, ElementRef, Input } from "@angular/core";
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+} from "@angular/core";
 import { BaseControlValueAccessor } from "../../../shared/base-control-value-accessor";
 import { ClickOutsideDirective } from "../../../directives";
 import { Option } from "../../../models";
@@ -13,16 +19,18 @@ import { IconComponent } from "../../feedback/icon";
 })
 export class SelectComponent extends BaseControlValueAccessor<string> {
   @Input() label = "";
-
   @Input() placeholder = "Select...";
-
   @Input() options: Option[] = [];
-
   @Input() override disabled = false;
+  @Input() value: string | null = null;
+
+  @Output() valueChange = new EventEmitter<string | null>();
 
   isOpen = false;
 
-  override value = "";
+  writeValue(value: string): void {
+    this.value = value;
+  }
 
   get selectedOption(): Option | undefined {
     return this.options.find((option) => option.value === this.value);
@@ -47,9 +55,11 @@ export class SelectComponent extends BaseControlValueAccessor<string> {
 
     this.value = option.value;
 
-    this.onChange(this.value);
+    this.value = option.value;
 
-    this.onTouched();
+    this.emitValueChange(this.value);
+
+    this.valueChange.emit(this.value);
 
     this.close();
   }

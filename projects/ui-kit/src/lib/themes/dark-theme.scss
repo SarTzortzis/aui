@@ -1,0 +1,32 @@
+[data-ui-theme='dark'] {
+
+  /* Brand */
+
+  --ui-color-primary: #64b5f6;
+  --ui-color-secondary: #ba68c8;
+
+  --ui-color-success: #66bb6a;
+  --ui-color-danger: #ef5350;
+  --ui-color-warning: #ffa726;
+
+  /* Surface */
+
+  --ui-color-background: #1f1f1f;
+  --ui-color-surface: #2a2a2a;
+
+  /* Text */
+
+  --ui-color-text: #f5f5f5;
+  --ui-color-text-secondary: #bdbdbd;
+
+  /* Borders */
+
+  --ui-color-border: #444;
+
+  /* Semantic */
+
+  --ui-color-primary-subtle: rgba(100,181,246,.12);
+  --ui-color-success-subtle: rgba(102,187,106,.12);
+  --ui-color-danger-subtle: rgba(239,83,80,.12);
+  --ui-color-warning-subtle: rgba(255,167,38,.12);
+}

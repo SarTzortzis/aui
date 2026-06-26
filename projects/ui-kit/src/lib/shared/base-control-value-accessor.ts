@@ -3,17 +3,13 @@ import { ControlValueAccessor } from "@angular/forms";
 export abstract class BaseControlValueAccessor<
   T,
 > implements ControlValueAccessor {
-  value: T | null = null;
-
   disabled = false;
 
   protected onChange: (value: T) => void = () => {};
 
   protected onTouched: () => void = () => {};
 
-  writeValue(value: T): void {
-    this.value = value;
-  }
+  abstract writeValue(value: T): void;
 
   registerOnChange(fn: (value: T) => void): void {
     this.onChange = fn;
@@ -25,5 +21,10 @@ export abstract class BaseControlValueAccessor<
 
   setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
+  }
+
+  protected emitValueChange(value: T): void {
+    this.onChange(value);
+    this.onTouched();
   }
 }

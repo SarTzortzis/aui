@@ -1,4 +1,10 @@
-import { Component, forwardRef, Input } from "@angular/core";
+import {
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+} from "@angular/core";
 
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 
@@ -34,11 +40,20 @@ export class TextareaComponent extends BaseControlValueAccessor<string> {
   @Input() rows = 4;
   @Input() size: TextareaSize = "medium";
 
-  onInput(event: Event): void {
-    const value = (event.target as HTMLTextAreaElement).value;
+  @Input() value = "";
 
+  @Output() valueChange = new EventEmitter<string>();
+
+  writeValue(value: string): void {
     this.value = value;
-    this.onChange(value);
+  }
+
+  onInput(event: Event): void {
+    this.value = (event.target as HTMLTextAreaElement).value;
+
+    this.emitValueChange(this.value);
+
+    this.valueChange.emit(this.value);
   }
 
   onBlur(): void {

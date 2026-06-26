@@ -1,268 +1,292 @@
-<h2>Buttons</h2>
-<ui-card>
+<div class="playground" [attr.data-ui-theme]="darkMode ? 'dark' : 'light'">
 
-  <ui-button>Default</ui-button>
+  <div class="theme-toolbar">
 
-  <ui-button variant="contained">
-    Contained
-  </ui-button>
+    <span>
+      {{ darkMode ? '🌙 Dark Theme' : '☀️ Light Theme' }}
+    </span>
 
-  <ui-button variant="outlined">
-    Outlined
-  </ui-button>
+    <div class="theme-toolbar">
 
-  <ui-button color="danger">
-    Delete
-  </ui-button>
+      <span>
+        Theme
+      </span>
 
-  <ui-button size="large" (clicked)="onLargeButtonClick()">
-    Large on Click
-  </ui-button>
+      <ui-switch [value]="darkMode" (valueChange)="toggleTheme()">
+      </ui-switch>
 
-  <ui-button variant="contained" [disabled]=true>
-    Disabled
-  </ui-button>
+    </div>
 
-  <ui-button variant="contained" [loading]=true>
-    Loading...
-  </ui-button>
-  <ui-button [fullWidth]="true">
-    Submit
-  </ui-button>
-</ui-card>
-<br />
-<ui-divider></ui-divider>
-<br />
-<ui-card>
 
-  <h2>Inputs</h2>
-
-  <ui-input label="Username" placeholder="Enter username">
-  </ui-input>
-
-  <br />
-
-  <ui-input label="Email" placeholder="Enter email" helperText="We'll never share your email">
-  </ui-input>
-
-  <br />
-
-  <ui-input label="Email" [error]="true" errorText="Invalid email">
-  </ui-input>
-</ui-card>
-<br />
-<ui-divider></ui-divider>
-<br />
-<ui-card>
-  <h2>Textarea</h2>
-
-  <ui-textarea label="Description" placeholder="Write something..."></ui-textarea>
-
-  <br />
-
-  <ui-textarea label="Notes" [rows]="6" helperText="Maximum 500 characters"></ui-textarea>
-
-  <br />
-
-  <ui-textarea label="Feedback" [error]="true" errorText="This field is required"></ui-textarea>
-
-</ui-card>
-<br />
-<ui-divider></ui-divider>
-<br />
-<ui-card>
-  <h2>Checkboxes</h2>
-
-  <ui-checkbox>
-    Accept terms and conditions
-  </ui-checkbox>
-
-  <br />
-  <br />
-
-  <ui-checkbox [disabled]="true">
-    Disabled checkbox
-  </ui-checkbox>
-</ui-card>
-<br />
-<ui-divider></ui-divider>
-<br />
-<ui-card>
-  <h2>Switches</h2>
-
-  <ui-switch></ui-switch>
-
-  <br />
-  <br />
-
-  <ui-switch [disabled]="true"></ui-switch>
-</ui-card>
-<br />
-<ui-divider></ui-divider>
-<br />
-<ui-card>
-  <h3>User Information</h3>
-
-  <p>
-    This content is inside a card.
-  </p>
-
-  <ui-button>
-    Save
-  </ui-button>
-</ui-card>
-<br />
-<ui-divider></ui-divider>
-<br />
-<ui-card>
-  <h3>Badges</h3>
-
-  <ui-badge>
-    Primary
-  </ui-badge>
-
-  <ui-badge color="success">
-    Active
-  </ui-badge>
-
-  <ui-badge color="danger">
-    Deleted
-  </ui-badge>
-
-  <ui-badge color="warning">
-    Pending
-  </ui-badge>
-</ui-card>
-<br />
-<ui-divider></ui-divider>
-<br />
-<ui-card>
-  <h3>User Details</h3>
-
-  <p>Name: John Doe</p>
-
-  <ui-divider></ui-divider>
-
-  <p>Email: john&#64;test.com</p>
-</ui-card>
-<br />
-<ui-divider></ui-divider>
-<br />
-<ui-card>
-  <h3>Spinners</h3>
-
-  <ui-spinner></ui-spinner>
-
-  <ui-spinner size="small"></ui-spinner>
-
-  <ui-spinner size="large"></ui-spinner>
-</ui-card>
-<br />
-<ui-divider></ui-divider>
-<br />
-<ui-card>
-  <h3>Radio Group</h3>
-
-  <ui-radio-group [options]="statusOptions">
-  </ui-radio-group>
-</ui-card>
-<br />
-<ui-divider></ui-divider>
-<br />
-<ui-select label="Country" [options]="countries">
-</ui-select>
-
-<br />
-<ui-divider></ui-divider>
-<br />
-<ui-card>
-
-  <h3>Icons</h3>
-
-  <ui-icon>
-    ✓
-  </ui-icon>
-
-  <ui-icon color="danger" size="large">
-
-    ✕
-
-  </ui-icon>
-
-  <ui-icon color="success">
-
-    ★
-
-  </ui-icon>
-
-</ui-card>
-
-
-<br />
-<ui-divider></ui-divider>
-<br />
-
-<ui-card>
-
-  <h3>Alerts</h3>
-
-  <ui-alert>
-    Information message
-  </ui-alert>
-
-  <br>
-
-  <ui-alert color="success">
-    User created successfully.
-  </ui-alert>
-
-  <br>
-
-  <ui-alert color="warning">
-    Unsaved changes.
-  </ui-alert>
-
-  <br>
-
-  <ui-alert color="danger">
-    Something went wrong.
-  </ui-alert>
-
-</ui-card>
-<br />
-<ui-divider></ui-divider>
-<br />
-<ui-button (clicked)="dialogOpen = true">
-
-  Open Dialog
-
-</ui-button>
-
-<ui-dialog [(open)]="dialogOpen">
-
-  <div dialog-title>
-    Delete User
   </div>
 
-  <div dialog-content>
-    Are you sure you want to delete this user?
-  </div>
+  <h2>Buttons</h2>
+  <ui-card>
 
-  <div dialog-actions>
+    <ui-button>Default</ui-button>
 
-    <ui-button variant="text" (clicked)="dialogOpen = false">
+    <ui-button variant="contained">
+      Contained
+    </ui-button>
 
-      Cancel
-
+    <ui-button variant="outlined">
+      Outlined
     </ui-button>
 
     <ui-button color="danger">
       Delete
     </ui-button>
 
-  </div>
+    <ui-button size="large" (clicked)="onLargeButtonClick()">
+      Large on Click
+    </ui-button>
 
-</ui-dialog>
-<br />
-<ui-divider></ui-divider>
-<br />
+    <ui-button variant="contained" [disabled]=true>
+      Disabled
+    </ui-button>
+
+    <ui-button variant="contained" [loading]=true>
+      Loading...
+    </ui-button>
+    <ui-button [fullWidth]="true">
+      Submit
+    </ui-button>
+  </ui-card>
+  <br />
+  <ui-divider></ui-divider>
+  <br />
+  <ui-card>
+
+    <h2>Inputs</h2>
+
+    <ui-input label="Username" placeholder="Enter username">
+    </ui-input>
+
+    <br />
+
+    <ui-input label="Email" placeholder="Enter email" helperText="We'll never share your email">
+    </ui-input>
+
+    <br />
+
+    <ui-input label="Email" [error]="true" errorText="Invalid email">
+    </ui-input>
+  </ui-card>
+  <br />
+  <ui-divider></ui-divider>
+  <br />
+  <ui-card>
+    <h2>Textarea</h2>
+
+    <ui-textarea label="Description" placeholder="Write something..."></ui-textarea>
+
+    <br />
+
+    <ui-textarea label="Notes" [rows]="6" helperText="Maximum 500 characters"></ui-textarea>
+
+    <br />
+
+    <ui-textarea label="Feedback" [error]="true" errorText="This field is required"></ui-textarea>
+
+  </ui-card>
+  <br />
+  <ui-divider></ui-divider>
+  <br />
+  <ui-card>
+    <h2>Checkboxes</h2>
+
+    <ui-checkbox>
+      Accept terms and conditions
+    </ui-checkbox>
+
+    <br />
+    <br />
+
+    <ui-checkbox [disabled]="true">
+      Disabled checkbox
+    </ui-checkbox>
+  </ui-card>
+  <br />
+  <ui-divider></ui-divider>
+  <br />
+  <ui-card>
+    <h2>Switches</h2>
+
+    <ui-switch></ui-switch>
+
+    <br />
+    <br />
+
+    <ui-switch [disabled]="true"></ui-switch>
+  </ui-card>
+  <br />
+  <ui-divider></ui-divider>
+  <br />
+  <ui-card>
+    <h3>User Information</h3>
+
+    <p>
+      This content is inside a card.
+    </p>
+
+    <ui-button>
+      Save
+    </ui-button>
+  </ui-card>
+  <br />
+  <ui-divider></ui-divider>
+  <br />
+  <ui-card>
+    <h3>Badges</h3>
+
+    <ui-badge>
+      Primary
+    </ui-badge>
+
+    <ui-badge color="success">
+      Active
+    </ui-badge>
+
+    <ui-badge color="danger">
+      Deleted
+    </ui-badge>
+
+    <ui-badge color="warning">
+      Pending
+    </ui-badge>
+  </ui-card>
+  <br />
+  <ui-divider></ui-divider>
+  <br />
+  <ui-card>
+    <h3>User Details</h3>
+
+    <p>Name: John Doe</p>
+
+    <ui-divider></ui-divider>
+
+    <p>Email: john&#64;test.com</p>
+  </ui-card>
+  <br />
+  <ui-divider></ui-divider>
+  <br />
+  <ui-card>
+    <h3>Spinners</h3>
+
+    <ui-spinner></ui-spinner>
+
+    <ui-spinner size="small"></ui-spinner>
+
+    <ui-spinner size="large"></ui-spinner>
+  </ui-card>
+  <br />
+  <ui-divider></ui-divider>
+  <br />
+  <ui-card>
+    <h3>Radio Group</h3>
+
+    <ui-radio-group [options]="statusOptions">
+    </ui-radio-group>
+  </ui-card>
+  <br />
+  <ui-divider></ui-divider>
+  <br />
+  <ui-select label="Country" [options]="countries">
+  </ui-select>
+
+  <br />
+  <ui-divider></ui-divider>
+  <br />
+  <ui-card>
+
+    <h3>Icons</h3>
+
+    <ui-icon>
+      ✓
+    </ui-icon>
+
+    <ui-icon color="danger" size="large">
+
+      ✕
+
+    </ui-icon>
+
+    <ui-icon color="success">
+
+      ★
+
+    </ui-icon>
+
+  </ui-card>
+
+
+  <br />
+  <ui-divider></ui-divider>
+  <br />
+
+  <ui-card>
+
+    <h3>Alerts</h3>
+
+    <ui-alert>
+      Information message
+    </ui-alert>
+
+    <br>
+
+    <ui-alert color="success">
+      User created successfully.
+    </ui-alert>
+
+    <br>
+
+    <ui-alert color="warning">
+      Unsaved changes.
+    </ui-alert>
+
+    <br>
+
+    <ui-alert color="danger">
+      Something went wrong.
+    </ui-alert>
+
+  </ui-card>
+  <br />
+  <ui-divider></ui-divider>
+  <br />
+  <ui-button (clicked)="dialogOpen = true">
+
+    Open Dialog
+
+  </ui-button>
+
+  <ui-dialog [(open)]="dialogOpen">
+
+    <div dialog-title>
+      Delete User
+    </div>
+
+    <div dialog-content>
+      Are you sure you want to delete this user?
+    </div>
+
+    <div dialog-actions>
+
+      <ui-button variant="text" (clicked)="dialogOpen = false">
+
+        Cancel
+
+      </ui-button>
+
+      <ui-button color="danger">
+        Delete
+      </ui-button>
+
+    </div>
+
+  </ui-dialog>
+  <br />
+  <ui-divider></ui-divider>
+  <br />
+
+</div>

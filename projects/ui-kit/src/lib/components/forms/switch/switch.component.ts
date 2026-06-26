@@ -1,7 +1,14 @@
-import { Component, forwardRef, Input } from "@angular/core";
-
+import {
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+} from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
+
 import { BaseControlValueAccessor } from "../../../shared";
+
 @Component({
   selector: "ui-switch",
   standalone: true,
@@ -16,7 +23,15 @@ import { BaseControlValueAccessor } from "../../../shared";
   ],
 })
 export class SwitchComponent extends BaseControlValueAccessor<boolean> {
+  @Input() value = false;
+
   @Input() override disabled = false;
+
+  @Output() valueChange = new EventEmitter<boolean>();
+
+  writeValue(value: boolean): void {
+    this.value = value;
+  }
 
   toggle(): void {
     if (this.disabled) {
@@ -25,7 +40,8 @@ export class SwitchComponent extends BaseControlValueAccessor<boolean> {
 
     this.value = !this.value;
 
-    this.onChange(this.value);
-    this.onTouched();
+    this.emitValueChange(this.value);
+
+    this.valueChange.emit(this.value);
   }
 }

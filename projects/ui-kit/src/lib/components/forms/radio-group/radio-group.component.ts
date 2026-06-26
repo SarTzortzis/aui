@@ -1,4 +1,10 @@
-import { Component, Input, forwardRef } from "@angular/core";
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  forwardRef,
+} from "@angular/core";
 
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 
@@ -21,6 +27,13 @@ import { BaseControlValueAccessor } from "../../../shared";
 export class RadioGroupComponent extends BaseControlValueAccessor<string> {
   @Input() options: RadioOption[] = [];
   @Input() override disabled = false;
+  @Input() value: string | null = null;
+
+  @Output() valueChange = new EventEmitter<string>();
+
+  writeValue(value: string): void {
+    this.value = value;
+  }
 
   select(value: string): void {
     if (this.disabled) {
@@ -29,7 +42,8 @@ export class RadioGroupComponent extends BaseControlValueAccessor<string> {
 
     this.value = value;
 
-    this.onChange(value);
-    this.onTouched();
+    this.emitValueChange(this.value);
+
+    this.valueChange.emit(this.value);
   }
 }

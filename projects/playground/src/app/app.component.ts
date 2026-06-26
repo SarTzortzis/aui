@@ -1,20 +1,20 @@
 import { Component } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
 import {
-  ButtonComponent,
-  InputComponent,
-  TextareaComponent,
-  CheckboxComponent,
-  SwitchComponent,
-  CardComponent,
+  AlertComponent,
   BadgeComponent,
+  ButtonComponent,
+  CardComponent,
+  CheckboxComponent,
+  DialogComponent,
   DividerComponent,
-  SpinnerComponent,
+  IconComponent,
+  InputComponent,
   RadioGroupComponent,
   SelectComponent,
-  IconComponent,
-  AlertComponent,
-  DialogComponent,
+  SpinnerComponent,
+  SwitchComponent,
+  TextareaComponent,
 } from "ui-kit";
 
 @Component({
@@ -42,7 +42,11 @@ import {
 })
 export class AppComponent {
   title = "playground";
+
+  darkMode = false;
+
   dialogOpen = false;
+
   countries = [
     {
       label: "Greece",
@@ -57,6 +61,7 @@ export class AppComponent {
       value: "fr",
     },
   ];
+
   statusOptions = [
     {
       label: "Draft",
@@ -72,7 +77,15 @@ export class AppComponent {
     },
   ];
 
-  onLargeButtonClick() {
+  toggleTheme(): void {
+    this.darkMode = !this.darkMode;
+  }
+
+  onThemeChanged(isDark: boolean): void {
+    this.darkMode = isDark;
+  }
+
+  onLargeButtonClick(): void {
     console.log("Large button clicked!");
   }
 }

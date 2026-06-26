@@ -1,4 +1,10 @@
-import { Component, forwardRef, Input } from "@angular/core";
+import {
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+} from "@angular/core";
 
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 
@@ -23,6 +29,7 @@ export class InputComponent extends BaseControlValueAccessor<string> {
   @Input() placeholder = "";
   @Input() helperText = "";
   @Input() errorText = "";
+
   @Input() override disabled = false;
 
   @Input() required = false;
@@ -31,11 +38,20 @@ export class InputComponent extends BaseControlValueAccessor<string> {
   @Input() size: InputSize = "medium";
   @Input() type: InputType = "text";
 
-  onInput(event: Event): void {
-    const value = (event.target as HTMLInputElement).value;
+  @Input() value = "";
 
+  @Output() valueChange = new EventEmitter<string>();
+
+  writeValue(value: string): void {
     this.value = value;
-    this.onChange(value);
+  }
+
+  onInput(event: Event): void {
+    this.value = (event.target as HTMLInputElement).value;
+
+    this.emitValueChange(this.value);
+
+    this.valueChange.emit(this.value);
   }
 
   onBlur(): void {
