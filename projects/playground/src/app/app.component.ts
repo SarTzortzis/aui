@@ -12,6 +12,9 @@ import {
   SpinnerComponent,
   RadioGroupComponent,
   SelectComponent,
+  IconComponent,
+  AlertComponent,
+  DialogComponent,
 } from "ui-kit";
 
 @Component({
@@ -30,12 +33,16 @@ import {
     SpinnerComponent,
     RadioGroupComponent,
     SelectComponent,
+    IconComponent,
+    AlertComponent,
+    DialogComponent,
   ],
   templateUrl: "./app.component.html",
   styleUrl: "./app.component.css",
 })
 export class AppComponent {
   title = "playground";
+  dialogOpen = false;
   countries = [
     {
       label: "Greece",

@@ -1,14 +1,15 @@
 import { Component, ElementRef, Input } from "@angular/core";
-import { BaseControlValueAccessor } from "../../shared/base-control-value-accessor";
-import { ClickOutsideDirective } from "../../directives";
-import { Option } from "../../models";
+import { BaseControlValueAccessor } from "../../../shared/base-control-value-accessor";
+import { ClickOutsideDirective } from "../../../directives";
+import { Option } from "../../../models";
+import { IconComponent } from "../../feedback/icon";
 
 @Component({
   selector: "ui-select",
   standalone: true,
   templateUrl: "./select.component.html",
   styleUrls: ["./select.component.scss"],
-  imports: [ClickOutsideDirective],
+  imports: [ClickOutsideDirective, IconComponent],
 })
 export class SelectComponent extends BaseControlValueAccessor<string> {
   @Input() label = "";

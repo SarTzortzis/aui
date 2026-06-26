@@ -3,7 +3,7 @@ import { Component, forwardRef, Input } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 
 import { InputSize, InputType } from "./input.types";
-import { BaseControlValueAccessor } from "../../shared";
+import { BaseControlValueAccessor } from "../../../shared";
 
 @Component({
   selector: "ui-input",

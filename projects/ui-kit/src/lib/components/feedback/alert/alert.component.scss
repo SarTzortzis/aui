@@ -1,0 +1,84 @@
+.ui-alert {
+  display: flex;
+  align-items: center;
+  gap: var(--ui-spacing-md);
+
+  width: 100%;
+
+  padding: var(--ui-spacing-lg);
+
+  border: 1px solid transparent;
+  border-left-width: 4px;
+
+  border-radius: var(--ui-radius-md);
+
+  font-size: var(--ui-font-size-md);
+
+  transition: all var(--ui-transition-fast);
+}
+
+.content {
+  flex: 1;
+
+  color: var(--ui-color-text);
+}
+
+/* Primary */
+
+.color-primary {
+  background: var(--ui-color-primary-subtle);
+
+  border-left-color: var(--ui-color-primary);
+}
+
+.color-primary ui-icon {
+  color: var(--ui-color-primary);
+}
+
+/* Secondary */
+
+.color-secondary {
+  background: rgba(123, 31, 162, 0.08);
+
+  border-left-color: var(--ui-color-secondary);
+}
+
+.color-secondary ui-icon {
+  color: var(--ui-color-secondary);
+}
+
+/* Success */
+
+.color-success {
+  background: var(--ui-color-success-subtle);
+
+  border-left-color: var(--ui-color-success);
+}
+
+.color-success ui-icon {
+  color: var(--ui-color-success);
+}
+
+/* Danger */
+
+.color-danger {
+ background: var(--ui-color-danger-subtle);
+
+  border-left-color: var(--ui-color-danger);
+}
+
+.color-danger ui-icon {
+  color: var(--ui-color-danger);
+}
+
+/* Warning */
+
+.color-warning {
+  background: var(--ui-color-warning-subtle);
+
+  border-left-color: var(--ui-color-warning);
+}
+
+.color-warning ui-icon {
+  color: var(--ui-color-warning);
+}

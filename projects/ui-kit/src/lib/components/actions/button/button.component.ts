@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { Color, Size, Variant } from "../../models";
-import { SpinnerComponent } from "../spinner";
+import { Color, Size, Variant } from "../../../models";
+import { SpinnerComponent } from "../../feedback/spinner";
 
 @Component({
   selector: "ui-button",

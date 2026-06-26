@@ -1,7 +1,7 @@
 import { Component, forwardRef, Input } from "@angular/core";
 
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
-import { BaseControlValueAccessor } from "../../shared";
+import { BaseControlValueAccessor } from "../../../shared";
 @Component({
   selector: "ui-switch",
   standalone: true,

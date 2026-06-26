@@ -1,0 +1,33 @@
+@if (open) {
+
+<div class="dialog-overlay" (click)="onBackdropClick()">
+
+  <div class="dialog" (click)="$event.stopPropagation()">
+
+    <div class="dialog-header">
+
+      @if (title) {
+      <h2>{{ title }}</h2>
+      }
+
+      <button class="close-button" type="button" (click)="close()">
+
+        <ui-icon>
+          ✕
+        </ui-icon>
+
+      </button>
+
+    </div>
+
+    <div class="dialog-content">
+
+      <ng-content></ng-content>
+
+    </div>
+
+  </div>
+
+</div>
+
+}

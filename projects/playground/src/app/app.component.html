@@ -175,3 +175,82 @@
 <br />
 <ui-divider></ui-divider>
 <br />
+<ui-card>
+
+  <h3>Icons</h3>
+
+  <ui-icon>
+    ✓
+  </ui-icon>
+
+  <ui-icon color="danger" size="large">
+
+    ✕
+
+  </ui-icon>
+
+  <ui-icon color="success">
+
+    ★
+
+  </ui-icon>
+
+</ui-card>
+
+
+<br />
+<ui-divider></ui-divider>
+<br />
+
+<ui-card>
+
+  <h3>Alerts</h3>
+
+  <ui-alert>
+    Information message
+  </ui-alert>
+
+  <br>
+
+  <ui-alert color="success">
+    User created successfully.
+  </ui-alert>
+
+  <br>
+
+  <ui-alert color="warning">
+    Unsaved changes.
+  </ui-alert>
+
+  <br>
+
+  <ui-alert color="danger">
+    Something went wrong.
+  </ui-alert>
+
+</ui-card>
+<br />
+<ui-divider></ui-divider>
+<br />
+<ui-button (clicked)="dialogOpen = true">
+
+  Open Dialog
+
+</ui-button>
+
+<ui-dialog [(open)]="dialogOpen" title="Delete user">
+
+  <p>
+    Are you sure you want to delete this user?
+  </p>
+
+  <br>
+
+  <ui-button color="danger">
+    Delete
+  </ui-button>
+
+</ui-dialog>
+<br />
+<ui-divider></ui-divider>
+<br />

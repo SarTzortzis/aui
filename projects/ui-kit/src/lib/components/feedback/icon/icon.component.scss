@@ -1,0 +1,57 @@
+span {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  line-height: 1;
+
+  color: inherit;
+}
+
+/* Sizes */
+
+.size-small {
+  font-size: 16px;
+}
+
+.size-medium {
+  font-size: 20px;
+}
+
+.size-large {
+  font-size: 24px;
+}
+
+/* Colors */
+
+.color-primary {
+  color: var(--ui-color-primary);
+}
+
+.color-secondary {
+  color: var(--ui-color-secondary);
+}
+
+.color-success {
+  color: var(--ui-color-success);
+}
+
+.color-danger {
+  color: var(--ui-color-danger);
+}
+
+.color-warning {
+  color: var(--ui-color-warning);
+}
+
+.color-inherit {
+  color: inherit;
+}
+
+svg {
+  width: 1em;
+  height: 1em;
+
+  fill: currentColor;
+}

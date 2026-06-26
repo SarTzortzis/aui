@@ -1,13 +1,15 @@
 import { Component, forwardRef, Input } from "@angular/core";
 
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
-import { BaseControlValueAccessor } from "../../shared";
+import { BaseControlValueAccessor } from "../../../shared";
+import { IconComponent } from "../../feedback/icon";
 
 @Component({
   selector: "ui-checkbox",
   standalone: true,
   templateUrl: "./checkbox.component.html",
   styleUrls: ["./checkbox.component.scss"],
+  imports: [IconComponent],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

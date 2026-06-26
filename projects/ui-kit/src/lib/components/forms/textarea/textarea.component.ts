@@ -4,7 +4,7 @@ import { NG_VALUE_ACCESSOR } from "@angular/forms";
 
 import { NgClass } from "@angular/common";
 import { TextareaSize } from "./textarea.types";
-import { BaseControlValueAccessor } from "../../shared";
+import { BaseControlValueAccessor } from "../../../shared";
 
 @Component({
   selector: "ui-textarea",

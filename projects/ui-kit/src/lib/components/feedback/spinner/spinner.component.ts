@@ -1,6 +1,5 @@
 import { Component, Input } from "@angular/core";
-
-import { Size } from "../../models/component.types";
+import { Size } from "../../../models";
 
 @Component({
   selector: "ui-spinner",

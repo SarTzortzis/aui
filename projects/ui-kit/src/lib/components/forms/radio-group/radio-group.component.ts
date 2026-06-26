@@ -3,7 +3,7 @@ import { Component, Input, forwardRef } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 
 import { RadioOption } from "./radio-group.types";
-import { BaseControlValueAccessor } from "../../shared";
+import { BaseControlValueAccessor } from "../../../shared";
 
 @Component({
   selector: "ui-radio-group",
