@@ -1,62 +1,232 @@
-# Aui
+# AUI
 
-A modern, reusable Angular UI component library built with **standalone components**, **design tokens**, and **ControlValueAccessor** support.
-
-The goal of this project is to create a lightweight design system that can be reused across multiple personal and commercial applications such as:
-
-- Appointment & reservation systems
-- Restaurant websites
-- Barber shop management
-- Staff management dashboards
-- Admin panels
-- CRM systems
-- Internal business tools
-
-Rather than depending on large third-party UI frameworks, this library aims to provide a clean, maintainable, and extensible foundation tailored to my own projects.
+> **The internal application platform powering all future software products.**
 
 ---
 
-# Features
+# Vision
 
-## ✅ Standalone Components
+AUI is **not** another Angular component library.
 
-All components are Angular Standalone Components.
+It is the foundation of a future software company.
 
-## ✅ Design Tokens
+Every component, service and utility exists because it removes duplicated work across future applications.
 
-The library is fully token-based using CSS Custom Properties.
+The objective is to maximize:
 
-Current token categories include:
+- Development speed
+- Code reuse
+- Consistency
+- Maintainability
+- Developer experience
+
+Future business applications such as:
+
+- Appointment & Reservation Systems
+- Restaurant Management
+- Barber Shop Management
+- CRM Systems
+- Staff Management
+- Inventory Systems
+- AI Dashboards
+- Admin Panels
+- Internal Business Tools
+
+should all be built on top of AUI.
+
+The library grows organically from real business needs rather than trying to replicate existing UI frameworks.
+
+---
+
+# Philosophy
+
+AUI follows one simple rule:
+
+> **If it saves time in the next 10 projects, it belongs in AUI.**
+
+Otherwise it belongs in the application.
+
+This principle keeps the platform focused on leverage rather than feature count.
+
+---
+
+# Engineering Principles
+
+These principles should be followed throughout the entire project.
+
+## Modern Angular
+
+The project targets modern Angular.
+
+Whenever possible prefer:
+
+- Standalone Components
+- Signals
+- inject()
+- Modern Control Flow
+- New Angular APIs
+
+Avoid legacy Angular patterns unless required.
+
+---
+
+## Signal First
+
+Application state should be exposed through readonly Signals.
+
+Services expose:
+
+- readonly state
+- public methods
+
+Example:
+
+```ts
+readonly theme = this._theme.asReadonly();
+
+setTheme(...)
+toggle()
+```
+
+instead of:
+
+```ts
+isDark();
+isLight();
+BehaviorSubject;
+Observable;
+```
+
+---
+
+## Public API First
+
+Every feature starts with designing the public API before implementation.
+
+Example:
+
+```ts
+theme.setTheme("dark");
+
+theme.toggle();
+
+notification.success(...);
+
+dialog.open(...);
+```
+
+Consumers should express intent.
+
+Implementation details remain inside AUI.
+
+---
+
+## Token First
+
+Components never hardcode design values.
+
+Everything should use design tokens.
+
+Current token groups:
 
 - Colors
 - Typography
-- Spacing
 - Radius
 - Shadows
+- Spacing
 - Transitions
 
-This makes theming and future customization straightforward.
+Future additions:
 
-## ✅ Theme Support
+- Z-index
+- Opacity
+- Breakpoints
+- Elevation
+- Motion
 
-The library supports multiple themes using CSS variables.
+---
 
-Current themes:
+## Accessibility First
 
-- Light
-- Dark
+Accessibility is not an afterthought.
 
-Additional themes (Corporate, High Contrast, etc.) can easily be introduced without modifying component implementations.
+Every component should include:
 
-## ✅ Forms
+- Keyboard Navigation
+- ARIA
+- Focus Management
+- Screen Reader Support
 
-All form controls implement Angular's `ControlValueAccessor`, making them compatible with:
+---
 
-- Reactive Forms
-- Template-driven Forms
-- Two-way binding (`value` / `valueChange`)
+## Consistency
 
-A shared `BaseControlValueAccessor` removes duplicated logic across all form components.
+All services follow the same layout.
+
+```ts
+//------------------------------------------
+// Constants
+//------------------------------------------
+
+//------------------------------------------
+// State
+//------------------------------------------
+
+//------------------------------------------
+// Constructor
+//------------------------------------------
+
+//------------------------------------------
+// Public API
+//------------------------------------------
+
+//------------------------------------------
+// Private methods
+//------------------------------------------
+```
+
+All components expose a predictable API.
+
+---
+
+## Business Agnostic
+
+AUI never contains business logic.
+
+Example:
+
+Button knows buttons.
+
+Dialog knows dialogs.
+
+Table knows tables.
+
+Applications know users, invoices and appointments.
+
+---
+
+# Current Architecture
+
+```
+components/
+
+    actions/
+    display/
+    feedback/
+    forms/
+    layout/
+    overlays/
+
+directives/
+
+models/
+
+services/
+
+shared/
+
+themes/
+```
 
 ---
 
@@ -64,208 +234,280 @@ A shared `BaseControlValueAccessor` removes duplicated logic across all form com
 
 ## Actions
 
-- Button
+- ✅ Button
+
+---
 
 ## Forms
 
-- Input
-- Textarea
-- Checkbox
-- Switch
-- Radio Group
-- Select
-- Dialog
+- ✅ Input
+- ✅ Textarea
+- ✅ Checkbox
+- ✅ Switch
+- ✅ Radio Group
+- ✅ Select
+
+---
 
 ## Feedback
 
-- Alert
-- Badge
-- Spinner
+- ✅ Alert
+- ✅ Badge
+- ✅ Spinner
+
+---
 
 ## Layout
 
-- Card
-- Divider
+- ✅ Card
+- ✅ Divider
+
+---
 
 ## Display
 
-- Icon
+- ✅ Icon
 
 ---
 
-# Infrastructure
+## Overlays
+
+- ✅ Dialog
+
+---
+
+# Current Infrastructure
+
+## Implemented
 
 - Design Tokens
-- Light / Dark Theme
+- Theme System
 - Base ControlValueAccessor
 - Click Outside Directive
-- Shared Models
 - Shared Utilities
+- Shared Models
+- Playground
 
 ---
 
-# Architecture
+## Recently Added
 
-The project follows a modular structure.
+### ThemeService
 
-```text
-components/
-├── actions/
-├── forms/
-├── layout/
-├── display/
-├── feedback/
-└── overlays/
+Implemented.
 
-directives/
+Responsibilities:
 
-models/
+- Theme switching
+- Theme persistence
+- Expose current theme using Signals
 
-shared/
+---
 
-themes/
-├── light.scss
-├── dark.scss
-└── tokens/
+### StorageService
+
+Implemented.
+
+Responsibilities:
+
+- Local Storage abstraction
+- Generic typed API
+- Future replacement with IndexedDB / Encrypted Storage
+
+---
+
+# Theme Architecture
+
+The theme system has been redesigned.
+
+## Default Theme
+
+The default theme is represented by `:root`.
+
+There is **no need for a separate Light Theme**.
+
+```
+:root
 ```
 
-The focus is on:
-
-- Reusability
-- Consistency
-- Accessibility
-- Maintainability
-- Extensibility
+contains all default values.
 
 ---
 
-# Development
+## Dark Theme
 
-The repository contains two Angular projects.
+Dark theme only overrides variables.
 
-## ui-kit
+```
+[data-ui-theme="dark"]
+```
 
-The reusable component library.
-
-## playground
-
-A playground application used for:
-
-- Developing components
-- Manual testing
-- API experimentation
-- Visual showcase
-
-It serves a similar purpose to Storybook while keeping the setup lightweight.
+contains only values that differ from the default theme.
 
 ---
 
-# Design Principles
+## Future Themes
 
-The library is built around a few core principles.
+New themes should only override values.
 
-### Composition over Configuration
+Examples:
 
-Components should be composed together rather than exposing dozens of inputs.
+- Corporate
+- Restaurant
+- Barber
+- High Contrast
+- Midnight
 
-### Consistent APIs
+No theme should redefine the complete token set.
 
-All form controls expose a consistent API:
+---
 
-- `value`
-- `valueChange`
-- `ControlValueAccessor`
+# Theme Folder Structure
 
-### Token First
+```
+themes/
 
-Components never hardcode styling values.
+    dark-theme.scss
 
-Everything should come from design tokens whenever possible.
+    tokens/
 
-### Minimal Dependencies
+        colors/
+        spacing/
+        radius/
+        typography/
+        transitions/
+        shadows/
 
-The library intentionally avoids large UI frameworks to remain lightweight and fully customizable.
+    index.scss
+```
+
+---
+
+# Current Known Issue
+
+## Theme System
+
+ThemeService correctly:
+
+- updates `data-ui-theme`
+- persists theme
+- restores theme
+
+A CSS issue was discovered where default variables are emitted more than once.
+
+Generated CSS currently contains:
+
+```
+:root
+
+[data-ui-theme="dark"]
+
+:root
+```
+
+The second `:root` overrides the dark theme.
+
+Next session should:
+
+- eliminate duplicated `:root` declarations
+- remove obsolete `light-theme.scss`
+- ensure default tokens are emitted exactly once
+- verify generated CSS order
+
+This is the current blocker before continuing development.
+
+---
+
+# Development Workflow
+
+Every feature follows the same process.
+
+1. API Design
+2. Folder Structure
+3. Accessibility
+4. Implementation
+5. Playground
+6. Documentation
+7. Refactoring
+
+No feature is considered complete until all steps are finished.
 
 ---
 
 # Roadmap
 
-## Core Components
+## Infrastructure
 
-- [x] Button
-- [x] Input
-- [x] Textarea
-- [x] Checkbox
-- [x] Switch
-- [x] Radio Group
-- [x] Select
-- [x] Dialog
+- ✅ ThemeService
+- ✅ StorageService
+- ⬜ NotificationService
+- ⬜ DialogService
+- ⬜ LoadingService
 
-## Layout
+---
 
-- [x] Card
-- [x] Divider
+## Form System
+
+- ⬜ FormField
+- ⬜ Validation Messages
+- ⬜ Helper Text
+- ⬜ Required Indicator
+
+---
 
 ## Feedback
 
-- [x] Alert
-- [x] Badge
-- [x] Spinner
-
-## Display
-
-- [x] Icon
-
-## Infrastructure
-
-- [x] Design Tokens
-- [x] Light / Dark Theme
-- [x] Base ControlValueAccessor
-- [x] Click Outside Directive
+- ⬜ Toast
+- ⬜ Progress Bar
+- ⬜ Skeleton
 
 ---
 
-## Next Components
+## Data
 
-- [ ] Form Field
-- [ ] Chip
-- [ ] Avatar
-- [ ] Accordion
-- [ ] Tabs
-- [ ] Tooltip
-- [ ] Toast
-- [ ] Progress Bar
-- [ ] Skeleton
-- [ ] Menu
-- [ ] Date Picker
-- [ ] Table
+- ⬜ DataGrid
+
+This will become the flagship component of AUI.
+
+Features:
+
+- Pagination
+- Sorting
+- Filtering
+- Selection
+- Empty State
+- Loading State
+- Actions
+- Responsive Columns
 
 ---
 
-## Quality Improvements
+## Business Components
 
-- [ ] Accessibility (ARIA)
-- [ ] Keyboard Navigation
-- [ ] Unit Tests
-- [ ] Playground Improvements
-- [ ] Documentation Website
-- [ ] CI/CD Pipeline
-- [ ] Storybook Integration (optional)
+Built only after completing the infrastructure.
+
+Examples:
+
+- Appointment Calendar
+- Dashboard Widgets
+- CRUD Generator
+- Permission Matrix
+- Charts
+- Analytics
+- User Picker
 
 ---
 
 # Long-Term Vision
 
-The goal is not to build another Angular Material replacement.
+The goal is not to compete with Angular Material.
 
-Instead, this library serves as the UI foundation for rapidly developing modern business applications.
+The goal is to build an internal application platform capable of generating complete business systems rapidly.
 
-By maintaining a consistent component API, shared design tokens, and reusable infrastructure, new applications can be assembled quickly while preserving a unified user experience.
+Eventually new projects should require little more than implementing business logic because authentication, layouts, forms, dialogs, notifications, themes, tables and dashboards already exist inside AUI.
 
-Future projects will continue to shape the library organically—new components will be introduced when real-world applications require them, ensuring every addition solves an actual problem rather than increasing complexity for its own sake.
+Every real-world application should improve the platform.
 
----
+The platform should never grow from assumptions.
 
-# License
-
-MIT
+It should grow from experience.
