@@ -1,31 +1,30 @@
-import { Component, ElementRef, HostListener, Input } from "@angular/core";
-
-import { SelectOption } from "./select.types";
+import { Component, ElementRef, Input } from "@angular/core";
 import { BaseControlValueAccessor } from "../../shared/base-control-value-accessor";
+import { ClickOutsideDirective } from "../../directives";
+import { Option } from "../../models";
 
 @Component({
   selector: "ui-select",
   standalone: true,
   templateUrl: "./select.component.html",
   styleUrls: ["./select.component.scss"],
+  imports: [ClickOutsideDirective],
 })
-export class SelectComponent extends BaseControlValueAccessor<string | null> {
+export class SelectComponent extends BaseControlValueAccessor<string> {
   @Input() label = "";
-  @Input() placeholder = "Select an option";
-  @Input() override disabled = false;
 
-  @Input() options: SelectOption[] = [];
+  @Input() placeholder = "Select...";
+
+  @Input() options: Option[] = [];
+
+  @Input() override disabled = false;
 
   isOpen = false;
 
-  constructor(private readonly elementRef: ElementRef<HTMLElement>) {
-    super();
-  }
+  override value = "";
 
-  get selectedLabel(): string {
-    const selected = this.options.find((option) => option.value === this.value);
-
-    return selected?.label ?? this.placeholder;
+  get selectedOption(): Option | undefined {
+    return this.options.find((option) => option.value === this.value);
   }
 
   toggle(): void {
@@ -36,27 +35,21 @@ export class SelectComponent extends BaseControlValueAccessor<string | null> {
     this.isOpen = !this.isOpen;
   }
 
-  select(option: SelectOption): void {
+  close(): void {
+    this.isOpen = false;
+  }
+
+  select(option: Option): void {
     if (option.disabled || this.disabled) {
       return;
     }
 
     this.value = option.value;
 
-    this.onChange(option.value);
+    this.onChange(this.value);
+
     this.onTouched();
 
-    this.isOpen = false;
-  }
-
-  @HostListener("document:click", ["$event"])
-  onDocumentClick(event: MouseEvent): void {
-    const clickedInside = this.elementRef.nativeElement.contains(
-      event.target as Node,
-    );
-
-    if (!clickedInside) {
-      this.isOpen = false;
-    }
+    this.close();
   }
 }

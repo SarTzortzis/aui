@@ -2,7 +2,6 @@ import { Component, forwardRef, Input } from "@angular/core";
 
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 import { BaseControlValueAccessor } from "../../shared";
-
 @Component({
   selector: "ui-switch",
   standalone: true,
@@ -19,16 +18,14 @@ import { BaseControlValueAccessor } from "../../shared";
 export class SwitchComponent extends BaseControlValueAccessor<boolean> {
   @Input() override disabled = false;
 
-  checked = false;
-
   toggle(): void {
     if (this.disabled) {
       return;
     }
 
-    this.checked = !this.checked;
+    this.value = !this.value;
 
-    this.onChange(this.checked);
+    this.onChange(this.value);
     this.onTouched();
   }
 }

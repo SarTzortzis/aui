@@ -1,12 +1,22 @@
-<div class="ui-select">
+<div class="ui-select" uiClickOutside (clickOutside)="close()">
 
   @if (label) {
-  <label>{{ label }}</label>
+  <label class="select-label">
+    {{ label }}
+  </label>
   }
 
-  <button type="button" class="select-trigger" (click)="toggle()">
+  <button type="button" class="select-trigger" [disabled]="disabled" (click)="toggle()">
 
-    {{ selectedLabel }}
+    <span class="select-value" [class.placeholder]="!selectedOption">
+
+      {{ selectedOption?.label ?? placeholder }}
+
+    </span>
+
+    <span class="select-arrow">
+      ▼
+    </span>
 
   </button>
 
@@ -16,7 +26,8 @@
 
     @for (option of options; track option.value) {
 
-    <button type="button" class="select-option" (click)="select(option)">
+    <button type="button" class="select-option" [class.selected]="value === option.value" [disabled]="option.disabled"
+      (click)="select(option)">
 
       {{ option.label }}
 
