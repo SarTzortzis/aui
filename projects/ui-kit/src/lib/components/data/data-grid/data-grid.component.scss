@@ -35,3 +35,22 @@
 
   color: var(--ui-color-text-secondary);
 }
+
+.aui-data-grid th.sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.aui-data-grid th.sortable:hover {
+  background: var(--ui-color-surface-hover);
+}
+
+.aui-data-grid th {
+  white-space: nowrap;
+}
+
+.aui-data-grid th .sort-indicator {
+  margin-left: 0.5rem;
+  font-size: 0.75rem;
+  opacity: 0.6;
+}

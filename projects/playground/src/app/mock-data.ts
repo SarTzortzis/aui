@@ -50,15 +50,24 @@ export const USERS = [
 ];
 
 export const USER_COLUMNS = [
-  column("name", "Name"),
+  column("name", "Name", {
+    sortable: true,
+  }),
 
   column("email", "Email", {
     width: "280px",
+    sortable: true,
   }),
 
-  column("role", "Role"),
+  column("role", "Role", {
+    sortable: true,
+  }),
 
-  column("department", "Department"),
+  column("department", "Department", {
+    sortable: true,
+  }),
 
-  column("status", "Status"),
+  column("status", "Status", {
+    sortable: true,
+  }),
 ];

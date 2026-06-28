@@ -10,9 +10,23 @@
 
       @if (!column.hidden) {
 
-      <th [style.width]="column.width">
+      <th [style.width]="column.width" [class.sortable]="column.sortable" (click)="sort(column)">
 
-        {{ column.header }}
+        <span>{{ column.header }}</span>
+
+        @if (column.sortable) {
+
+        <span class="sort-indicator">
+
+          @if (sortColumn() === column.field) {
+          {{ sortDirection() === "asc" ? "▲" : "▼" }}
+          } @else {
+          ↕
+          }
+
+        </span>
+
+        }
 
       </th>
 
@@ -26,7 +40,7 @@
 
   <tbody>
 
-    @for (row of data(); track $index) {
+    @for (row of rows(); track $index) {
 
     <tr>
 
