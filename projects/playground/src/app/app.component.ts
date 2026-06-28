@@ -25,6 +25,7 @@ import {
   ToastContainerComponent,
   column,
 } from "ui-kit";
+import { COUNTRIES, STATUS_OPTIONS, USER_COLUMNS, USERS } from "./mock-data";
 
 @Component({
   selector: "app-root",
@@ -69,45 +70,13 @@ export class AppComponent {
     return this.theme.theme() === "dark";
   }
 
-  readonly countries = [
-    { label: "Greece", value: "gr" },
-    { label: "Germany", value: "de" },
-    { label: "France", value: "fr" },
-  ];
+  readonly countries = COUNTRIES;
 
-  readonly statusOptions = [
-    { label: "Draft", value: "draft" },
-    { label: "Published", value: "published" },
-    { label: "Archived", value: "archived" },
-  ];
+  readonly statusOptions = STATUS_OPTIONS;
 
-  readonly users = [
-    {
-      name: "John Doe",
-      email: "john@test.com",
-      role: "Administrator",
-    },
-    {
-      name: "Jane Smith",
-      email: "jane@test.com",
-      role: "Manager",
-    },
-    {
-      name: "Mike Johnson",
-      email: "mike@test.com",
-      role: "Developer",
-    },
-  ];
+  readonly users = USERS;
 
-  readonly columns = [
-    column("name", "Name"),
-
-    column("email", "Email", {
-      width: "320px",
-    }),
-
-    column("role", "Role"),
-  ];
+  readonly columns = USER_COLUMNS;
 
   onThemeChanged(isDark: boolean): void {
     this.theme.setTheme(isDark ? "dark" : "light");

@@ -11,325 +11,324 @@
 
   </div>
 
-  <h2>Buttons</h2>
-  <ui-card>
+  <!-- ACTIONS -->
 
-    <ui-button>Default</ui-button>
+  <section class="playground-section">
 
-    <ui-button variant="contained">
-      Contained
-    </ui-button>
+    <h2 class="playground-section__title">
+      Actions
+    </h2>
 
-    <ui-button variant="outlined">
-      Outlined
-    </ui-button>
+    <div class="playground-grid">
 
-    <ui-button color="danger">
-      Delete
-    </ui-button>
+      <!-- Buttons -->
 
-    <ui-button size="large" (clicked)="onLargeButtonClick()">
-      Large on Click
-    </ui-button>
+      <ui-card>
 
-    <ui-button variant="contained" [disabled]=true>
-      Disabled
-    </ui-button>
+        <h3>Buttons</h3>
 
-    <ui-button variant="contained" [loading]=true>
-      Loading...
-    </ui-button>
-    <ui-button [fullWidth]="true">
-      Submit
-    </ui-button>
-  </ui-card>
-  <br />
-  <ui-divider></ui-divider>
-  <br />
-  <ui-card>
+        <ui-button>
+          Default
+        </ui-button>
 
-    <h2>Inputs</h2>
+        <ui-button variant="contained">
+          Contained
+        </ui-button>
 
-    <ui-input label="Username" placeholder="Enter username">
-    </ui-input>
+        <ui-button variant="outlined">
+          Outlined
+        </ui-button>
 
-    <br />
+        <ui-button color="danger">
+          Delete
+        </ui-button>
 
-    <ui-input label="Email" placeholder="Enter email" helperText="We'll never share your email">
-    </ui-input>
+        <ui-button size="large" (clicked)="onLargeButtonClick()">
+          Large Click
+        </ui-button>
 
-    <br />
+        <ui-button variant="contained" [disabled]="true">
+          Disabled
+        </ui-button>
 
-    <ui-input label="Email" [error]="true" errorText="Invalid email">
-    </ui-input>
-  </ui-card>
-  <br />
-  <ui-divider></ui-divider>
-  <br />
-  <ui-card>
-    <h2>Textarea</h2>
+        <ui-button variant="contained" [loading]="true">
+          Loading...
+        </ui-button>
 
-    <ui-textarea label="Description" placeholder="Write something..."></ui-textarea>
+        <ui-button [fullWidth]="true">
+          Full Width
+        </ui-button>
 
-    <br />
-
-    <ui-textarea label="Notes" [rows]="6" helperText="Maximum 500 characters"></ui-textarea>
-
-    <br />
-
-    <ui-textarea label="Feedback" [error]="true" errorText="This field is required"></ui-textarea>
-
-  </ui-card>
-  <br />
-  <ui-divider></ui-divider>
-  <br />
-  <ui-card>
-    <h2>Checkboxes</h2>
-
-    <ui-checkbox>
-      Accept terms and conditions
-    </ui-checkbox>
-
-    <br />
-    <br />
-
-    <ui-checkbox [disabled]="true">
-      Disabled checkbox
-    </ui-checkbox>
-  </ui-card>
-  <br />
-  <ui-divider></ui-divider>
-  <br />
-  <ui-card>
-    <h2>Switches</h2>
-
-    <ui-switch></ui-switch>
-
-    <br />
-    <br />
-
-    <ui-switch [disabled]="true"></ui-switch>
-  </ui-card>
-  <br />
-  <ui-divider></ui-divider>
-  <br />
-  <ui-card>
-    <h3>User Information</h3>
-
-    <p>
-      This content is inside a card.
-    </p>
-
-    <ui-button>
-      Save
-    </ui-button>
-  </ui-card>
-  <br />
-  <ui-divider></ui-divider>
-  <br />
-  <ui-card>
-    <h3>Badges</h3>
-
-    <ui-badge>
-      Primary
-    </ui-badge>
-
-    <ui-badge color="success">
-      Active
-    </ui-badge><ui-badge color="danger">
-      Deleted
-    </ui-badge>
-
-    <ui-badge color="warning">
-      Pending
-    </ui-badge>
-  </ui-card>
-  <br />
-  <ui-divider></ui-divider>
-  <br />
-  <ui-card>
-
-    <h3>User Details</h3>
-
-    <p>Name: John Doe</p>
-
-    <ui-divider></ui-divider>
-
-    <p>Email: john&#64;test.com</p>
-  </ui-card>
-  <br />
-  <ui-divider></ui-divider>
-  <br />
-  <ui-card>
-    <h3>Spinners</h3>
-
-    <ui-spinner></ui-spinner>
-
-    <ui-spinner size="small"></ui-spinner>
-
-    <ui-spinner size="large"></ui-spinner>
-  </ui-card>
-  <br />
-  <ui-divider></ui-divider>
-  <br />
-  <ui-card>
-    <h3>Radio Group</h3>
-
-    <ui-radio-group [options]="statusOptions">
-    </ui-radio-group>
-  </ui-card>
-  <br />
-  <ui-divider></ui-divider>
-  <br />
-  <ui-select label="Country" [options]="countries">
-  </ui-select>
-
-  <br />
-  <ui-divider></ui-divider>
-  <br />
-  <ui-card>
-
-    <h3>Icons</h3>
-
-    <ui-icon>
-      ✓
-    </ui-icon>
-
-    <ui-icon color="danger" size="large">
-
-      ✕
-
-    </ui-icon>
-
-    <ui-icon color="success">
-
-      ★
-
-    </ui-icon>
-
-  </ui-card>
-
-
-  <br />
-  <ui-divider></ui-divider>
-  <br />
-
-  <ui-card>
-
-    <h3>Alerts</h3>
-
-    <ui-alert>
-      Information message
-    </ui-alert>
-
-    <br>
-
-    <ui-alert color="success">
-      User created successfully.
-    </ui-alert>
-
-    <br>
-
-    <ui-alert color="warning">
-      Unsaved changes.
-    </ui-alert>
-
-    <br>
-
-    <ui-alert color="danger">
-      Something went wrong.
-    </ui-alert>
-
-  </ui-card>
-  <br />
-  <ui-divider></ui-divider>
-  <br />
-  <ui-button (clicked)="dialogOpen = true">
-
-    Open Dialog
-
-  </ui-button>
-
-  <ui-dialog [(open)]="dialogOpen">
-
-    <div dialog-title>
-      Delete User
-    </div>
-
-    <div dialog-content>
-      Are you sure you want to delete this user?
-    </div>
-
-    <div dialog-actions>
-
-      <ui-button variant="text" (clicked)="dialogOpen = false">
-
-        Cancel
-
-      </ui-button>
-
-      <ui-button color="danger">
-        Delete
-      </ui-button>
+      </ui-card>
 
     </div>
 
-  </ui-dialog>
-  <br />
-  <ui-divider></ui-divider>
-  <br />
+  </section>
 
-  <aui-form-field label="Email" helperText="We'll never share your email." [required]="true">
-    <ui-input label="Username" placeholder="Enter username" />
-  </aui-form-field>
+  <!-- FORMS -->
 
-  <br />
-  <ui-divider></ui-divider>
-  <br />
-  <br />
-  <ui-divider></ui-divider>
-  <br />
+  <section class="playground-section">
 
-  <ui-card>
+    <h2 class="playground-section__title">
+      Forms
+    </h2>
 
-    <h3>Notifications</h3>
+    <div class="playground-grid">
 
-    <ui-button color="success" (clicked)="showSuccessNotification()">
-      Success
-    </ui-button>
+      <ui-card>
 
-    <ui-button color="danger" (clicked)="showErrorNotification()">
-      Error
-    </ui-button>
+        <h3>Inputs</h3>
 
-    <ui-button color="warning" (clicked)="showWarningNotification()">
-      Warning
-    </ui-button>
+        <ui-input label="Username" placeholder="Enter username">
+        </ui-input>
 
-    <ui-button (clicked)="showInfoNotification()">
-      Info
-    </ui-button>
+        <ui-input label="Email" placeholder="Enter email" helperText="We'll never share your email">
+        </ui-input>
 
-  </ui-card>
-  <br />
-  <ui-divider></ui-divider>
-  <br />
+        <ui-input label="Email" [error]="true" errorText="Invalid email">
+        </ui-input>
 
-  <ui-button (clicked)="simulateLoading()">
+      </ui-card>
 
-    Simulate Loading
+      <ui-card>
 
-  </ui-button>
-  <br />
-  <ui-divider></ui-divider>
-  <br />
-  <aui-data-grid [columns]="columns" [data]="users">
-  </aui-data-grid>
-  <br />
-  <ui-divider></ui-divider>
-  <br />
+        <h3>Textarea</h3>
 
+        <ui-textarea label="Description" placeholder="Write something...">
+        </ui-textarea>
+
+        <ui-textarea label="Notes" [rows]="6" helperText="Maximum 500 characters">
+        </ui-textarea>
+
+        <ui-textarea label="Feedback" [error]="true" errorText="This field is required">
+        </ui-textarea>
+
+      </ui-card>
+
+      <ui-card>
+
+        <h3>Checkboxes</h3>
+
+        <ui-checkbox>
+          Accept terms and conditions
+        </ui-checkbox>
+
+        <ui-checkbox [disabled]="true">
+          Disabled checkbox
+        </ui-checkbox>
+
+      </ui-card>
+
+      <ui-card>
+
+        <h3>Switches</h3>
+
+        <ui-switch>
+        </ui-switch>
+
+        <ui-switch [disabled]="true">
+        </ui-switch>
+
+      </ui-card>
+
+      <ui-card>
+
+        <h3>Radio Group</h3>
+
+        <ui-radio-group [options]="statusOptions">
+        </ui-radio-group>
+
+      </ui-card>
+
+      <ui-card>
+
+        <h3>Select</h3>
+
+        <ui-select label="Country" [options]="countries">
+        </ui-select>
+
+      </ui-card>
+
+      <ui-card>
+
+        <h3>Form Field</h3>
+
+        <aui-form-field label="Email" helperText="We'll never share your email." [required]="true">
+
+          <ui-input placeholder="Enter email">
+          </ui-input>
+
+        </aui-form-field>
+
+      </ui-card>
+
+    </div>
+
+  </section>
+
+  <!-- FEEDBACK -->
+
+  <section class="playground-section">
+
+    <h2 class="playground-section__title">
+      Feedback
+    </h2>
+
+    <div class="playground-grid">
+
+      <ui-card>
+
+        <h3>Alerts</h3>
+
+        <ui-alert>
+          Information message
+        </ui-alert>
+
+        <ui-alert color="success">
+          User created successfully.
+        </ui-alert>
+
+        <ui-alert color="warning">
+          Unsaved changes.
+        </ui-alert>
+
+        <ui-alert color="danger">
+          Something went wrong.
+        </ui-alert>
+
+      </ui-card>
+
+      <ui-card>
+
+        <h3>Badges</h3>
+
+        <ui-badge>
+          Primary
+        </ui-badge>
+
+        <ui-badge color="success">
+          Active
+        </ui-badge>
+
+        <ui-badge color="warning">
+          Pending
+        </ui-badge>
+
+        <ui-badge color="danger">
+          Deleted
+        </ui-badge>
+
+      </ui-card>
+
+      <ui-card>
+
+        <h3>Icons</h3>
+
+        <ui-icon>
+          ✓
+        </ui-icon>
+
+        <ui-icon color="success">
+          ★
+        </ui-icon>
+
+        <ui-icon color="danger" size="large">
+          ✕
+        </ui-icon>
+
+      </ui-card>
+
+      <ui-card>
+
+        <h3>Spinners</h3>
+
+        <ui-spinner></ui-spinner>
+
+        <ui-spinner size="small"></ui-spinner>
+
+        <ui-spinner size="large"></ui-spinner>
+
+      </ui-card>
+
+      <ui-card>
+
+        <h3>Notifications (Press me)</h3>
+
+        <ui-button color="success" (clicked)="showSuccessNotification()">
+          Success
+        </ui-button>
+
+        <ui-button color="danger" (clicked)="showErrorNotification()">
+          Error
+        </ui-button>
+
+        <ui-button color="warning" (clicked)="showWarningNotification()">
+          Warning
+        </ui-button>
+
+        <ui-button (clicked)="showInfoNotification()">
+          Info
+        </ui-button>
+
+      </ui-card>
+
+      <ui-card>
+
+        <h3>Loading</h3>
+
+        <ui-button variant="contained" (clicked)="simulateLoading()">
+
+          Simulate Loading
+
+        </ui-button>
+
+      </ui-card>
+
+    </div>
+
+  </section>
+
+  <!-- DATA -->
+
+  <section class="playground-section">
+
+    <h2 class="playground-section__title">
+      Data
+    </h2>
+
+    <div class="playground-grid playground-grid--full">
+
+      <ui-card>
+
+        <h3>Data Grid</h3>
+
+        <aui-data-grid [columns]="columns" [data]="users">
+        </aui-data-grid>
+
+      </ui-card>
+
+    </div>
+
+  </section>
+
+  <!-- OVERLAYS -->
+
+  <section class="playground-section">
+
+    <h2 class="playground-section__title">
+      Overlays
+    </h2>
+
+    <div class="playground-grid">
+
+      <!-- Paste overlays.html here -->
+
+    </div>
+
+  </section>
 
   <aui-loading-overlay />
 
   <aui-toast-container />
+
+</div>

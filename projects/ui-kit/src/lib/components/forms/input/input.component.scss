@@ -1,3 +1,14 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 .ui-input {
   display: flex;
   flex-direction: column;
@@ -16,7 +27,12 @@
 }
 
 input {
+  display: block;
+
   width: 100%;
+  max-width: 100%;
+
+  box-sizing: border-box;
 
   border: 1px solid var(--ui-color-border);
   border-radius: var(--ui-radius-md);
@@ -24,9 +40,12 @@ input {
   background: var(--ui-color-background);
   color: var(--ui-color-text);
 
-  transition: all var(--ui-transition-fast);
-
   outline: none;
+
+  transition:
+    border-color var(--ui-transition-fast),
+    background var(--ui-transition-fast),
+    color var(--ui-transition-fast);
 }
 
 input:focus {
