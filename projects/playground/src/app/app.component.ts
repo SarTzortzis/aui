@@ -18,6 +18,7 @@ import {
   SwitchComponent,
   TextareaComponent,
   ThemeService,
+  ToastContainerComponent,
 } from "ui-kit";
 
 @Component({
@@ -40,6 +41,7 @@ import {
     AlertComponent,
     DialogComponent,
     FormFieldComponent,
+    ToastContainerComponent,
   ],
   templateUrl: "./app.component.html",
   styleUrl: "./app.component.css",

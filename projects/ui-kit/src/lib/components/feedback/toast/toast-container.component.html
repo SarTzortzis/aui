@@ -1,0 +1,33 @@
+<div class="aui-toast-container">
+
+  @for (notification of notifications(); track notification.id) {
+
+  <div class="aui-toast">
+
+    <strong>
+
+      {{ notification.title }}
+
+    </strong>
+
+    <div>
+
+      {{ notification.message }}
+
+    </div>
+
+    @if (notification.closable) {
+
+    <button type="button" (click)="notificationService.dismiss(notification.id)">
+
+      ✕
+
+    </button>
+
+    }
+
+  </div>
+
+  }
+
+</div>

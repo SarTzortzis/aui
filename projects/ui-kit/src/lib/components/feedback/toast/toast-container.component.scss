@@ -1,0 +1,45 @@
+.aui-toast-container {
+  position: fixed;
+
+  top: 1rem;
+  right: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+
+  z-index: 9999;
+
+  pointer-events: none;
+}
+
+.aui-toast {
+  display: flex;
+  flex-direction: column;
+
+  gap: .5rem;
+
+  min-width: 320px;
+
+  padding: 1rem;
+
+  border-radius: var(--ui-radius-md);
+
+  background: var(--ui-color-surface);
+
+  color: var(--ui-color-text-primary);
+
+  box-shadow: var(--ui-shadow-lg);
+
+  pointer-events: auto;
+}
+
+.aui-toast button {
+  align-self: flex-end;
+
+  background: transparent;
+
+  border: none;
+
+  cursor: pointer;
+}
