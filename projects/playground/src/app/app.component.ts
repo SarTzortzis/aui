@@ -8,8 +8,10 @@ import {
   CheckboxComponent,
   DialogComponent,
   DividerComponent,
+  FormFieldComponent,
   IconComponent,
   InputComponent,
+  NotificationService,
   RadioGroupComponent,
   SelectComponent,
   SpinnerComponent,
@@ -37,6 +39,7 @@ import {
     IconComponent,
     AlertComponent,
     DialogComponent,
+    FormFieldComponent,
   ],
   templateUrl: "./app.component.html",
   styleUrl: "./app.component.css",
@@ -46,7 +49,10 @@ export class AppComponent {
 
   dialogOpen = false;
 
-  constructor(public readonly theme: ThemeService) {}
+  constructor(
+    public readonly theme: ThemeService,
+    private readonly notification: NotificationService,
+  ) {}
 
   get darkMode(): boolean {
     return this.theme.theme() === "dark";
@@ -54,6 +60,22 @@ export class AppComponent {
 
   onThemeChanged(isDark: boolean): void {
     this.theme.setTheme(isDark ? "dark" : "light");
+  }
+
+  showSuccessNotification(): void {
+    this.notification.success("User created successfully.", "Success");
+  }
+
+  showErrorNotification(): void {
+    this.notification.error("Something went wrong.", "Error");
+  }
+
+  showWarningNotification(): void {
+    this.notification.warning("You have unsaved changes.", "Warning");
+  }
+
+  showInfoNotification(): void {
+    this.notification.info("A new update is available.", "Information");
   }
 
   countries = [

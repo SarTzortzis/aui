@@ -136,9 +136,7 @@
 
     <ui-badge color="success">
       Active
-    </ui-badge>
-
-    <ui-badge color="danger">
+    </ui-badge><ui-badge color="danger">
       Deleted
     </ui-badge>
 
@@ -277,6 +275,42 @@
     </div>
 
   </ui-dialog>
+  <br />
+  <ui-divider></ui-divider>
+  <br />
+
+  <aui-form-field label="Email" helperText="We'll never share your email." [required]="true">
+    <ui-input label="Username" placeholder="Enter username" />
+  </aui-form-field>
+
+  <br />
+  <ui-divider></ui-divider>
+  <br />
+  <br />
+  <ui-divider></ui-divider>
+  <br />
+
+  <ui-card>
+
+    <h3>Notifications</h3>
+
+    <ui-button color="success" (clicked)="showSuccessNotification()">
+      Success
+    </ui-button>
+
+    <ui-button color="danger" (clicked)="showErrorNotification()">
+      Error
+    </ui-button>
+
+    <ui-button color="warning" (clicked)="showWarningNotification()">
+      Warning
+    </ui-button>
+
+    <ui-button (clicked)="showInfoNotification()">
+      Info
+    </ui-button>
+
+  </ui-card>
   <br />
   <ui-divider></ui-divider>
   <br />

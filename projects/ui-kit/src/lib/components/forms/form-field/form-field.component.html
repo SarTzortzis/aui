@@ -1,0 +1,25 @@
+<div class="aui-form-field">
+  @if (label()) {
+  <label class="aui-form-field__label">
+    {{ label() }}
+
+    @if (required()) {
+    <span class="aui-form-field__required">*</span>
+    }
+  </label>
+  }
+
+  <div class="aui-form-field__control">
+    <ng-content />
+  </div>
+
+  @if (errorText()) {
+  <div class="aui-form-field__message aui-form-field__message--error">
+    {{ errorText() }}
+  </div>
+  } @else if (helperText()) {
+  <div class="aui-form-field__message">
+    {{ helperText() }}
+  </div>
+  }
+</div>

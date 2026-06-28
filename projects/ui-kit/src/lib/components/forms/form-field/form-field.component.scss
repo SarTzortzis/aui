@@ -1,0 +1,33 @@
+.aui-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-spacing-xs);
+  width: 100%;
+}
+
+.aui-form-field__label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ui-spacing-2xs);
+
+  font-size: var(--ui-font-size-sm);
+  font-weight: var(--ui-font-weight-medium);
+  color: var(--ui-color-text-primary);
+}
+
+.aui-form-field__required {
+  color: var(--ui-color-danger);
+}
+
+.aui-form-field__control {
+  width: 100%;
+}
+
+.aui-form-field__message {
+  font-size: var(--ui-font-size-xs);
+  color: var(--ui-color-text-secondary);
+}
+
+.aui-form-field__message--error {
+  color: var(--ui-color-danger);
+}
