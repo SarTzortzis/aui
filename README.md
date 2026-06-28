@@ -1,216 +1,172 @@
 # AUI
 
-> **The internal application platform powering all future software products.**
+> **A modern Angular application platform for building business software faster.**
+
+<p align="center">
+
+Build consistent, production-ready business applications with reusable components, services, theming and infrastructure.
+
+**Designed for real-world products, not isolated demos.**
+
+</p>
 
 ---
 
-# Vision
+## 🚀 Live Demo
+
+**https://sartzortzis.github.io/aui/**
+
+Explore the interactive playground showcasing the current components, themes and infrastructure.
+
+---
+
+# Why AUI?
 
 AUI is **not** another Angular component library.
 
-It is the foundation of a future software company.
+It is an application platform designed to eliminate repetitive work across business applications.
 
-Every component, service and utility exists because it removes duplicated work across future applications.
+Instead of rebuilding the same infrastructure for every project, AUI provides a consistent foundation that allows new applications to focus almost entirely on business logic.
 
-The objective is to maximize:
+Typical applications include:
 
-- Development speed
-- Code reuse
-- Consistency
-- Maintainability
-- Developer experience
+* Appointment & Reservation Systems
+* Restaurant Management
+* Barber Shop Management
+* CRM Systems
+* Inventory Management
+* Staff Management
+* Admin Panels
+* AI Dashboards
+* Internal Business Tools
 
-Future business applications such as:
-
-- Appointment & Reservation Systems
-- Restaurant Management
-- Barber Shop Management
-- CRM Systems
-- Staff Management
-- Inventory Systems
-- AI Dashboards
-- Admin Panels
-- Internal Business Tools
-
-should all be built on top of AUI.
-
-The library grows organically from real business needs rather than trying to replicate existing UI frameworks.
+The project grows from solving real business problems rather than attempting to replicate existing UI frameworks.
 
 ---
 
-# Philosophy
+# Core Principles
 
-AUI follows one simple rule:
+## Build From Experience
 
-> **If it saves time in the next 10 projects, it belongs in AUI.**
+Every reusable abstraction must first solve a real problem.
 
-Otherwise it belongs in the application.
+If a feature saves time across multiple projects, it belongs in AUI.
 
-This principle keeps the platform focused on leverage rather than feature count.
+Otherwise, it belongs in the application.
 
 ---
-
-# Engineering Principles
-
-These principles should be followed throughout the entire project.
 
 ## Modern Angular
 
-The project targets modern Angular.
+AUI embraces modern Angular development.
 
-Whenever possible prefer:
+Whenever possible the platform prefers:
 
-- Standalone Components
-- Signals
-- inject()
-- Modern Control Flow
-- New Angular APIs
+* Standalone Components
+* Signals
+* `inject()`
+* Modern Control Flow
+* Latest Angular APIs
 
-Avoid legacy Angular patterns unless required.
-
----
-
-## Signal First
-
-Application state should be exposed through readonly Signals.
-
-Services expose:
-
-- readonly state
-- public methods
-
-Example:
-
-```ts
-readonly theme = this._theme.asReadonly();
-
-setTheme(...)
-toggle()
-```
-
-instead of:
-
-```ts
-isDark();
-isLight();
-BehaviorSubject;
-Observable;
-```
+Legacy patterns are avoided unless compatibility requires them.
 
 ---
 
 ## Public API First
 
-Every feature starts with designing the public API before implementation.
+Developer experience always comes before implementation.
 
-Example:
+Consumers should write expressive code such as:
 
 ```ts
-theme.setTheme("dark");
-
 theme.toggle();
 
 notification.success(...);
 
+loading.track(...);
+
 dialog.open(...);
 ```
 
-Consumers should express intent.
-
-Implementation details remain inside AUI.
+Implementation details remain internal to the platform.
 
 ---
 
-## Token First
+## Signal First
 
-Components never hardcode design values.
+Application state is exposed through readonly Signals.
 
-Everything should use design tokens.
+Example:
 
-Current token groups:
+```ts
+readonly theme = this._theme.asReadonly();
+```
 
-- Colors
-- Typography
-- Radius
-- Shadows
-- Spacing
-- Transitions
+rather than mutable observables or public state.
 
-Future additions:
+---
 
-- Z-index
-- Opacity
-- Breakpoints
-- Elevation
-- Motion
+## Design Token First
+
+Visual decisions are never hardcoded.
+
+Every component consumes design tokens for:
+
+* Colors
+* Typography
+* Spacing
+* Radius
+* Shadows
+* Transitions
+
+Future token groups include:
+
+* Motion
+* Elevation
+* Breakpoints
+* Opacity
+* Z-index
 
 ---
 
 ## Accessibility First
 
-Accessibility is not an afterthought.
+Accessibility is treated as a fundamental requirement.
 
-Every component should include:
+Every component aims to support:
 
-- Keyboard Navigation
-- ARIA
-- Focus Management
-- Screen Reader Support
-
----
-
-## Consistency
-
-All services follow the same layout.
-
-```ts
-//------------------------------------------
-// Constants
-//------------------------------------------
-
-//------------------------------------------
-// State
-//------------------------------------------
-
-//------------------------------------------
-// Constructor
-//------------------------------------------
-
-//------------------------------------------
-// Public API
-//------------------------------------------
-
-//------------------------------------------
-// Private methods
-//------------------------------------------
-```
-
-All components expose a predictable API.
+* Keyboard Navigation
+* ARIA
+* Focus Management
+* Screen Readers
 
 ---
 
 ## Business Agnostic
 
-AUI never contains business logic.
+AUI contains infrastructure—not business logic.
 
-Example:
+Components understand UI.
 
-Button knows buttons.
+Applications understand domains.
 
-Dialog knows dialogs.
+For example:
 
-Table knows tables.
+* Button knows buttons.
+* Dialog knows dialogs.
+* DataGrid knows tables.
 
-Applications know users, invoices and appointments.
+Applications know users, reservations, invoices and employees.
 
 ---
 
-# Current Architecture
+# Architecture
 
 ```
 components/
 
     actions/
+    data/
     display/
     feedback/
     forms/
@@ -230,284 +186,143 @@ themes/
 
 ---
 
-# Current Components
+# Current Features
 
-## Actions
+## Components
 
-- ✅ Button
+### Actions
 
----
+* ✅ Button
 
-## Forms
+### Forms
 
-- ✅ Input
-- ✅ Textarea
-- ✅ Checkbox
-- ✅ Switch
-- ✅ Radio Group
-- ✅ Select
+* ✅ Input
+* ✅ Textarea
+* ✅ Checkbox
+* ✅ Switch
+* ✅ Radio Group
+* ✅ Select
+* ✅ FormField
 
----
+### Feedback
 
-## Feedback
+* ✅ Alert
+* ✅ Badge
+* ✅ Spinner
+* ✅ Toast Notifications
 
-- ✅ Alert
-- ✅ Badge
-- ✅ Spinner
+### Layout
 
----
+* ✅ Card
+* ✅ Divider
 
-## Layout
+### Display
 
-- ✅ Card
-- ✅ Divider
+* ✅ Icon
 
----
+### Overlays
 
-## Display
+* ✅ Dialog
+* ✅ Loading Overlay
 
-- ✅ Icon
+### Data
 
----
-
-## Overlays
-
-- ✅ Dialog
-
----
-
-# Current Infrastructure
-
-## Implemented
-
-- Design Tokens
-- Theme System
-- Base ControlValueAccessor
-- Click Outside Directive
-- Shared Utilities
-- Shared Models
-- Playground
+* ✅ Initial DataGrid
 
 ---
 
-## Recently Added
+## Infrastructure
 
-### ThemeService
-
-Implemented.
-
-Responsibilities:
-
-- Theme switching
-- Theme persistence
-- Expose current theme using Signals
-
----
-
-### StorageService
-
-Implemented.
-
-Responsibilities:
-
-- Local Storage abstraction
-- Generic typed API
-- Future replacement with IndexedDB / Encrypted Storage
+* ✅ Theme System
+* ✅ Design Tokens
+* ✅ ThemeService
+* ✅ StorageService
+* ✅ NotificationService
+* ✅ LoadingService
+* ✅ Base ControlValueAccessor
+* ✅ Click Outside Directive
+* ✅ Interactive Playground
 
 ---
 
-# Theme Architecture
+# Theme System
 
-The theme system has been redesigned.
-
-## Default Theme
+The platform uses a token-driven theme architecture.
 
 The default theme is represented by `:root`.
 
-There is **no need for a separate Light Theme**.
+Dark mode overrides only the variables that differ.
 
-```
-:root
-```
-
-contains all default values.
-
----
-
-## Dark Theme
-
-Dark theme only overrides variables.
-
-```
-[data-ui-theme="dark"]
-```
-
-contains only values that differ from the default theme.
-
----
-
-## Future Themes
-
-New themes should only override values.
-
-Examples:
-
-- Corporate
-- Restaurant
-- Barber
-- High Contrast
-- Midnight
-
-No theme should redefine the complete token set.
-
----
-
-# Theme Folder Structure
-
-```
-themes/
-
-    dark-theme.scss
-
-    tokens/
-
-        colors/
-        spacing/
-        radius/
-        typography/
-        transitions/
-        shadows/
-
-    index.scss
-```
-
----
-
-# Current Known Issue
-
-## Theme System
-
-ThemeService correctly:
-
-- updates `data-ui-theme`
-- persists theme
-- restores theme
-
-A CSS issue was discovered where default variables are emitted more than once.
-
-Generated CSS currently contains:
-
-```
-:root
-
-[data-ui-theme="dark"]
-
-:root
-```
-
-The second `:root` overrides the dark theme.
-
-Next session should:
-
-- eliminate duplicated `:root` declarations
-- remove obsolete `light-theme.scss`
-- ensure default tokens are emitted exactly once
-- verify generated CSS order
-
-This is the current blocker before continuing development.
+This approach makes future themes inexpensive to create while keeping maintenance low.
 
 ---
 
 # Development Workflow
 
-Every feature follows the same process.
+Every feature follows the same lifecycle.
 
 1. API Design
-2. Folder Structure
-3. Accessibility
-4. Implementation
-5. Playground
-6. Documentation
-7. Refactoring
+2. Accessibility
+3. Implementation
+4. Playground Integration
+5. Documentation
+6. Refactoring
 
-No feature is considered complete until all steps are finished.
+The public API is always considered before internal implementation.
 
 ---
 
 # Roadmap
 
-## Infrastructure
+## DataGrid Evolution
 
-- ✅ ThemeService
-- ✅ StorageService
-- ⬜ NotificationService
-- ⬜ DialogService
-- ⬜ LoadingService
+The DataGrid is currently the primary focus of development.
 
----
+Planned capabilities include:
 
-## Form System
+* Client-side Sorting
+* Filtering
+* Pagination
+* Row Selection
+* Sticky Headers
+* Loading States
+* Column Templates
+* Value Formatters
+* Responsive Columns
+* Server-side Mode
+* Column Visibility
+* Column Resizing
 
-- ⬜ FormField
-- ⬜ Validation Messages
-- ⬜ Helper Text
-- ⬜ Required Indicator
-
----
-
-## Feedback
-
-- ⬜ Toast
-- ⬜ Progress Bar
-- ⬜ Skeleton
+The DataGrid is intended to become the flagship component of AUI.
 
 ---
 
-## Data
+## Future Components
 
-- ⬜ DataGrid
+High-priority additions include:
 
-This will become the flagship component of AUI.
-
-Features:
-
-- Pagination
-- Sorting
-- Filtering
-- Selection
-- Empty State
-- Loading State
-- Actions
-- Responsive Columns
-
----
-
-## Business Components
-
-Built only after completing the infrastructure.
-
-Examples:
-
-- Appointment Calendar
-- Dashboard Widgets
-- CRUD Generator
-- Permission Matrix
-- Charts
-- Analytics
-- User Picker
+* Stack
+* HStack
+* VStack
+* Toolbar
+* Drawer
+* Tabs
+* Search Input
+* Empty State
+* Statistic Card
+* Confirm Dialog
+* Page Header
 
 ---
 
 # Long-Term Vision
 
-The goal is not to compete with Angular Material.
+The ambition of AUI is not to compete with Angular Material.
 
-The goal is to build an internal application platform capable of generating complete business systems rapidly.
+Its goal is to become the internal platform powering an ecosystem of business software.
 
-Eventually new projects should require little more than implementing business logic because authentication, layouts, forms, dialogs, notifications, themes, tables and dashboards already exist inside AUI.
+As the platform matures, new applications should require little more than implementing domain-specific functionality while relying on AUI for infrastructure, theming, forms, dialogs, tables, notifications and reusable UI patterns.
 
-Every real-world application should improve the platform.
+Every production project contributes back to the platform.
 
-The platform should never grow from assumptions.
-
-It should grow from experience.
+AUI grows through experience—not assumptions.
