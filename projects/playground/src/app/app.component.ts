@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
 import {
   AlertComponent,
@@ -11,6 +11,7 @@ import {
   FormFieldComponent,
   IconComponent,
   InputComponent,
+  LoadingService,
   NotificationService,
   RadioGroupComponent,
   SelectComponent,
@@ -48,6 +49,7 @@ import {
 })
 export class AppComponent {
   title = "playground";
+  private readonly loading = inject(LoadingService);
 
   dialogOpen = false;
 
@@ -78,6 +80,12 @@ export class AppComponent {
 
   showInfoNotification(): void {
     this.notification.info("A new update is available.", "Information");
+  }
+
+  async simulateLoading(): Promise<void> {
+    await this.loading.track(
+      new Promise((resolve) => setTimeout(resolve, 3000)),
+    );
   }
 
   countries = [
