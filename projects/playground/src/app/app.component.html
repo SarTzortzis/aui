@@ -34,7 +34,6 @@
         <ui-button variant="contained">
           Contained
         </ui-button>
-
         <ui-button variant="outlined">
           Outlined
         </ui-button>
@@ -302,7 +301,8 @@
 
         <h3>Data Grid</h3>
 
-        <aui-data-grid [columns]="columns" [data]="users" [pagination]="true" [pageSize]="10">
+        <aui-data-grid [columns]="columns" [data]="users" [pagination]="true" [pageSize]="10" [selectable]="true"
+          [filterable]="true" [filterPlaceholder]="'Search Users...'">
         </aui-data-grid>
 
       </ui-card>

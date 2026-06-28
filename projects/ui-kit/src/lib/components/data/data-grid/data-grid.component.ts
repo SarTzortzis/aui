@@ -7,6 +7,7 @@ import {
 } from "@angular/core";
 
 import { DataGridColumn } from "./data-grid.types";
+import { InputComponent } from "../../forms/input";
 
 @Component({
   selector: "aui-data-grid",
@@ -14,8 +15,10 @@ import { DataGridColumn } from "./data-grid.types";
   templateUrl: "./data-grid.component.html",
   styleUrl: "./data-grid.component.scss",
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [InputComponent],
 })
 export class DataGridComponent {
+  readonly filterPlaceholder = input("Search...");
   readonly columns = input.required<DataGridColumn[]>();
 
   readonly data = input.required<Record<string, unknown>[]>();
@@ -24,24 +27,56 @@ export class DataGridComponent {
 
   readonly pageSize = input(10);
 
+  readonly selectable = input(false);
+
+  readonly filterable = input(false);
+
+  readonly rowId = input("id");
+
+  protected readonly filter = signal("");
+
   protected readonly sortColumn = signal<string | null>(null);
 
   protected readonly sortDirection = signal<"asc" | "desc">("asc");
 
   protected readonly currentPage = signal(1);
 
+  protected readonly selectedRows = signal<Set<unknown>>(new Set());
+
+  protected readonly selectedCount = computed(() => this.selectedRows().size);
+
   protected readonly hasData = computed(() => this.data().length > 0);
+
+  protected readonly filteredRows = computed(() => {
+    const search = this.filter().trim().toLowerCase();
+
+    if (!search) {
+      return this.data();
+    }
+
+    return this.data().filter((row) =>
+      this.columns()
+        .filter((column) => !column.hidden)
+        .some((column) => {
+          const value = this.getCellValue(row, column);
+
+          return String(value ?? "")
+            .toLowerCase()
+            .includes(search);
+        }),
+    );
+  });
 
   protected readonly sortedRows = computed(() => {
     const column = this.sortColumn();
 
     if (!column) {
-      return this.data();
+      return this.filteredRows();
     }
 
     const direction = this.sortDirection();
 
-    return [...this.data()].sort((a, b) => {
+    return [...this.filteredRows()].sort((a, b) => {
       const first = a[column];
       const second = b[column];
 
@@ -77,6 +112,25 @@ export class DataGridComponent {
     return rows.slice(start, start + this.pageSize());
   });
 
+  protected readonly allRowsSelected = computed(() => {
+    const rows = this.rows();
+
+    return rows.length > 0 && rows.every((row) => this.isSelected(row));
+  });
+
+  protected readonly someRowsSelected = computed(() => {
+    const rows = this.rows();
+
+    const selected = rows.filter((row) => this.isSelected(row)).length;
+
+    return selected > 0 && selected < rows.length;
+  });
+
+  protected setFilter(value: string): void {
+    this.filter.set(value);
+    this.currentPage.set(1);
+  }
+
   protected sort(column: DataGridColumn): void {
     if (!column.sortable) {
       return;
@@ -104,6 +158,38 @@ export class DataGridComponent {
     if (this.currentPage() < this.totalPages()) {
       this.currentPage.update((page) => page + 1);
     }
+  }
+
+  protected toggleRow(row: Record<string, unknown>): void {
+    const id = row[this.rowId()];
+
+    this.selectedRows.update((current) => {
+      const next = new Set(current);
+
+      next.has(id) ? next.delete(id) : next.add(id);
+
+      return next;
+    });
+  }
+
+  protected toggleAll(): void {
+    const rows = this.rows();
+
+    this.selectedRows.update((current) => {
+      const next = new Set(current);
+
+      if (this.allRowsSelected()) {
+        rows.forEach((row) => next.delete(row[this.rowId()]));
+      } else {
+        rows.forEach((row) => next.add(row[this.rowId()]));
+      }
+
+      return next;
+    });
+  }
+
+  protected isSelected(row: Record<string, unknown>): boolean {
+    return this.selectedRows().has(row[this.rowId()]);
   }
 
   protected getCellValue(

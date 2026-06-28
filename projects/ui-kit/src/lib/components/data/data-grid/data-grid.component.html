@@ -1,10 +1,32 @@
 @if (hasData()) {
 
+@if (filterable()) {
+
+<div class="aui-data-grid__toolbar">
+
+  <ui-input placeholder="Search..." [value]="filter()" (valueChange)="setFilter($event)">
+  </ui-input>
+
+</div>
+
+}
+
 <table class="aui-data-grid">
 
   <thead>
 
     <tr>
+
+      @if (selectable()) {
+
+      <th class="aui-data-grid__selection">
+
+        <input type="checkbox" [checked]="allRowsSelected()" [indeterminate]="someRowsSelected()"
+          (change)="toggleAll()">
+
+      </th>
+
+      }
 
       @for (column of columns(); track column.field) {
 
@@ -40,9 +62,19 @@
 
   <tbody>
 
-    @for (row of rows(); track $index) {
+    @for (row of rows(); track row[rowId()]) {
 
-    <tr>
+    <tr [class.selected]="isSelected(row)">
+
+      @if (selectable()) {
+
+      <td class="aui-data-grid__selection">
+
+        <input type="checkbox" [checked]="isSelected(row)" (click)="$event.stopPropagation()" (change)="toggleRow(row)">
+
+      </td>
+
+      }
 
       @for (column of columns(); track column.field) {
 
@@ -77,6 +109,10 @@
   </button>
 
   <span>
+
+    @if (selectable() && selectedCount() > 0) {
+    {{ selectedCount() }} selected •
+    }
 
     Page {{ currentPage() }} of {{ totalPages() }}
 

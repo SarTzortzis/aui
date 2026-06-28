@@ -1,61 +1,78 @@
 .aui-data-grid {
   width: 100%;
-
   border-collapse: collapse;
-
   background: var(--ui-color-surface);
-
   color: var(--ui-color-text-primary);
 }
 
 .aui-data-grid th {
   text-align: left;
-
   padding: 1rem;
-
   font-weight: 600;
-
   border-bottom: 1px solid var(--ui-color-border);
-
   white-space: nowrap;
 }
 
 .aui-data-grid td {
   padding: 1rem;
-
   border-bottom: 1px solid var(--ui-color-border);
+}
+
+.aui-data-grid tbody tr {
+  transition: background-color .2s;
 }
 
 .aui-data-grid tbody tr:hover {
   background: var(--ui-color-surface-hover);
 }
 
+.aui-data-grid tbody tr.selected {
+  background: color-mix(
+    in srgb,
+    var(--ui-color-primary) 10%,
+    transparent
+  );
+}
+
 .aui-data-grid__empty {
   padding: 3rem;
-
   text-align: center;
-
   color: var(--ui-color-text-secondary);
 }
 
+/* -------------------------------- */
+/* Sorting                          */
+/* -------------------------------- */
+
 .aui-data-grid th.sortable {
   cursor: pointer;
-
   user-select: none;
-
-  transition: background-color var(--ui-transition-duration, 150ms);
+  transition: background-color .2s;
 }
 
 .aui-data-grid th.sortable:hover {
   background: var(--ui-color-surface-hover);
 }
 
-.aui-data-grid th .sort-indicator {
-  margin-left: 0.5rem;
+.sort-indicator {
+  margin-left: .5rem;
+  font-size: .75rem;
+  opacity: .6;
+}
 
-  font-size: 0.75rem;
+/* -------------------------------- */
+/* Selection                        */
+/* -------------------------------- */
 
-  opacity: 0.6;
+.aui-data-grid__selection {
+  width: 52px;
+  text-align: center;
+}
+
+.aui-data-grid__selection input {
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
 }
 
 /* -------------------------------- */
@@ -64,35 +81,23 @@
 
 .aui-data-grid__pagination {
   display: flex;
-
-  justify-content: flex-end;
-
   align-items: center;
-
-  gap: 1rem;
-
-  padding: 1rem 0;
+  justify-content: space-between;
+  margin-top: 1rem;
 }
 
 .aui-data-grid__pagination span {
   color: var(--ui-color-text-secondary);
-
-  font-size: 0.875rem;
+  font-size: .875rem;
 }
 
 .aui-data-grid__pagination button {
-  padding: 0.5rem 1rem;
-
+  padding: .5rem 1rem;
   border: 1px solid var(--ui-color-border);
-
   border-radius: var(--ui-radius-md);
-
   background: var(--ui-color-surface);
-
   color: var(--ui-color-text-primary);
-
   cursor: pointer;
-
   transition:
     background-color .2s,
     border-color .2s;
@@ -104,6 +109,5 @@
 
 .aui-data-grid__pagination button:disabled {
   opacity: .45;
-
   cursor: not-allowed;
 }
