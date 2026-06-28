@@ -16,6 +16,8 @@
   font-weight: 600;
 
   border-bottom: 1px solid var(--ui-color-border);
+
+  white-space: nowrap;
 }
 
 .aui-data-grid td {
@@ -38,19 +40,70 @@
 
 .aui-data-grid th.sortable {
   cursor: pointer;
+
   user-select: none;
+
+  transition: background-color var(--ui-transition-duration, 150ms);
 }
 
 .aui-data-grid th.sortable:hover {
   background: var(--ui-color-surface-hover);
 }
 
-.aui-data-grid th {
-  white-space: nowrap;
-}
-
 .aui-data-grid th .sort-indicator {
   margin-left: 0.5rem;
+
   font-size: 0.75rem;
+
   opacity: 0.6;
+}
+
+/* -------------------------------- */
+/* Pagination                       */
+/* -------------------------------- */
+
+.aui-data-grid__pagination {
+  display: flex;
+
+  justify-content: flex-end;
+
+  align-items: center;
+
+  gap: 1rem;
+
+  padding: 1rem 0;
+}
+
+.aui-data-grid__pagination span {
+  color: var(--ui-color-text-secondary);
+
+  font-size: 0.875rem;
+}
+
+.aui-data-grid__pagination button {
+  padding: 0.5rem 1rem;
+
+  border: 1px solid var(--ui-color-border);
+
+  border-radius: var(--ui-radius-md);
+
+  background: var(--ui-color-surface);
+
+  color: var(--ui-color-text-primary);
+
+  cursor: pointer;
+
+  transition:
+    background-color .2s,
+    border-color .2s;
+}
+
+.aui-data-grid__pagination button:hover:not(:disabled) {
+  background: var(--ui-color-surface-hover);
+}
+
+.aui-data-grid__pagination button:disabled {
+  opacity: .45;
+
+  cursor: not-allowed;
 }
