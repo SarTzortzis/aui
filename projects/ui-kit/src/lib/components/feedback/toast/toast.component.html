@@ -1,0 +1,36 @@
+<div class="aui-toast" [class.aui-toast--success]="notification().type === 'success'"
+  [class.aui-toast--error]="notification().type === 'error'"
+  [class.aui-toast--warning]="notification().type === 'warning'"
+  [class.aui-toast--info]="notification().type === 'info'">
+
+  <div class="aui-toast__header">
+
+    @if (notification().title) {
+
+    <strong>
+
+      {{ notification().title }}
+
+    </strong>
+
+    }
+
+    @if (notification().closable) {
+
+    <button type="button" (click)="dismiss()">
+
+      ✕
+
+    </button>
+
+    }
+
+  </div>
+
+  <div class="aui-toast__message">
+
+    {{ notification().message }}
+
+  </div>
+
+</div>
