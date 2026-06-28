@@ -12,7 +12,7 @@ Build consistent, production-ready business applications with reusable component
 
 ---
 
-## 🚀 Live Demo
+# 🚀 Live Demo
 
 **https://sartzortzis.github.io/aui/**
 
@@ -30,15 +30,15 @@ Instead of rebuilding the same infrastructure for every project, AUI provides a 
 
 Typical applications include:
 
-* Appointment & Reservation Systems
-* Restaurant Management
-* Barber Shop Management
-* CRM Systems
-* Inventory Management
-* Staff Management
-* Admin Panels
-* AI Dashboards
-* Internal Business Tools
+- Appointment & Reservation Systems
+- Restaurant Management
+- Barber Shop Management
+- CRM Systems
+- Inventory Management
+- Staff Management
+- Admin Panels
+- AI Dashboards
+- Internal Business Tools
 
 The project grows from solving real business problems rather than attempting to replicate existing UI frameworks.
 
@@ -62,21 +62,17 @@ AUI embraces modern Angular development.
 
 Whenever possible the platform prefers:
 
-* Standalone Components
-* Signals
-* `inject()`
-* Modern Control Flow
-* Latest Angular APIs
-
-Legacy patterns are avoided unless compatibility requires them.
+- Standalone Components
+- Signals
+- `inject()`
+- Modern Control Flow
+- Latest Angular APIs
 
 ---
 
 ## Public API First
 
 Developer experience always comes before implementation.
-
-Consumers should write expressive code such as:
 
 ```ts
 theme.toggle();
@@ -88,57 +84,45 @@ loading.track(...);
 dialog.open(...);
 ```
 
-Implementation details remain internal to the platform.
-
 ---
 
 ## Signal First
 
-Application state is exposed through readonly Signals.
-
-Example:
-
-```ts
-readonly theme = this._theme.asReadonly();
-```
-
-rather than mutable observables or public state.
+Application state is exposed through readonly Signals whenever possible.
 
 ---
 
 ## Design Token First
 
-Visual decisions are never hardcoded.
+Every visual decision is driven by design tokens.
 
-Every component consumes design tokens for:
+Current token groups include:
 
-* Colors
-* Typography
-* Spacing
-* Radius
-* Shadows
-* Transitions
+- Colors
+- Typography
+- Radius
+- Spacing
+- Shadows
+- Transitions
 
-Future token groups include:
+Future additions:
 
-* Motion
-* Elevation
-* Breakpoints
-* Opacity
-* Z-index
+- Motion
+- Elevation
+- Opacity
+- Breakpoints
+- Z-index
 
 ---
 
 ## Accessibility First
 
-Accessibility is treated as a fundamental requirement.
+Every reusable component is built with accessibility in mind.
 
-Every component aims to support:
-
-* Keyboard Navigation
-* ARIA
-* Focus Management
-* Screen Readers
+- Keyboard navigation
+- Focus management
+- Screen readers
+- ARIA
 
 ---
 
@@ -146,17 +130,9 @@ Every component aims to support:
 
 AUI contains infrastructure—not business logic.
 
-Components understand UI.
-
 Applications understand domains.
 
-For example:
-
-* Button knows buttons.
-* Dialog knows dialogs.
-* DataGrid knows tables.
-
-Applications know users, reservations, invoices and employees.
+AUI understands UI.
 
 ---
 
@@ -188,72 +164,84 @@ themes/
 
 # Current Features
 
-## Components
+## Actions
 
-### Actions
+- ✅ Button
 
-* ✅ Button
+## Forms
 
-### Forms
+- ✅ Input
+- ✅ Textarea
+- ✅ Checkbox
+- ✅ Switch
+- ✅ Radio Group
+- ✅ Select
+- ✅ FormField
 
-* ✅ Input
-* ✅ Textarea
-* ✅ Checkbox
-* ✅ Switch
-* ✅ Radio Group
-* ✅ Select
-* ✅ FormField
+## Feedback
 
-### Feedback
+- ✅ Alert
+- ✅ Badge
+- ✅ Spinner
+- ✅ Toast Notifications
 
-* ✅ Alert
-* ✅ Badge
-* ✅ Spinner
-* ✅ Toast Notifications
+## Layout
 
-### Layout
+- ✅ Card
+- ✅ Divider
 
-* ✅ Card
-* ✅ Divider
+## Display
 
-### Display
+- ✅ Icon
 
-* ✅ Icon
+## Overlays
 
-### Overlays
+- ✅ Dialog
+- ✅ Loading Overlay
 
-* ✅ Dialog
-* ✅ Loading Overlay
+## Data
 
-### Data
+### ✅ DataGrid
 
-* ✅ Initial DataGrid
+Current capabilities:
+
+- Client-side Sorting
+- Global Filtering
+- Pagination
+- Page Size Selector
+- Row Selection
+- Loading State
+- Empty State
+- No Results State
+- Row Click
+- Row Double Click
+- Value Formatters
+- CSV Export
+- Row Actions
 
 ---
 
-## Infrastructure
+# Infrastructure
 
-* ✅ Theme System
-* ✅ Design Tokens
-* ✅ ThemeService
-* ✅ StorageService
-* ✅ NotificationService
-* ✅ LoadingService
-* ✅ Base ControlValueAccessor
-* ✅ Click Outside Directive
-* ✅ Interactive Playground
+- Theme System
+- Design Tokens
+- ThemeService
+- StorageService
+- NotificationService
+- LoadingService
+- Base ControlValueAccessor
+- ClickOutside Directive
+- Interactive Playground
 
 ---
 
 # Theme System
 
-The platform uses a token-driven theme architecture.
+The platform uses a token-driven architecture.
 
-The default theme is represented by `:root`.
+The default theme lives in `:root`.
 
-Dark mode overrides only the variables that differ.
-
-This approach makes future themes inexpensive to create while keeping maintenance low.
+Dark mode overrides only the tokens that differ, making future themes inexpensive to create.
 
 ---
 
@@ -261,68 +249,63 @@ This approach makes future themes inexpensive to create while keeping maintenanc
 
 Every feature follows the same lifecycle.
 
-1. API Design
+1. Public API
 2. Accessibility
 3. Implementation
-4. Playground Integration
+4. Playground
 5. Documentation
 6. Refactoring
-
-The public API is always considered before internal implementation.
 
 ---
 
 # Roadmap
 
-## DataGrid Evolution
+## DataGrid Phase 3
 
-The DataGrid is currently the primary focus of development.
+The remaining enterprise features are:
 
-Planned capabilities include:
-
-* Client-side Sorting
-* Filtering
-* Pagination
-* Row Selection
-* Sticky Headers
-* Loading States
-* Column Templates
-* Value Formatters
-* Responsive Columns
-* Server-side Mode
-* Column Visibility
-* Column Resizing
-
-The DataGrid is intended to become the flagship component of AUI.
+- Sticky Header
+- Column Resizing
+- Column Visibility
+- Column Templates
+- Responsive Columns
+- Server-side Mode
+- Virtual Scrolling
+- Keyboard Navigation
+- Custom Empty Templates
+- Column Groups
+- Tree Data
+- Drag & Drop Columns
+- Inline Editing
 
 ---
 
-## Future Components
+## Upcoming Components
 
-High-priority additions include:
+High priority:
 
-* Stack
-* HStack
-* VStack
-* Toolbar
-* Drawer
-* Tabs
-* Search Input
-* Empty State
-* Statistic Card
-* Confirm Dialog
-* Page Header
+- Stack
+- HStack
+- VStack
+- Toolbar
+- Drawer
+- Tabs
+- Search Input
+- Empty State Component
+- Statistic Card
+- Confirm Dialog
+- Page Header
 
 ---
 
 # Long-Term Vision
 
-The ambition of AUI is not to compete with Angular Material.
+The goal of AUI is not to replace Angular Material.
 
-Its goal is to become the internal platform powering an ecosystem of business software.
+The goal is to become the internal platform powering an ecosystem of business software.
 
-As the platform matures, new applications should require little more than implementing domain-specific functionality while relying on AUI for infrastructure, theming, forms, dialogs, tables, notifications and reusable UI patterns.
+Every production application strengthens the platform.
 
-Every production project contributes back to the platform.
+Every solved problem becomes reusable infrastructure.
 
-AUI grows through experience—not assumptions.
+Applications should spend their time implementing business logic—not rebuilding UI foundations.
