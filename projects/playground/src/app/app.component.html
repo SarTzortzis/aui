@@ -251,7 +251,7 @@
 
       <ui-card>
 
-        <h3>Notifications (Press me)</h3>
+        <h3>Notifications (Click)</h3>
 
         <ui-button color="success" (clicked)="showSuccessNotification()">
           Success
@@ -301,10 +301,11 @@
 
         <h3>Data Grid</h3>
 
-        <aui-data-grid [columns]="columns" [data]="users" [pagination]="true" [defaultPageSize]="10" [selectable]="true"
+        <aui-data-grid [columns]="columns" [data]="users" [pagination]="true" [pageSize]="10" [selectable]="true"
           (rowClick)="onRowClick($event)" (rowDoubleClick)="onRowDoubleClick($event)" [filterable]="true"
-          [filterPlaceholder]="'Search Users...'">
-        </aui-data-grid>
+          [filterPlaceholder]="'Search Users...'" (rowAction)="onRowAction($event)" [actions]="userActions"
+          [exportable]="true"></aui-data-grid>
+
 
       </ui-card>
 

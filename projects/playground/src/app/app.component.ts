@@ -25,7 +25,13 @@ import {
   ToastContainerComponent,
   column,
 } from "ui-kit";
-import { COUNTRIES, STATUS_OPTIONS, USER_COLUMNS, USERS } from "./mock-data";
+import {
+  COUNTRIES,
+  STATUS_OPTIONS,
+  USER_COLUMNS,
+  USERS,
+  USER_ACTIONS,
+} from "./mock-data";
 
 @Component({
   selector: "app-root",
@@ -78,6 +84,7 @@ export class AppComponent {
   readonly users = USERS;
 
   readonly columns = USER_COLUMNS;
+  readonly userActions = USER_ACTIONS;
 
   onThemeChanged(isDark: boolean): void {
     this.theme.setTheme(isDark ? "dark" : "light");
@@ -114,5 +121,8 @@ export class AppComponent {
 
   onLargeButtonClick(): void {
     console.log("Large button clicked!");
+  }
+  onRowAction(event: { action: string; row: Record<string, unknown> }): void {
+    console.log(event.action, event.row);
   }
 }

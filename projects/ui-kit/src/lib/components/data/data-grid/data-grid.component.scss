@@ -21,9 +21,32 @@
   flex: 1;
 }
 
+.aui-data-grid__toolbar-actions {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
 .aui-data-grid__toolbar ui-select {
   width: 120px;
   flex-shrink: 0;
+}
+
+.aui-data-grid__toolbar-actions button {
+  padding: .65rem 1rem;
+  border: 1px solid var(--ui-color-border);
+  border-radius: var(--ui-radius-md);
+  background: var(--ui-color-surface);
+  color: var(--ui-color-text-primary);
+  cursor: pointer;
+
+  transition:
+    background-color .2s,
+    border-color .2s;
+}
+
+.aui-data-grid__toolbar-actions button:hover {
+  background: var(--ui-color-surface-hover);
 }
 
 /* -------------------------------- */
@@ -117,6 +140,38 @@
 }
 
 /* -------------------------------- */
+/* Row Actions                      */
+/* -------------------------------- */
+
+.aui-data-grid__actions {
+  width: 1%;
+  white-space: nowrap;
+}
+
+.aui-data-grid__actions button {
+  margin-right: .5rem;
+  padding: .35rem .75rem;
+  border: 1px solid var(--ui-color-border);
+  border-radius: var(--ui-radius-sm);
+  background: var(--ui-color-surface);
+  color: var(--ui-color-text-primary);
+  cursor: pointer;
+  font-size: .875rem;
+
+  transition:
+    background-color .2s,
+    border-color .2s;
+}
+
+.aui-data-grid__actions button:last-child {
+  margin-right: 0;
+}
+
+.aui-data-grid__actions button:hover {
+  background: var(--ui-color-surface-hover);
+}
+
+/* -------------------------------- */
 /* Pagination                       */
 /* -------------------------------- */
 
@@ -164,6 +219,11 @@
     align-items: stretch;
   }
 
+  .aui-data-grid__toolbar-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
   .aui-data-grid__toolbar ui-select {
     width: 100%;
   }
@@ -171,5 +231,11 @@
   .aui-data-grid__pagination {
     flex-direction: column;
     gap: .75rem;
+  }
+
+  .aui-data-grid__actions button {
+    display: block;
+    width: 100%;
+    margin: 0 0 .5rem;
   }
 }

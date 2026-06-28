@@ -5,10 +5,9 @@ import {
   input,
   output,
   signal,
-  effect,
 } from "@angular/core";
 
-import { DataGridColumn } from "./data-grid.types";
+import { DataGridColumn, DataGridAction } from "./data-grid.types";
 import { InputComponent } from "../../forms/input";
 import { SelectComponent } from "../../forms/select";
 import { SpinnerComponent } from "../../feedback/spinner";
@@ -27,14 +26,20 @@ export class DataGridComponent {
   readonly rowClick = output<Record<string, unknown>>();
 
   readonly rowDoubleClick = output<Record<string, unknown>>();
+  readonly actions = input<DataGridAction[]>([]);
+
+  readonly exportable = input(false);
+
+  readonly rowAction = output<{
+    action: string;
+    row: Record<string, unknown>;
+  }>();
 
   readonly columns = input.required<DataGridColumn[]>();
 
   readonly data = input.required<Record<string, unknown>[]>();
 
   readonly pagination = input(false);
-
-  readonly defaultPageSize = input(10);
 
   readonly pageSize = input(10);
 
@@ -76,6 +81,18 @@ export class DataGridComponent {
   protected onRowDoubleClick(row: Record<string, unknown>): void {
     this.rowDoubleClick.emit(row);
   }
+
+  protected readonly pageSizeSelectOptions = computed(() =>
+    this.pageSizeOptions().map((size) => ({
+      label: size.toString(),
+      value: size.toString(),
+    })),
+  );
+  protected readonly hasActions = computed(() => this.actions().length > 0);
+
+  protected readonly visibleColumns = computed(() =>
+    this.columns().filter((column) => !column.hidden),
+  );
 
   protected readonly filteredRows = computed(() => {
     const search = this.filter().trim().toLowerCase();
@@ -219,6 +236,50 @@ export class DataGridComponent {
 
       return next;
     });
+  }
+  protected triggerAction(
+    action: DataGridAction,
+    row: Record<string, unknown>,
+    event: MouseEvent,
+  ): void {
+    event.stopPropagation();
+
+    this.rowAction.emit({
+      action: action.action,
+      row,
+    });
+  }
+
+  protected exportCsv(): void {
+    const headers = this.visibleColumns().map((column) => column.header);
+
+    const rows = this.sortedRows().map((row) =>
+      this.visibleColumns().map((column) => {
+        const value = this.getCellValue(row, column);
+
+        return `"${String(value ?? "").replace(/"/g, '""')}"`;
+      }),
+    );
+
+    const csv = [headers.join(","), ...rows.map((row) => row.join(","))].join(
+      "\n",
+    );
+
+    const blob = new Blob([csv], {
+      type: "text/csv;charset=utf-8;",
+    });
+
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+
+    link.href = url;
+
+    link.download = "data.csv";
+
+    link.click();
+
+    URL.revokeObjectURL(url);
   }
 
   protected isSelected(row: Record<string, unknown>): boolean {

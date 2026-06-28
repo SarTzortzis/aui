@@ -256,7 +256,18 @@ export const USERS = [
     status: "Active",
   },
 ];
-
+export const USER_ACTIONS = [
+  {
+    label: "Edit",
+    icon: "✏️",
+    action: "edit",
+  },
+  {
+    label: "Delete",
+    icon: "🗑️",
+    action: "delete",
+  },
+];
 export const USER_COLUMNS = [
   column("name", "Name", {
     sortable: true,

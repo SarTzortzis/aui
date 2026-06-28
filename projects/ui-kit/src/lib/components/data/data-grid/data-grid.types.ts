@@ -1,3 +1,13 @@
+export interface DataGridAction {
+  icon?: string;
+
+  label: string;
+
+  color?: "primary" | "success" | "warning" | "danger";
+
+  action: string;
+}
+
 export interface DataGridColumn {
   field: string;
 
