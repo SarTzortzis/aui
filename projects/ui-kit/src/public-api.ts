@@ -17,6 +17,7 @@ export * from "./lib/components/feedback/spinner";
 export * from "./lib/components/feedback/icon";
 export * from "./lib/components/feedback/alert";
 export * from "./lib/components/feedback/toast";
+export * from "./lib/components/feedback/loading-overlay";
 
 /*display */
 export * from "./lib/components/display/badge";
