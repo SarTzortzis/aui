@@ -1,54 +1,23 @@
-name: Deploy Playground
+build:
+  runs-on: ubuntu-latest
 
-on:
-  push:
-    branches:
-      - main
+  steps:
+    - uses: actions/checkout@v4
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 24
 
-concurrency:
-  group: pages
-  cancel-in-progress: true
+    - name: Install dependencies
+      run: yarn install --frozen-lockfile
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+    - name: Build Playground
+      run: |
+        npx ng build playground \
+          --configuration production \
+          --base-href /aui/
 
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: yarn
-
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile
-
-      - name: Build Playground
-        run: |
-          npx ng build playground \
-            --configuration production \
-            --base-href /aui/
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist/playground/browser
-
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    needs: build
-
-    runs-on: ubuntu-latest
-
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: dist/playground/browser
