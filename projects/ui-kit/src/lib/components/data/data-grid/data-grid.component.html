@@ -1,0 +1,63 @@
+@if (hasData()) {
+
+<table class="aui-data-grid">
+
+  <thead>
+
+    <tr>
+
+      @for (column of columns(); track column.field) {
+
+      @if (!column.hidden) {
+
+      <th [style.width]="column.width">
+
+        {{ column.header }}
+
+      </th>
+
+      }
+
+      }
+
+    </tr>
+
+  </thead>
+
+  <tbody>
+
+    @for (row of data(); track $index) {
+
+    <tr>
+
+      @for (column of columns(); track column.field) {
+
+      @if (!column.hidden) {
+
+      <td>
+
+        {{ getCellValue(row, column) }}
+
+      </td>
+
+      }
+
+      }
+
+    </tr>
+
+    }
+
+  </tbody>
+
+</table>
+
+} @else {
+
+<div class="aui-data-grid__empty">
+
+  No data available.
+
+</div>
+
+}

@@ -1,11 +1,13 @@
 import { Component, inject } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
+
 import {
   AlertComponent,
   BadgeComponent,
   ButtonComponent,
   CardComponent,
   CheckboxComponent,
+  DataGridComponent,
   DialogComponent,
   DividerComponent,
   FormFieldComponent,
@@ -21,6 +23,7 @@ import {
   TextareaComponent,
   ThemeService,
   ToastContainerComponent,
+  column,
 } from "ui-kit";
 
 @Component({
@@ -45,15 +48,17 @@ import {
     FormFieldComponent,
     ToastContainerComponent,
     LoadingOverlayComponent,
+    DataGridComponent,
   ],
   templateUrl: "./app.component.html",
   styleUrl: "./app.component.css",
 })
 export class AppComponent {
   title = "playground";
-  private readonly loading = inject(LoadingService);
 
   dialogOpen = false;
+
+  private readonly loading = inject(LoadingService);
 
   constructor(
     public readonly theme: ThemeService,
@@ -63,6 +68,46 @@ export class AppComponent {
   get darkMode(): boolean {
     return this.theme.theme() === "dark";
   }
+
+  readonly countries = [
+    { label: "Greece", value: "gr" },
+    { label: "Germany", value: "de" },
+    { label: "France", value: "fr" },
+  ];
+
+  readonly statusOptions = [
+    { label: "Draft", value: "draft" },
+    { label: "Published", value: "published" },
+    { label: "Archived", value: "archived" },
+  ];
+
+  readonly users = [
+    {
+      name: "John Doe",
+      email: "john@test.com",
+      role: "Administrator",
+    },
+    {
+      name: "Jane Smith",
+      email: "jane@test.com",
+      role: "Manager",
+    },
+    {
+      name: "Mike Johnson",
+      email: "mike@test.com",
+      role: "Developer",
+    },
+  ];
+
+  readonly columns = [
+    column("name", "Name"),
+
+    column("email", "Email", {
+      width: "320px",
+    }),
+
+    column("role", "Role"),
+  ];
 
   onThemeChanged(isDark: boolean): void {
     this.theme.setTheme(isDark ? "dark" : "light");
@@ -89,18 +134,6 @@ export class AppComponent {
       new Promise((resolve) => setTimeout(resolve, 3000)),
     );
   }
-
-  countries = [
-    { label: "Greece", value: "gr" },
-    { label: "Germany", value: "de" },
-    { label: "France", value: "fr" },
-  ];
-
-  statusOptions = [
-    { label: "Draft", value: "draft" },
-    { label: "Published", value: "published" },
-    { label: "Archived", value: "archived" },
-  ];
 
   onLargeButtonClick(): void {
     console.log("Large button clicked!");

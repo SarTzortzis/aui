@@ -19,7 +19,10 @@ export * from "./lib/components/feedback/alert";
 export * from "./lib/components/feedback/toast";
 export * from "./lib/components/feedback/loading-overlay";
 
-/*display */
+/* Data */
+export * from "./lib/components/data/data-grid";
+
+/*Display */
 export * from "./lib/components/display/badge";
 export * from "./lib/components/display/card";
 
