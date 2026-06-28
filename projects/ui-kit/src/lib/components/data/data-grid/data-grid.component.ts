@@ -3,11 +3,15 @@ import {
   Component,
   computed,
   input,
+  output,
   signal,
+  effect,
 } from "@angular/core";
 
 import { DataGridColumn } from "./data-grid.types";
 import { InputComponent } from "../../forms/input";
+import { SelectComponent } from "../../forms/select";
+import { SpinnerComponent } from "../../feedback/spinner";
 
 @Component({
   selector: "aui-data-grid",
@@ -15,17 +19,26 @@ import { InputComponent } from "../../forms/input";
   templateUrl: "./data-grid.component.html",
   styleUrl: "./data-grid.component.scss",
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [InputComponent],
+  imports: [InputComponent, SpinnerComponent, SelectComponent],
 })
 export class DataGridComponent {
   readonly filterPlaceholder = input("Search...");
+  readonly loading = input(false);
+  readonly rowClick = output<Record<string, unknown>>();
+
+  readonly rowDoubleClick = output<Record<string, unknown>>();
+
   readonly columns = input.required<DataGridColumn[]>();
 
   readonly data = input.required<Record<string, unknown>[]>();
 
   readonly pagination = input(false);
 
+  readonly defaultPageSize = input(10);
+
   readonly pageSize = input(10);
+
+  readonly pageSizeOptions = input([10, 25, 50, 100]);
 
   readonly selectable = input(false);
 
@@ -46,6 +59,23 @@ export class DataGridComponent {
   protected readonly selectedCount = computed(() => this.selectedRows().size);
 
   protected readonly hasData = computed(() => this.data().length > 0);
+
+  protected pageSizeValue = signal(this.pageSize());
+
+  protected setPageSize(value: string | number): void {
+    this.pageSizeValue.set(Number(value));
+    this.currentPage.set(1);
+  }
+  protected readonly hasResults = computed(
+    () => this.filteredRows().length > 0,
+  );
+  protected onRowClick(row: Record<string, unknown>): void {
+    this.rowClick.emit(row);
+  }
+
+  protected onRowDoubleClick(row: Record<string, unknown>): void {
+    this.rowDoubleClick.emit(row);
+  }
 
   protected readonly filteredRows = computed(() => {
     const search = this.filter().trim().toLowerCase();
@@ -97,7 +127,10 @@ export class DataGridComponent {
       return 1;
     }
 
-    return Math.max(1, Math.ceil(this.sortedRows().length / this.pageSize()));
+    return Math.max(
+      1,
+      Math.ceil(this.sortedRows().length / this.pageSizeValue()),
+    );
   });
 
   protected readonly rows = computed(() => {
@@ -107,9 +140,9 @@ export class DataGridComponent {
       return rows;
     }
 
-    const start = (this.currentPage() - 1) * this.pageSize();
+    const start = (this.currentPage() - 1) * this.pageSizeValue();
 
-    return rows.slice(start, start + this.pageSize());
+    return rows.slice(start, start + this.pageSizeValue());
   });
 
   protected readonly allRowsSelected = computed(() => {

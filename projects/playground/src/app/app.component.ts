@@ -58,6 +58,7 @@ export class AppComponent {
   title = "playground";
 
   dialogOpen = false;
+  tableLoading = true;
 
   private readonly loading = inject(LoadingService);
 
@@ -102,6 +103,13 @@ export class AppComponent {
     await this.loading.track(
       new Promise((resolve) => setTimeout(resolve, 3000)),
     );
+  }
+  onRowClick(row: Record<string, unknown>): void {
+    console.log("Row Click:", row);
+  }
+
+  onRowDoubleClick(row: Record<string, unknown>): void {
+    console.log("Row Double Click:", row);
   }
 
   onLargeButtonClick(): void {

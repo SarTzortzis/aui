@@ -1,15 +1,54 @@
-@if (hasData()) {
+@if (loading()) {
 
-@if (filterable()) {
+<div class="aui-data-grid__loading">
 
-<div class="aui-data-grid__toolbar">
-
-  <ui-input placeholder="Search..." [value]="filter()" (valueChange)="setFilter($event)">
-  </ui-input>
+  <ui-spinner size="large">
+  </ui-spinner>
 
 </div>
 
-}
+} @else if (!hasData()) {
+
+<div class="aui-data-grid__empty">
+
+  No data available.
+
+</div>
+
+} @else {
+
+<div class="aui-data-grid__toolbar">
+
+  @if (filterable()) {
+
+  <ui-input [placeholder]="filterPlaceholder()" [value]="filter()" (valueChange)="setFilter($event)">
+  </ui-input>
+
+  }
+
+  @if (pagination()) {
+
+  <ui-select label="Rows" [options]="[
+    { label: '10', value: '10' },
+    { label: '25', value: '25' },
+    { label: '50', value: '50' },
+    { label: '100', value: '100' }
+  ]" [value]="pageSize().toString()" (valueChange)="setPageSize($event ?? '10')">
+  </ui-select>
+
+  }
+
+</div>
+
+@if (!hasResults()) {
+
+<div class="aui-data-grid__empty">
+
+  No matching records found.
+
+</div>
+
+} @else {
 
 <table class="aui-data-grid">
 
@@ -64,7 +103,7 @@
 
     @for (row of rows(); track row[rowId()]) {
 
-    <tr [class.selected]="isSelected(row)">
+    <tr [class.selected]="isSelected(row)" (click)="onRowClick(row)" (dblclick)="onRowDoubleClick(row)">
 
       @if (selectable()) {
 
@@ -128,12 +167,6 @@
 
 }
 
-} @else {
-
-<div class="aui-data-grid__empty">
-
-  No data available.
-
-</div>
+}
 
 }

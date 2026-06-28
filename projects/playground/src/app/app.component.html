@@ -301,11 +301,32 @@
 
         <h3>Data Grid</h3>
 
-        <aui-data-grid [columns]="columns" [data]="users" [pagination]="true" [pageSize]="10" [selectable]="true"
-          [filterable]="true" [filterPlaceholder]="'Search Users...'">
+        <aui-data-grid [columns]="columns" [data]="users" [pagination]="true" [defaultPageSize]="10" [selectable]="true"
+          (rowClick)="onRowClick($event)" (rowDoubleClick)="onRowDoubleClick($event)" [filterable]="true"
+          [filterPlaceholder]="'Search Users...'">
         </aui-data-grid>
 
       </ui-card>
+
+      <ui-card>
+
+        <h3>Data Grid (loading)</h3>
+
+        <aui-data-grid [columns]="columns" [data]="users" [pagination]="true" [selectable]="true" [filterable]="true"
+          [loading]="tableLoading">
+        </aui-data-grid>
+
+      </ui-card>
+      <ui-card>
+
+        <h3>Data Grid (noData)</h3>
+
+        <aui-data-grid [columns]="columns" [data]="[]" [pagination]="true" [selectable]="true" [filterable]="true">
+        </aui-data-grid>
+
+      </ui-card>
+
+
 
     </div>
 
