@@ -70,4 +70,22 @@ export const USER_COLUMNS = [
   column("status", "Status", {
     sortable: true,
   }),
+  column("status", "Status", {
+    sortable: true,
+    formatter: (value) => {
+      switch (value) {
+        case "Active":
+          return "🟢 Active";
+
+        case "Inactive":
+          return "🔴 Inactive";
+
+        case "Vacation":
+          return "🏖️ Vacation";
+
+        default:
+          return value;
+      }
+    },
+  }),
 ];

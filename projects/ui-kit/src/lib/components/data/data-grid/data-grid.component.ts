@@ -70,6 +70,8 @@ export class DataGridComponent {
     row: Record<string, unknown>,
     column: DataGridColumn,
   ): unknown {
-    return row[column.field];
+    const value = row[column.field];
+
+    return column.formatter ? column.formatter(value, row) : value;
   }
 }

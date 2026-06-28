@@ -8,6 +8,8 @@ export interface DataGridColumn {
   hidden?: boolean;
 
   width?: string;
+
+  formatter?: (value: unknown, row: Record<string, unknown>) => unknown;
 }
 
 export function column(
