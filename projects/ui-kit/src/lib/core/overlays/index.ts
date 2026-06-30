@@ -1,5 +1,4 @@
 export * from "./models/overlay-config";
-export * from "./models/overlay-position";
 export * from "./models/overlay-ref";
 
 export * from "./tokens/overlay.tokens";

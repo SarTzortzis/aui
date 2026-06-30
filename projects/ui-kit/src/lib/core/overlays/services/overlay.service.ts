@@ -16,16 +16,8 @@ import { AUI_OVERLAY_CONFIG, AUI_OVERLAY_REF } from "../tokens/overlay.tokens";
   providedIn: "root",
 })
 export class OverlayService {
-  /**
-   * Currently opened overlays.
-   */
   private readonly overlays = new Set<OverlayRef>();
 
-  /**
-   * Global overlay host.
-   * Falls back to document.body until the OverlayContainerComponent
-   * registers itself.
-   */
   private hostElement: HTMLElement | null = null;
 
   constructor(
@@ -33,9 +25,6 @@ export class OverlayService {
     private readonly environmentInjector: EnvironmentInjector,
   ) {}
 
-  /**
-   * Opens a component inside the overlay host.
-   */
   open<T>(component: Type<T>, config: OverlayConfig = {}): OverlayRef {
     let overlayRef!: OverlayRef;
 
@@ -53,7 +42,7 @@ export class OverlayService {
       ],
     });
 
-    const componentRef: ComponentRef<T> = createComponent(component, {
+    const componentRef = createComponent(component, {
       environmentInjector: this.environmentInjector,
       elementInjector: injector,
     });
@@ -68,42 +57,68 @@ export class OverlayService {
 
     host.appendChild(componentRef.location.nativeElement);
 
+    this.positionOverlay(componentRef.location.nativeElement, config);
+
     this.overlays.add(overlayRef);
 
     return overlayRef;
   }
 
-  /**
-   * Closes every opened overlay.
-   */
   closeAll(): void {
     [...this.overlays].forEach((ref) => ref.close());
   }
 
-  /**
-   * Returns true if at least one overlay is opened.
-   */
   hasOpenOverlays(): boolean {
     return this.overlays.size > 0;
   }
 
-  /**
-   * Returns all currently opened overlays.
-   */
   getOpenOverlays(): readonly OverlayRef[] {
     return [...this.overlays];
   }
 
-  /**
-   * Registers the global overlay host.
-   */
   setHostElement(element: HTMLElement | null): void {
     this.hostElement = element;
   }
 
-  /**
-   * Cleans up an overlay instance.
-   */
+  private positionOverlay(element: HTMLElement, config: OverlayConfig): void {
+    if (!config.origin) {
+      return;
+    }
+
+    const rect = config.origin.getBoundingClientRect();
+
+    const offset = config.offset ?? 8;
+
+    element.style.position = "fixed";
+
+    switch (config.position) {
+      case "bottom":
+        element.style.left = `${rect.left}px`;
+        element.style.top = `${rect.bottom + offset}px`;
+
+        break;
+
+      case "left":
+        element.style.left = `${rect.left - element.offsetWidth - offset}px`;
+        element.style.top = `${rect.top}px`;
+
+        break;
+
+      case "right":
+        element.style.left = `${rect.right + offset}px`;
+        element.style.top = `${rect.top}px`;
+
+        break;
+
+      case "top":
+      default:
+        element.style.left = `${rect.left}px`;
+        element.style.top = `${rect.top - element.offsetHeight - offset}px`;
+
+        break;
+    }
+  }
+
   private dispose(
     componentRef: ComponentRef<unknown>,
     overlayRef: OverlayRef,

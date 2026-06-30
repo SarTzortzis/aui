@@ -335,6 +335,8 @@
 
   <!-- OVERLAYS -->
 
+  <!-- OVERLAYS -->
+
   <section class="playground-section">
 
     <h2 class="playground-section__title">
@@ -343,7 +345,43 @@
 
     <div class="playground-grid">
 
-      <!-- Paste overlays.html here -->
+      <ui-card>
+
+        <h3>Tooltips</h3>
+
+        <ui-vstack gap="md">
+
+          <ui-button auiTooltip="This is a tooltip">
+            Default
+          </ui-button>
+
+          <ui-button auiTooltip="Tooltip on top" tooltipPosition="top">
+            Top
+          </ui-button>
+
+          <ui-button auiTooltip="Tooltip on bottom" tooltipPosition="bottom">
+            Bottom
+          </ui-button>
+
+          <ui-button auiTooltip="Tooltip on left" tooltipPosition="left">
+            Left
+          </ui-button>
+
+          <ui-button auiTooltip="Tooltip on right" tooltipPosition="right">
+            Right
+          </ui-button>
+
+          <ui-button auiTooltip="Appears after one second" [showDelay]="1000">
+            Delayed
+          </ui-button>
+
+          <ui-button auiTooltip="You should never see this" [tooltipDisabled]="true">
+            Disabled
+          </ui-button>
+
+        </ui-vstack>
+
+      </ui-card>
 
     </div>
 

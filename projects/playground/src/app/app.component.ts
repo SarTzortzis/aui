@@ -28,6 +28,7 @@ import {
   TextareaComponent,
   ThemeService,
   ToastContainerComponent,
+  TooltipComponent,
   TopbarComponent,
   VStackComponent,
   column,
@@ -39,6 +40,7 @@ import {
   USERS,
   USER_ACTIONS,
 } from "./mock-data";
+import { TooltipDirective } from "../../../ui-kit/src/lib/components/overlay/tooltip/tooltip.directive";
 
 @Component({
   selector: "app-root",
@@ -70,6 +72,8 @@ import {
     PageHeaderComponent,
     SidebarComponent,
     TopbarComponent,
+    TooltipComponent,
+    TooltipDirective,
   ],
   templateUrl: "./app.component.html",
   styleUrl: "./app.component.css",

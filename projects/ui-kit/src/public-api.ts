@@ -28,6 +28,7 @@ export * from "./lib/components/display/card";
 
 /* Overlay */
 export * from "./lib/components/overlay/dialog";
+export * from "./lib/components/overlay/tooltip";
 
 /* Layout */
 export * from "./lib/components/layout/divider";

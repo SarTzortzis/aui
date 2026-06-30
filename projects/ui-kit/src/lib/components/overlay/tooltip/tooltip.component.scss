@@ -1,0 +1,29 @@
+:host {
+  display: block;
+
+  pointer-events: none;
+
+  user-select: none;
+}
+
+.aui-tooltip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  max-width: 260px;
+
+  padding: 0.5rem 0.75rem;
+
+  border-radius: var(--ui-border-radius-md);
+
+  background: var(--ui-color-surface-inverse, #222);
+  color: var(--ui-color-text-inverse, #fff);
+
+  font-size: 0.75rem;
+  line-height: 1.4;
+
+  box-shadow: var(--ui-shadow-lg);
+
+  white-space: nowrap;
+}

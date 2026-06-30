@@ -1,14 +1,7 @@
-export type OverlayHorizontalAlignment = "start" | "center" | "end";
+export type OverlayPositionName = "top" | "bottom" | "left" | "right";
 
-export type OverlayVerticalAlignment = "top" | "center" | "bottom";
+export interface OverlayCoordinates {
+  top: number;
 
-export interface OverlayPosition {
-  originX: OverlayHorizontalAlignment;
-  originY: OverlayVerticalAlignment;
-
-  overlayX: OverlayHorizontalAlignment;
-  overlayY: OverlayVerticalAlignment;
-
-  offsetX?: number;
-  offsetY?: number;
+  left: number;
 }

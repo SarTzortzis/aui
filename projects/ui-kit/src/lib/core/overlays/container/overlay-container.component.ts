@@ -14,7 +14,7 @@ import { OverlayService } from "../services/overlay.service";
   selector: "aui-overlay-container",
   standalone: true,
   templateUrl: "./overlay-container.component.html",
-  styleUrls: ["./overlay-container.component.css"],
+  styleUrls: ["./overlay-container.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OverlayContainerComponent implements AfterViewInit, OnDestroy {
