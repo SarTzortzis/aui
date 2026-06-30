@@ -31,6 +31,9 @@ export * from "./lib/components/overlay/dialog";
 
 /* Layout */
 export * from "./lib/components/layout/divider";
+export * from "./lib/components/layout/stack";
+export * from "./lib/components/layout/vstack";
+export * from "./lib/components/layout/hstack";
 
 /* Services */
 export * from "./lib/services/theme";

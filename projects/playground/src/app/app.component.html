@@ -353,4 +353,170 @@
 
   <aui-toast-container />
 
+  <!-- LAYOUT -->
+
+  <section class="playground-section">
+
+    <h2 class="playground-section__title">
+      Layout
+    </h2>
+
+    <div class="playground-grid">
+
+      <!-- Stack -->
+
+      <ui-card>
+
+        <h3>Stack (Column)</h3>
+
+        <ui-stack gap="lg">
+
+          <ui-button>First</ui-button>
+
+          <ui-button color="success">
+            Second
+          </ui-button>
+
+          <ui-button color="danger">
+            Third
+          </ui-button>
+
+        </ui-stack>
+
+      </ui-card>
+
+      <!-- HStack -->
+
+      <ui-card>
+
+        <h3>HStack</h3>
+
+        <ui-hstack justify="between" align="center" gap="lg">
+
+          <ui-badge color="success">
+            Active
+          </ui-badge>
+
+          <ui-button>
+            Edit
+          </ui-button>
+
+        </ui-hstack>
+
+      </ui-card>
+
+      <!-- VStack -->
+
+      <ui-card>
+
+        <h3>VStack</h3>
+
+        <ui-vstack gap="md">
+
+          <ui-input label="First Name" placeholder="John">
+          </ui-input>
+
+          <ui-input label="Last Name" placeholder="Doe">
+          </ui-input>
+
+          <ui-button>
+            Save
+          </ui-button>
+
+        </ui-vstack>
+
+      </ui-card>
+
+      <!-- Nested Layout -->
+
+      <ui-card>
+
+        <h3>Nested Layout</h3>
+
+        <ui-vstack gap="lg">
+
+          <ui-hstack justify="between" align="center">
+
+            <h4>User Profile</h4>
+
+            <ui-button size="small">
+              Edit
+            </ui-button>
+
+          </ui-hstack>
+
+          <ui-divider></ui-divider>
+
+          <ui-vstack gap="sm">
+
+            <span>Username: admin</span>
+
+            <span>Email: admin&#64;test.com</span>
+
+            <span>Role: Administrator</span>
+
+          </ui-vstack>
+
+        </ui-vstack>
+
+      </ui-card>
+
+      <!-- Wrapping -->
+
+      <ui-card>
+
+        <h3>Wrapping</h3>
+
+        <ui-hstack [wrap]="true" gap="sm">
+
+          <ui-badge>Angular</ui-badge>
+
+          <ui-badge color="success">
+            TypeScript
+          </ui-badge>
+
+          <ui-badge color="warning">
+            Signals
+          </ui-badge>
+
+          <ui-badge color="danger">
+            Standalone
+          </ui-badge>
+
+          <ui-badge>
+            AUI
+          </ui-badge>
+
+          <ui-badge color="success">
+            Business Apps
+          </ui-badge>
+
+        </ui-hstack>
+
+      </ui-card>
+
+      <!-- Alignment -->
+
+      <ui-card>
+
+        <h3>Alignment</h3>
+
+        <div style="height: 160px; border: 1px dashed var(--ui-color-border);">
+
+          <ui-stack [fullHeight]="true" justify="center" align="center">
+
+            <ui-button>
+              Centered
+            </ui-button>
+
+          </ui-stack>
+
+        </div>
+
+      </ui-card>
+
+    </div>
+
+  </section>
+
 </div>
