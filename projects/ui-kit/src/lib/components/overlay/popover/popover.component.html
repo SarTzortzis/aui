@@ -1,4 +1,4 @@
-<div class="aui-popover">
+<div class="aui-popover" (click)="$event.stopPropagation()">
 
   <ng-container *ngIf="content" [ngTemplateOutlet]="content">
   </ng-container>

@@ -149,15 +149,18 @@ components/
     layout/
     overlays/
 
+core/
+
+    overlays/
+    services/
+    tokens/
+    models/
+
 directives/
 
-models/
-
-services/
+themes/
 
 shared/
-
-themes/
 ```
 
 ---
@@ -167,6 +170,8 @@ themes/
 ## Actions
 
 - ✅ Button
+
+---
 
 ## Forms
 
@@ -178,26 +183,47 @@ themes/
 - ✅ Select
 - ✅ FormField
 
+---
+
 ## Feedback
 
 - ✅ Alert
 - ✅ Badge
 - ✅ Spinner
 - ✅ Toast Notifications
+- ✅ Loading Overlay
+
+---
 
 ## Layout
 
 - ✅ Card
 - ✅ Divider
+- ✅ Stack
+- ✅ HStack
+- ✅ VStack
+- ✅ Sidebar
+- ✅ Topbar
+- ✅ Page
+- ✅ Page Header
+
+---
 
 ## Display
 
 - ✅ Icon
 
+---
+
 ## Overlays
 
-- ✅ Dialog
-- ✅ Loading Overlay
+- ✅ Tooltip _(v1)_
+- 🚧 Popover _(in progress)_
+- 🚧 Dropdown Menu
+- 🚧 Context Menu
+- 🚧 Dialog Improvements
+
+---
 
 ## Data
 
@@ -223,15 +249,16 @@ Current capabilities:
 
 # Infrastructure
 
-- Theme System
-- Design Tokens
-- ThemeService
-- StorageService
-- NotificationService
-- LoadingService
-- Base ControlValueAccessor
-- ClickOutside Directive
-- Interactive Playground
+- ✅ Theme System
+- ✅ Design Tokens
+- ✅ ThemeService
+- ✅ StorageService
+- ✅ NotificationService
+- ✅ LoadingService
+- ✅ Overlay Infrastructure
+- ✅ Base ControlValueAccessor
+- ✅ ClickOutside Directive
+- ✅ Interactive Playground
 
 ---
 
@@ -247,22 +274,69 @@ Dark mode overrides only the tokens that differ, making future themes inexpensiv
 
 # Development Workflow
 
-Every feature follows the same lifecycle.
+Every reusable feature follows the same lifecycle.
 
 1. Public API
-2. Accessibility
-3. Implementation
-4. Playground
-5. Documentation
-6. Refactoring
+2. Architecture
+3. Accessibility
+4. Implementation
+5. Playground
+6. Documentation
+7. Refactoring
+
+---
+
+# Current Status
+
+AUI has reached its **first stable foundation**.
+
+The core infrastructure is considered stable and future work will primarily focus on expanding the component catalog rather than redesigning the platform.
+
+Current development is focused on completing the **Core UI Layer** before starting the first production application (**Barber Pro**).
 
 ---
 
 # Roadmap
 
-## DataGrid Phase 3
+## Core UI
 
-The remaining enterprise features are:
+### Overlays
+
+- ✅ Tooltip
+- 🚧 Popover
+- ⏳ Dropdown Menu
+- ⏳ Context Menu
+- ⏳ Dialog Improvements
+
+### Navigation
+
+- Tabs
+- Breadcrumb
+- Standalone Pagination
+
+### Feedback
+
+- Skeleton
+- Progress Bar
+- Empty State
+
+### Forms
+
+- Search Input
+- Autocomplete
+- Date Picker
+
+### Display
+
+- Avatar
+- Chip
+- Statistic Card
+
+---
+
+## DataGrid Enterprise Phase
+
+Future capabilities:
 
 - Sticky Header
 - Column Resizing
@@ -277,24 +351,6 @@ The remaining enterprise features are:
 - Tree Data
 - Drag & Drop Columns
 - Inline Editing
-
----
-
-## Upcoming Components
-
-High priority:
-
-- Stack
-- HStack
-- VStack
-- Toolbar
-- Drawer
-- Tabs
-- Search Input
-- Empty State Component
-- Statistic Card
-- Confirm Dialog
-- Page Header
 
 ---
 

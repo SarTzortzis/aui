@@ -36,8 +36,23 @@ export class PopoverDirective {
     this.open();
   }
 
-  @HostListener("document:click")
-  onDocumentClick(): void {
+  @HostListener("document:click", ["$event"])
+  onDocumentClick(event: MouseEvent): void {
+    if (!this.overlayRef) {
+      return;
+    }
+
+    const target = event.target as Node;
+
+    const trigger = this.elementRef.nativeElement;
+
+    const popover = this.overlayRef.getComponentRef<PopoverComponent>().location
+      .nativeElement as HTMLElement;
+
+    if (trigger.contains(target) || popover.contains(target)) {
+      return;
+    }
+
     this.close();
   }
 
@@ -56,9 +71,9 @@ export class PopoverDirective {
       position: "bottom",
     });
 
-    const popover = this.overlayRef.getComponentRef<PopoverComponent>();
+    const component = this.overlayRef.getComponentRef<PopoverComponent>();
 
-    popover.setInput("content", this.content);
+    component.setInput("content", this.content);
   }
 
   private close(): void {
