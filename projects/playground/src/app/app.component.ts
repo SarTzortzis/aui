@@ -28,6 +28,7 @@ import {
   TextareaComponent,
   ThemeService,
   ToastContainerComponent,
+  TopbarComponent,
   VStackComponent,
   column,
 } from "ui-kit";
@@ -68,6 +69,7 @@ import {
     PageComponent,
     PageHeaderComponent,
     SidebarComponent,
+    TopbarComponent,
   ],
   templateUrl: "./app.component.html",
   styleUrl: "./app.component.css",

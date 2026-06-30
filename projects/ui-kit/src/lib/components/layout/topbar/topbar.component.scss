@@ -1,0 +1,28 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.ui-topbar {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+
+  padding: 0 var(--ui-spacing-lg);
+
+  background: var(--ui-color-surface);
+
+  border-bottom: 1px solid var(--ui-color-border);
+
+  box-sizing: border-box;
+}
+
+.ui-topbar__start,
+.ui-topbar__end {
+  display: flex;
+  align-items: center;
+  gap: var(--ui-spacing-md);
+}
