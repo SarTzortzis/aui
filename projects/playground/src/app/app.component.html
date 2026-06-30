@@ -337,6 +337,8 @@
 
   <!-- OVERLAYS -->
 
+  <!-- OVERLAYS -->
+
   <section class="playground-section">
 
     <h2 class="playground-section__title">
@@ -345,29 +347,31 @@
 
     <div class="playground-grid">
 
+      <!-- Tooltip -->
+
       <ui-card>
 
-        <h3>Tooltips</h3>
+        <h3>Tooltip</h3>
 
         <ui-vstack gap="md">
 
-          <ui-button auiTooltip="This is a tooltip">
+          <ui-button auiTooltip="Default tooltip">
             Default
           </ui-button>
 
-          <ui-button auiTooltip="Tooltip on top" tooltipPosition="top">
+          <ui-button auiTooltip="Appears above" tooltipPosition="top">
             Top
           </ui-button>
 
-          <ui-button auiTooltip="Tooltip on bottom" tooltipPosition="bottom">
+          <ui-button auiTooltip="Appears below" tooltipPosition="bottom">
             Bottom
           </ui-button>
 
-          <ui-button auiTooltip="Tooltip on left" tooltipPosition="left">
+          <ui-button auiTooltip="Appears left" tooltipPosition="left">
             Left
           </ui-button>
 
-          <ui-button auiTooltip="Tooltip on right" tooltipPosition="right">
+          <ui-button auiTooltip="Appears right" tooltipPosition="right">
             Right
           </ui-button>
 
@@ -375,11 +379,81 @@
             Delayed
           </ui-button>
 
-          <ui-button auiTooltip="You should never see this" [tooltipDisabled]="true">
+          <ui-button auiTooltip="Hidden" [tooltipDisabled]="true">
             Disabled
           </ui-button>
 
         </ui-vstack>
+
+      </ui-card>
+
+      <!-- Popover -->
+
+      <!-- Popover -->
+
+      <ui-card>
+
+        <h3>Popover</h3>
+
+        <ng-template #basicPopover>
+
+          <ui-vstack gap="md">
+
+            <h2>
+              User Actions
+            </h2>
+
+            <ui-divider></ui-divider>
+
+            <ui-button>
+              Edit
+            </ui-button>
+
+            <ui-button>
+              Duplicate
+            </ui-button>
+
+            <ui-button color="danger">
+              Delete
+            </ui-button>
+
+          </ui-vstack>
+
+        </ng-template>
+
+        <ui-button [auiPopover]="basicPopover">
+
+          Open Popover
+
+        </ui-button>
+
+      </ui-card>
+
+      <!-- Dropdown -->
+
+      <ui-card>
+
+        <h3>Dropdown Menu</h3>
+
+        <p style="opacity:.7">
+
+          Coming next...
+
+        </p>
+
+      </ui-card>
+
+      <!-- Context Menu -->
+
+      <ui-card>
+
+        <h3>Context Menu</h3>
+
+        <p style="opacity:.7">
+
+          Coming next...
+
+        </p>
 
       </ui-card>
 
