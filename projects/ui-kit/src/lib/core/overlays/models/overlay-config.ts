@@ -1,3 +1,5 @@
+import { OverlayPositionName } from "./overlay-position";
+
 export interface OverlayConfig {
   /**
    * Element the overlay should be attached to.
@@ -53,5 +55,3 @@ export interface OverlayConfig {
   maxWidth?: number | string;
   maxHeight?: number | string;
 }
-
-export type OverlayPositionName = "top" | "bottom" | "left" | "right";

@@ -11,6 +11,7 @@ import {
 import { OverlayConfig } from "../models/overlay-config";
 import { OverlayRef } from "../models/overlay-ref";
 import { AUI_OVERLAY_CONFIG, AUI_OVERLAY_REF } from "../tokens/overlay.tokens";
+import { OverlayPositionName } from "../models/overlay-position";
 
 @Injectable({
   providedIn: "root",
@@ -85,40 +86,95 @@ export class OverlayService {
       return;
     }
 
-    const rect = config.origin.getBoundingClientRect();
+    requestAnimationFrame(() => {
+      const rect = config.origin!.getBoundingClientRect();
+      const overlayRect = element.getBoundingClientRect();
 
-    const offset = config.offset ?? 8;
+      const offset = config.offset ?? 8;
+      const margin = 8;
 
-    element.style.position = "fixed";
+      let position = config.position ?? "top";
 
-    switch (config.position) {
-      case "bottom":
-        element.style.left = `${rect.left}px`;
-        element.style.top = `${rect.bottom + offset}px`;
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
 
-        break;
+      const calculate = (position: OverlayPositionName) => {
+        switch (position) {
+          case "bottom":
+            return {
+              top: rect.bottom + offset,
+              left: rect.left + (rect.width - overlayRect.width) / 2,
+            };
 
-      case "left":
-        element.style.left = `${rect.left - element.offsetWidth - offset}px`;
-        element.style.top = `${rect.top}px`;
+          case "left":
+            return {
+              top: rect.top + (rect.height - overlayRect.height) / 2,
+              left: rect.left - overlayRect.width - offset,
+            };
 
-        break;
+          case "right":
+            return {
+              top: rect.top + (rect.height - overlayRect.height) / 2,
+              left: rect.right + offset,
+            };
 
-      case "right":
-        element.style.left = `${rect.right + offset}px`;
-        element.style.top = `${rect.top}px`;
+          case "top":
+          default:
+            return {
+              top: rect.top - overlayRect.height - offset,
+              left: rect.left + (rect.width - overlayRect.width) / 2,
+            };
+        }
+      };
 
-        break;
+      const fits = (top: number, left: number) => {
+        return (
+          top >= margin &&
+          left >= margin &&
+          top + overlayRect.height <= viewportHeight - margin &&
+          left + overlayRect.width <= viewportWidth - margin
+        );
+      };
 
-      case "top":
-      default:
-        element.style.left = `${rect.left}px`;
-        element.style.top = `${rect.top - element.offsetHeight - offset}px`;
+      let coordinates = calculate(position);
 
-        break;
-    }
+      if (!fits(coordinates.top, coordinates.left)) {
+        switch (position) {
+          case "top":
+            position = "bottom";
+            break;
+
+          case "bottom":
+            position = "top";
+            break;
+
+          case "left":
+            position = "right";
+            break;
+
+          case "right":
+            position = "left";
+            break;
+        }
+
+        coordinates = calculate(position);
+      }
+
+      coordinates.top = Math.min(
+        Math.max(coordinates.top, margin),
+        viewportHeight - overlayRect.height - margin,
+      );
+
+      coordinates.left = Math.min(
+        Math.max(coordinates.left, margin),
+        viewportWidth - overlayRect.width - margin,
+      );
+
+      element.style.position = "fixed";
+      element.style.top = `${coordinates.top}px`;
+      element.style.left = `${coordinates.left}px`;
+    });
   }
-
   private dispose(
     componentRef: ComponentRef<unknown>,
     overlayRef: OverlayRef,

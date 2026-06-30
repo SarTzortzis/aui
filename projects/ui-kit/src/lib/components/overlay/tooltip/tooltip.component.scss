@@ -1,9 +1,13 @@
 :host {
-  display: block;
+  position: fixed;
+
+  display: inline-block;
 
   pointer-events: none;
 
   user-select: none;
+
+  z-index: 1000;
 }
 
 .aui-tooltip {
@@ -23,7 +27,7 @@
   font-size: 0.75rem;
   line-height: 1.4;
 
-  box-shadow: var(--ui-shadow-lg);
-
   white-space: nowrap;
+
+  box-shadow: var(--ui-shadow-lg);
 }
