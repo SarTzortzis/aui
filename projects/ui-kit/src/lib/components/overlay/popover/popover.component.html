@@ -1,4 +1,5 @@
-<div class="aui-popover" (click)="$event.stopPropagation()">
+<div class="aui-popover" tabindex="-1" [attr.role]="role" [attr.aria-label]="ariaLabel"
+  [attr.aria-labelledby]="ariaLabelledBy" [attr.aria-describedby]="ariaDescribedBy">
 
   <ng-container *ngIf="content" [ngTemplateOutlet]="content">
   </ng-container>

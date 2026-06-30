@@ -25,6 +25,14 @@
   box-shadow: var(--ui-shadow-lg);
 
   animation: aui-popover-enter 140ms ease-out;
+
+  outline: none;
+}
+
+.aui-popover:focus-visible {
+  box-shadow:
+    var(--ui-shadow-lg),
+    0 0 0 2px var(--ui-color-primary);
 }
 
 @keyframes aui-popover-enter {

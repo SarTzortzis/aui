@@ -37,6 +37,12 @@ export interface OverlayConfig {
   restoreFocus?: boolean;
 
   /**
+   * Invoked when the origin element is no longer
+   * available or visible in the viewport.
+   */
+  onOriginHidden?: () => void;
+
+  /**
    * Panel css classes.
    */
   panelClass?: string | string[];

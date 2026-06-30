@@ -19,6 +19,8 @@ import { OverlayPositionName } from "../models/overlay-position";
 export class OverlayService {
   private readonly overlays = new Set<OverlayRef>();
 
+  private readonly cleanupMap = new WeakMap<OverlayRef, () => void>();
+
   private hostElement: HTMLElement | null = null;
 
   constructor(
@@ -60,6 +62,12 @@ export class OverlayService {
 
     this.positionOverlay(componentRef.location.nativeElement, config);
 
+    this.registerAutoPositioning(
+      componentRef.location.nativeElement,
+      config,
+      overlayRef,
+    );
+
     this.overlays.add(overlayRef);
 
     return overlayRef;
@@ -81,22 +89,74 @@ export class OverlayService {
     this.hostElement = element;
   }
 
-  private positionOverlay(element: HTMLElement, config: OverlayConfig): void {
+  private registerAutoPositioning(
+    element: HTMLElement,
+    config: OverlayConfig,
+    overlayRef: OverlayRef,
+  ): void {
     if (!config.origin) {
       return;
     }
 
+    const update = () => {
+      const positioned = this.positionOverlay(element, config);
+
+      if (!positioned) {
+        config.onOriginHidden?.();
+      }
+    };
+
+    window.addEventListener("scroll", update, true);
+    window.addEventListener("resize", update);
+
+    this.cleanupMap.set(overlayRef, () => {
+      window.removeEventListener("scroll", update, true);
+      window.removeEventListener("resize", update);
+    });
+  }
+
+  private positionOverlay(
+    element: HTMLElement,
+    config: OverlayConfig,
+  ): boolean {
+    if (!config.origin) {
+      return false;
+    }
+
     requestAnimationFrame(() => {
-      const rect = config.origin!.getBoundingClientRect();
+      if (!config.origin) {
+        return;
+      }
+
+      if (!document.body.contains(config.origin)) {
+        return;
+      }
+
+      const rect = config.origin.getBoundingClientRect();
+
+      if (rect.width === 0 || rect.height === 0) {
+        return;
+      }
+
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+
+      const visible =
+        rect.bottom > 0 &&
+        rect.right > 0 &&
+        rect.top < viewportHeight &&
+        rect.left < viewportWidth;
+
+      if (!visible) {
+        return;
+      }
+
       const overlayRect = element.getBoundingClientRect();
 
       const offset = config.offset ?? 8;
       const margin = 8;
 
       let position = config.position ?? "top";
-
-      const viewportWidth = window.innerWidth;
-      const viewportHeight = window.innerHeight;
 
       const calculate = (position: OverlayPositionName) => {
         switch (position) {
@@ -127,14 +187,11 @@ export class OverlayService {
         }
       };
 
-      const fits = (top: number, left: number) => {
-        return (
-          top >= margin &&
-          left >= margin &&
-          top + overlayRect.height <= viewportHeight - margin &&
-          left + overlayRect.width <= viewportWidth - margin
-        );
-      };
+      const fits = (top: number, left: number) =>
+        top >= margin &&
+        left >= margin &&
+        top + overlayRect.height <= viewportHeight - margin &&
+        left + overlayRect.width <= viewportWidth - margin;
 
       let coordinates = calculate(position);
 
@@ -174,11 +231,34 @@ export class OverlayService {
       element.style.top = `${coordinates.top}px`;
       element.style.left = `${coordinates.left}px`;
     });
+
+    if (!document.body.contains(config.origin)) {
+      return false;
+    }
+
+    const rect = config.origin.getBoundingClientRect();
+
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+
+    return (
+      rect.width > 0 &&
+      rect.height > 0 &&
+      rect.bottom > 0 &&
+      rect.right > 0 &&
+      rect.top < viewportHeight &&
+      rect.left < viewportWidth
+    );
   }
+
   private dispose(
     componentRef: ComponentRef<unknown>,
     overlayRef: OverlayRef,
   ): void {
+    this.cleanupMap.get(overlayRef)?.();
+
+    this.cleanupMap.delete(overlayRef);
+
     this.appRef.detachView(componentRef.hostView);
 
     componentRef.destroy();

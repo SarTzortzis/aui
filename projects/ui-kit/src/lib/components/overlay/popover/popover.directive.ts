@@ -8,7 +8,6 @@ import {
 } from "@angular/core";
 
 import { OverlayRef, OverlayService } from "../../../core/overlays";
-
 import { PopoverComponent } from "./popover.component";
 
 @Directive({
@@ -21,19 +20,28 @@ export class PopoverDirective {
 
   private overlayRef?: OverlayRef;
 
+  private previouslyFocused?: HTMLElement;
+
   @Input("auiPopover")
   content?: TemplateRef<unknown>;
+
+  @Input()
+  auiPopoverRole = "dialog";
+
+  @Input()
+  auiPopoverAriaLabel?: string;
+
+  @Input()
+  auiPopoverAriaLabelledBy?: string;
+
+  @Input()
+  auiPopoverAriaDescribedBy?: string;
 
   @HostListener("click", ["$event"])
   onClick(event: MouseEvent): void {
     event.stopPropagation();
 
-    if (this.overlayRef) {
-      this.close();
-      return;
-    }
-
-    this.open();
+    this.toggle();
   }
 
   @HostListener("document:click", ["$event"])
@@ -61,24 +69,57 @@ export class PopoverDirective {
     this.close();
   }
 
-  private open(): void {
-    if (!this.content) {
+  open(): void {
+    if (!this.content || this.overlayRef) {
       return;
     }
+
+    this.previouslyFocused = document.activeElement as HTMLElement;
 
     this.overlayRef = this.overlayService.open(PopoverComponent, {
       origin: this.elementRef.nativeElement,
       position: "bottom",
+      onOriginHidden: () => this.close(),
     });
 
     const component = this.overlayRef.getComponentRef<PopoverComponent>();
 
     component.setInput("content", this.content);
+    component.setInput("role", this.auiPopoverRole);
+    component.setInput("ariaLabel", this.auiPopoverAriaLabel);
+    component.setInput("ariaLabelledBy", this.auiPopoverAriaLabelledBy);
+    component.setInput("ariaDescribedBy", this.auiPopoverAriaDescribedBy);
+
+    const trigger = this.elementRef.nativeElement;
+
+    trigger.setAttribute("aria-expanded", "true");
+
+    queueMicrotask(() => {
+      (component.location.nativeElement as HTMLElement)
+        .querySelector<HTMLElement>(".aui-popover")
+        ?.focus();
+    });
   }
 
-  private close(): void {
-    this.overlayRef?.close();
+  close(): void {
+    if (!this.overlayRef) {
+      return;
+    }
+
+    const overlayRef = this.overlayRef;
 
     this.overlayRef = undefined;
+
+    overlayRef.close();
+
+    const trigger = this.elementRef.nativeElement;
+
+    trigger.setAttribute("aria-expanded", "false");
+
+    this.previouslyFocused?.focus();
+  }
+
+  toggle(): void {
+    this.overlayRef ? this.close() : this.open();
   }
 }

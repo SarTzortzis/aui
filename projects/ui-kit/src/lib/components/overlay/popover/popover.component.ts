@@ -17,4 +17,16 @@ import { NgIf, NgTemplateOutlet } from "@angular/common";
 export class PopoverComponent {
   @Input()
   content?: TemplateRef<unknown>;
+
+  @Input()
+  role = "dialog";
+
+  @Input()
+  ariaLabel?: string;
+
+  @Input()
+  ariaLabelledBy?: string;
+
+  @Input()
+  ariaDescribedBy?: string;
 }
