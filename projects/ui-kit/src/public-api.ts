@@ -34,6 +34,8 @@ export * from "./lib/components/layout/divider";
 export * from "./lib/components/layout/stack";
 export * from "./lib/components/layout/vstack";
 export * from "./lib/components/layout/hstack";
+export * from "./lib/components/layout/page";
+export * from "./lib/components/layout/pageHeader";
 
 /* Services */
 export * from "./lib/services/theme";

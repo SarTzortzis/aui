@@ -1,0 +1,42 @@
+:host {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.ui-page {
+  width: 100%;
+  padding: var(--ui-spacing-xl);
+}
+
+/* Max Width */
+
+.ui-page--sm {
+  max-width: 720px;
+}
+
+.ui-page--md {
+  max-width: 960px;
+}
+
+.ui-page--lg {
+  max-width: 1200px;
+}
+
+.ui-page--xl {
+  max-width: 1440px;
+}
+
+/* Layout */
+
+.ui-page--centered {
+  margin-inline: auto;
+}
+
+.ui-page--fluid {
+  max-width: none;
+}
+
+.ui-page--no-padding {
+  padding: 0;
+}

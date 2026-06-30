@@ -1,0 +1,25 @@
+<ui-hstack justify="between" align="center" gap="lg">
+
+  <ui-vstack gap="xs">
+
+    <h1 class="ui-page-header__title">
+      {{ title }}
+    </h1>
+
+    @if (subtitle) {
+
+    <p class="ui-page-header__subtitle">
+      {{ subtitle }}
+    </p>
+
+    }
+
+  </ui-vstack>
+
+  <ui-hstack gap="sm">
+
+    <ng-content></ng-content>
+
+  </ui-hstack>
+
+</ui-hstack>
