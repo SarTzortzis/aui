@@ -3,6 +3,7 @@ import { RouterOutlet } from "@angular/router";
 
 import {
   AlertComponent,
+  AppLayoutComponent,
   BadgeComponent,
   ButtonComponent,
   CardComponent,
