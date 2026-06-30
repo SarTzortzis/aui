@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
+import { OverlayPositionName } from "../../../core/overlays/models/overlay-position";
 
 @Component({
   selector: "aui-tooltip",
@@ -10,4 +11,6 @@ import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
 export class TooltipComponent {
   @Input({ required: true })
   text = "";
+  @Input()
+  placement: OverlayPositionName = "top";
 }

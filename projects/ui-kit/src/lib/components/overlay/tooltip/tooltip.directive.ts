@@ -6,8 +6,9 @@ import {
   inject,
 } from "@angular/core";
 
-import { TooltipComponent } from "./tooltip.component";
+import { OverlayPositionName } from "../../../core/overlays/models/overlay-position";
 import { OverlayRef, OverlayService } from "../../../core/overlays";
+import { TooltipComponent } from "./tooltip.component";
 
 @Directive({
   selector: "[auiTooltip]",
@@ -15,7 +16,7 @@ import { OverlayRef, OverlayService } from "../../../core/overlays";
 })
 export class TooltipDirective {
   private readonly elementRef = inject(ElementRef<HTMLElement>);
-  private readonly overlay = inject(OverlayService);
+  private readonly overlayService = inject(OverlayService);
 
   private overlayRef?: OverlayRef;
 
@@ -26,7 +27,7 @@ export class TooltipDirective {
   text = "";
 
   @Input()
-  tooltipPosition: "top" | "bottom" | "left" | "right" = "top";
+  tooltipPosition: OverlayPositionName = "top";
 
   @Input()
   tooltipDisabled = false;
@@ -68,25 +69,28 @@ export class TooltipDirective {
     }
 
     window.clearTimeout(this.hideTimeout);
+    window.clearTimeout(this.showTimeout);
 
     this.showTimeout = window.setTimeout(() => {
       if (this.overlayRef) {
         return;
       }
 
-      this.overlayRef = this.overlay.open(TooltipComponent, {
+      this.overlayRef = this.overlayService.open(TooltipComponent, {
         origin: this.elementRef.nativeElement,
         position: this.tooltipPosition,
       });
 
-      this.overlayRef
-        .getComponentRef<TooltipComponent>()
-        .setInput("text", this.text);
+      const tooltip = this.overlayRef.getComponentRef<TooltipComponent>();
+
+      tooltip.setInput("text", this.text);
+      tooltip.setInput("placement", this.tooltipPosition);
     }, this.showDelay);
   }
 
   private hide(): void {
     window.clearTimeout(this.showTimeout);
+    window.clearTimeout(this.hideTimeout);
 
     this.hideTimeout = window.setTimeout(() => {
       this.hideImmediately();
@@ -94,8 +98,15 @@ export class TooltipDirective {
   }
 
   private hideImmediately(): void {
-    this.overlayRef?.close();
+    window.clearTimeout(this.showTimeout);
+    window.clearTimeout(this.hideTimeout);
+
+    const overlay = this.overlayRef;
 
     this.overlayRef = undefined;
+
+    window.setTimeout(() => {
+      overlay?.close();
+    }, 100);
   }
 }
