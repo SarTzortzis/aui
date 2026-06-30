@@ -4,7 +4,7 @@ import { NotificationService } from "../../../services/notification";
 import { ToastComponent } from "./toast.component";
 
 @Component({
-  selector: "aui-toast-container",
+  selector: "ui-toast-container",
   standalone: true,
   templateUrl: "./toast-container.component.html",
   styleUrl: "./toast-container.component.scss",

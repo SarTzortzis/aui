@@ -9,7 +9,7 @@ import { Notification } from "../../../services/notification";
 import { NotificationService } from "../../../services/notification";
 
 @Component({
-  selector: "aui-toast",
+  selector: "ui-toast",
   standalone: true,
   templateUrl: "./toast.component.html",
   styleUrl: "./toast.component.scss",

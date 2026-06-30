@@ -11,7 +11,7 @@ import {
 import { OverlayService } from "../services/overlay.service";
 
 @Component({
-  selector: "aui-overlay-container",
+  selector: "ui-overlay-container",
   standalone: true,
   templateUrl: "./overlay-container.component.html",
   styleUrls: ["./overlay-container.component.scss"],

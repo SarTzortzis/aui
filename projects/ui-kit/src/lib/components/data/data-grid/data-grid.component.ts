@@ -13,7 +13,7 @@ import { SelectComponent } from "../../forms/select";
 import { SpinnerComponent } from "../../feedback/spinner";
 
 @Component({
-  selector: "aui-data-grid",
+  selector: "ui-data-grid",
   standalone: true,
   templateUrl: "./data-grid.component.html",
   styleUrl: "./data-grid.component.scss",

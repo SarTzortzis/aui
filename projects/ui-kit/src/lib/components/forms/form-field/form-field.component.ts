@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from "@angular/core";
 
 @Component({
-  selector: "aui-form-field",
+  selector: "ui-form-field",
   standalone: true,
   templateUrl: "./form-field.component.html",
   styleUrl: "./form-field.component.scss",

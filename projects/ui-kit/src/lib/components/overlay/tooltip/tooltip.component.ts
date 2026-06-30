@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
 import { OverlayPositionName } from "../../../core/overlays/models/overlay-position";
 
 @Component({
-  selector: "aui-tooltip",
+  selector: "ui-tooltip",
   standalone: true,
   templateUrl: "./tooltip.component.html",
   styleUrls: ["./tooltip.component.scss"],

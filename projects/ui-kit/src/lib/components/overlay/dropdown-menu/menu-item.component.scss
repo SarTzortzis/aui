@@ -1,0 +1,40 @@
+:host {
+  display: block;
+}
+
+.ui-menu-item {
+  display: flex;
+  align-items: center;
+
+  gap: .75rem;
+
+  min-height: 2.25rem;
+
+  padding: .5rem .75rem;
+
+  border-radius: var(--ui-border-radius-sm);
+
+  cursor: pointer;
+
+  transition:
+    background-color 150ms ease,
+    color 150ms ease;
+}
+
+:host(:not(.ui-menu-item-disabled)):hover .ui-menu-item {
+  background: var(--ui-color-surface-hover);
+}
+
+:host(:focus-visible) .ui-menu-item {
+  outline: none;
+  background: var(--ui-color-surface-hover);
+}
+
+:host(.ui-menu-item-danger) {
+  color: var(--ui-color-danger);
+}
+
+:host(.ui-menu-item-disabled) {
+  opacity: .45;
+  pointer-events: none;
+}

@@ -10,12 +10,15 @@ import {
   DataGridComponent,
   DialogComponent,
   DividerComponent,
+  DropdownMenuComponent,
+  DropdownMenuDirective,
   FormFieldComponent,
   HStackComponent,
   IconComponent,
   InputComponent,
   LoadingOverlayComponent,
   LoadingService,
+  MenuItemComponent,
   NotificationService,
   PageComponent,
   PageHeaderComponent,
@@ -33,8 +36,8 @@ import {
   TooltipComponent,
   TopbarComponent,
   VStackComponent,
-  column,
 } from "ui-kit";
+
 import {
   COUNTRIES,
   STATUS_OPTIONS,
@@ -42,6 +45,7 @@ import {
   USERS,
   USER_ACTIONS,
 } from "./mock-data";
+
 import { TooltipDirective } from "../../../ui-kit/src/lib/components/overlay/tooltip/tooltip.directive";
 
 @Component({
@@ -49,24 +53,32 @@ import { TooltipDirective } from "../../../ui-kit/src/lib/components/overlay/too
   standalone: true,
   imports: [
     RouterOutlet,
+
+    // Actions
     ButtonComponent,
+
+    // Forms
     InputComponent,
     TextareaComponent,
     CheckboxComponent,
     SwitchComponent,
-    CardComponent,
-    BadgeComponent,
-    DividerComponent,
-    SpinnerComponent,
     RadioGroupComponent,
     SelectComponent,
-    IconComponent,
-    AlertComponent,
-    DialogComponent,
     FormFieldComponent,
+
+    // Feedback
+    AlertComponent,
+    BadgeComponent,
+    SpinnerComponent,
     ToastContainerComponent,
     LoadingOverlayComponent,
-    DataGridComponent,
+
+    // Display
+    IconComponent,
+
+    // Layout
+    CardComponent,
+    DividerComponent,
     StackComponent,
     VStackComponent,
     HStackComponent,
@@ -74,10 +86,22 @@ import { TooltipDirective } from "../../../ui-kit/src/lib/components/overlay/too
     PageHeaderComponent,
     SidebarComponent,
     TopbarComponent,
+
+    // Data
+    DataGridComponent,
+
+    // Overlays
     TooltipComponent,
     TooltipDirective,
+
     PopoverComponent,
     PopoverDirective,
+
+    DropdownMenuComponent,
+    DropdownMenuDirective,
+    MenuItemComponent,
+
+    DialogComponent,
   ],
   templateUrl: "./app.component.html",
   styleUrl: "./app.component.css",
@@ -100,11 +124,8 @@ export class AppComponent {
   }
 
   readonly countries = COUNTRIES;
-
   readonly statusOptions = STATUS_OPTIONS;
-
   readonly users = USERS;
-
   readonly columns = USER_COLUMNS;
   readonly userActions = USER_ACTIONS;
 
@@ -133,6 +154,7 @@ export class AppComponent {
       new Promise((resolve) => setTimeout(resolve, 3000)),
     );
   }
+
   onRowClick(row: Record<string, unknown>): void {
     console.log("Row Click:", row);
   }
@@ -144,6 +166,7 @@ export class AppComponent {
   onLargeButtonClick(): void {
     console.log("Large button clicked!");
   }
+
   onRowAction(event: { action: string; row: Record<string, unknown> }): void {
     console.log(event.action, event.row);
   }

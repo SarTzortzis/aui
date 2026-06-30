@@ -30,6 +30,7 @@ export * from "./lib/components/display/card";
 export * from "./lib/components/overlay/dialog";
 export * from "./lib/components/overlay/tooltip";
 export * from "./lib/components/overlay/popover";
+export * from "./lib/components/overlay/dropdown-menu";
 
 /* Layout */
 export * from "./lib/components/layout/divider";

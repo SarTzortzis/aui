@@ -7,7 +7,7 @@ import {
 import { NgIf, NgTemplateOutlet } from "@angular/common";
 
 @Component({
-  selector: "aui-popover",
+  selector: "ui-popover",
   standalone: true,
   templateUrl: "./popover.component.html",
   styleUrl: "./popover.component.scss",
