@@ -519,5 +519,42 @@
 
   </section>
 
+  <ui-card>
 
+    <h3>Sidebar</h3>
+
+    <div style="
+      height: 350px;
+      border: 1px solid var(--ui-color-border);
+    ">
+
+      <ui-sidebar>
+
+        <ui-button [fullWidth]="true" sidebar-header>
+          Thats the header
+        </ui-button>
+        <div sidebar-content>
+
+          <ui-button [fullWidth]="true">
+            Part of content
+          </ui-button>
+
+          <ui-button [fullWidth]="true">
+            Part of content
+          </ui-button>
+
+          <ui-button [fullWidth]="true">
+            Part of content
+          </ui-button>
+        </div>
+
+        <ui-button [fullWidth]="true" sidebar-footer>
+          Thats the footer
+        </ui-button>
+
+      </ui-sidebar>
+
+    </div>
+
+  </ui-card>
 </div>

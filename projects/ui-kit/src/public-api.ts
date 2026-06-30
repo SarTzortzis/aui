@@ -36,6 +36,7 @@ export * from "./lib/components/layout/vstack";
 export * from "./lib/components/layout/hstack";
 export * from "./lib/components/layout/page";
 export * from "./lib/components/layout/pageHeader";
+export * from "./lib/components/layout/sidebar";
 
 /* Services */
 export * from "./lib/services/theme";
