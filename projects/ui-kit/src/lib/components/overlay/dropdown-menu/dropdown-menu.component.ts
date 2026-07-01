@@ -1,12 +1,12 @@
 import {
-  AfterContentInit,
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
-  ContentChildren,
   HostListener,
   Input,
   QueryList,
   TemplateRef,
+  ViewChildren,
 } from "@angular/core";
 
 import { NgIf, NgTemplateOutlet } from "@angular/common";
@@ -18,21 +18,23 @@ import { MenuItemComponent } from "./menu-item.component";
   standalone: true,
   templateUrl: "./dropdown-menu.component.html",
   styleUrl: "./dropdown-menu.component.scss",
-  imports: [NgIf, NgTemplateOutlet],
+  imports: [NgIf, NgTemplateOutlet, MenuItemComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DropdownMenuComponent implements AfterContentInit {
+export class DropdownMenuComponent implements AfterViewInit {
   @Input()
   content: TemplateRef<unknown> | null = null;
 
-  @ContentChildren(MenuItemComponent, {
-    descendants: true,
-  })
+  @ViewChildren(MenuItemComponent)
   readonly items!: QueryList<MenuItemComponent>;
+
+  constructor() {
+    console.log("DropdownMenuComponent initialized");
+  }
 
   private activeIndex = 0;
 
-  ngAfterContentInit(): void {
+  ngAfterViewInit(): void {
     queueMicrotask(() => this.focusFirst());
   }
 

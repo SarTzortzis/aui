@@ -59,6 +59,7 @@ export class DropdownMenuDirective {
   }
 
   open(): void {
+    console.log(this.content);
     if (!this.content || this.overlayRef) {
       return;
     }
@@ -72,8 +73,12 @@ export class DropdownMenuDirective {
     });
 
     const component = this.overlayRef.getComponentRef<DropdownMenuComponent>();
+    console.log(component.instance);
+    console.log(component.location.nativeElement);
 
-    component.setInput("content", this.content);
+    component.instance.content = this.content!;
+    component.changeDetectorRef.detectChanges();
+    component.changeDetectorRef.detectChanges();
 
     const trigger = this.elementRef.nativeElement;
 
