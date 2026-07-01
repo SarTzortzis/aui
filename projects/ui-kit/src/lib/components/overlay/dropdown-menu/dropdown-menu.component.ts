@@ -28,10 +28,6 @@ export class DropdownMenuComponent implements AfterViewInit {
   @ViewChildren(MenuItemComponent)
   readonly items!: QueryList<MenuItemComponent>;
 
-  constructor() {
-    console.log("DropdownMenuComponent initialized");
-  }
-
   private activeIndex = 0;
 
   ngAfterViewInit(): void {

@@ -13,12 +13,14 @@
   border-radius: var(--ui-border-radius-md);
 
   background: var(--ui-color-surface);
+  color: var(--ui-color-text);
 
   border: 1px solid var(--ui-color-border);
 
   box-shadow: var(--ui-shadow-lg);
 
   animation: ui-menu-enter 140ms ease-out;
+  z-index: 10000;
 }
 
 @keyframes ui-menu-enter {

@@ -82,6 +82,14 @@ export class PopoverDirective {
       onOriginHidden: () => this.close(),
     });
 
+    this.overlayRef.afterClosed().subscribe(() => {
+      this.overlayRef = undefined;
+
+      this.elementRef.nativeElement.setAttribute("aria-expanded", "false");
+
+      this.previouslyFocused?.focus();
+    });
+
     const component = this.overlayRef.getComponentRef<PopoverComponent>();
 
     component.setInput("content", this.content);
@@ -106,17 +114,7 @@ export class PopoverDirective {
       return;
     }
 
-    const overlayRef = this.overlayRef;
-
-    this.overlayRef = undefined;
-
-    overlayRef.close();
-
-    const trigger = this.elementRef.nativeElement;
-
-    trigger.setAttribute("aria-expanded", "false");
-
-    this.previouslyFocused?.focus();
+    this.overlayRef.close();
   }
 
   toggle(): void {

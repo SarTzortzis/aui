@@ -18,6 +18,7 @@ import { OverlayPositionName } from "../models/overlay-position";
 })
 export class OverlayService {
   private readonly overlays = new Set<OverlayRef>();
+  private activeOverlay: OverlayRef | null = null;
 
   private readonly cleanupMap = new WeakMap<OverlayRef, () => void>();
 
@@ -31,6 +32,14 @@ export class OverlayService {
   open<T>(component: Type<T>, config: OverlayConfig = {}): OverlayRef {
     let overlayRef!: OverlayRef;
 
+    if (this.overlays.size > 0) {
+      const overlays = [...this.overlays];
+
+      // Prevent mutation while iterating.
+      this.overlays.clear();
+
+      overlays.forEach((overlay) => overlay.close());
+    }
     const injector = Injector.create({
       parent: this.environmentInjector,
       providers: [
@@ -56,17 +65,26 @@ export class OverlayService {
 
     this.appRef.attachView(componentRef.hostView);
 
+    const element = componentRef.location.nativeElement as HTMLElement;
+
+    // Prevent layout shift before positioning
+    element.style.position = "fixed";
+    element.style.top = "0";
+    element.style.left = "0";
+    element.style.visibility = "hidden";
+    element.style.pointerEvents = "none";
+
     const host = this.hostElement ?? document.body;
 
-    host.appendChild(componentRef.location.nativeElement);
+    host.appendChild(element);
 
-    this.positionOverlay(componentRef.location.nativeElement, config);
+    componentRef.changeDetectorRef.detectChanges();
 
-    this.registerAutoPositioning(
-      componentRef.location.nativeElement,
-      config,
-      overlayRef,
-    );
+    requestAnimationFrame(() => {
+      this.positionOverlay(element, config);
+    });
+
+    this.registerAutoPositioning(element, config, overlayRef);
 
     this.overlays.add(overlayRef);
 
@@ -88,6 +106,13 @@ export class OverlayService {
   setHostElement(element: HTMLElement | null): void {
     this.hostElement = element;
   }
+  closeAllExcept(except?: OverlayRef): void {
+    [...this.overlays].forEach((ref) => {
+      if (ref !== except) {
+        ref.close();
+      }
+    });
+  }
 
   private registerAutoPositioning(
     element: HTMLElement,
@@ -99,156 +124,128 @@ export class OverlayService {
     }
 
     const update = () => {
-      const positioned = this.positionOverlay(element, config);
-
-      if (!positioned) {
+      if (!config.origin?.isConnected) {
         config.onOriginHidden?.();
+        return;
       }
+
+      this.positionOverlay(element, config);
     };
 
     window.addEventListener("scroll", update, true);
     window.addEventListener("resize", update);
 
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
+          config.onOriginHidden?.();
+        }
+      },
+      {
+        threshold: 0,
+      },
+    );
+
+    observer.observe(config.origin);
+
     this.cleanupMap.set(overlayRef, () => {
       window.removeEventListener("scroll", update, true);
       window.removeEventListener("resize", update);
+
+      observer.disconnect();
     });
   }
 
-  private positionOverlay(
-    element: HTMLElement,
-    config: OverlayConfig,
-  ): boolean {
+  private positionOverlay(element: HTMLElement, config: OverlayConfig): void {
     if (!config.origin) {
-      return false;
-    }
-
-    requestAnimationFrame(() => {
-      if (!config.origin) {
-        return;
-      }
-
-      if (!document.body.contains(config.origin)) {
-        return;
-      }
-
-      const rect = config.origin.getBoundingClientRect();
-
-      if (rect.width === 0 || rect.height === 0) {
-        return;
-      }
-
-      const viewportWidth = window.innerWidth;
-      const viewportHeight = window.innerHeight;
-
-      const visible =
-        rect.bottom > 0 &&
-        rect.right > 0 &&
-        rect.top < viewportHeight &&
-        rect.left < viewportWidth;
-
-      if (!visible) {
-        return;
-      }
-
-      const overlayRect = element.getBoundingClientRect();
-
-      const offset = config.offset ?? 8;
-      const margin = 8;
-
-      let position = config.position ?? "top";
-
-      const calculate = (position: OverlayPositionName) => {
-        switch (position) {
-          case "bottom":
-            return {
-              top: rect.bottom + offset,
-              left: rect.left + (rect.width - overlayRect.width) / 2,
-            };
-
-          case "left":
-            return {
-              top: rect.top + (rect.height - overlayRect.height) / 2,
-              left: rect.left - overlayRect.width - offset,
-            };
-
-          case "right":
-            return {
-              top: rect.top + (rect.height - overlayRect.height) / 2,
-              left: rect.right + offset,
-            };
-
-          case "top":
-          default:
-            return {
-              top: rect.top - overlayRect.height - offset,
-              left: rect.left + (rect.width - overlayRect.width) / 2,
-            };
-        }
-      };
-
-      const fits = (top: number, left: number) =>
-        top >= margin &&
-        left >= margin &&
-        top + overlayRect.height <= viewportHeight - margin &&
-        left + overlayRect.width <= viewportWidth - margin;
-
-      let coordinates = calculate(position);
-
-      if (!fits(coordinates.top, coordinates.left)) {
-        switch (position) {
-          case "top":
-            position = "bottom";
-            break;
-
-          case "bottom":
-            position = "top";
-            break;
-
-          case "left":
-            position = "right";
-            break;
-
-          case "right":
-            position = "left";
-            break;
-        }
-
-        coordinates = calculate(position);
-      }
-
-      coordinates.top = Math.min(
-        Math.max(coordinates.top, margin),
-        viewportHeight - overlayRect.height - margin,
-      );
-
-      coordinates.left = Math.min(
-        Math.max(coordinates.left, margin),
-        viewportWidth - overlayRect.width - margin,
-      );
-
-      element.style.position = "fixed";
-      element.style.top = `${coordinates.top}px`;
-      element.style.left = `${coordinates.left}px`;
-    });
-
-    if (!document.body.contains(config.origin)) {
-      return false;
+      return;
     }
 
     const rect = config.origin.getBoundingClientRect();
 
+    const overlayRect = element.getBoundingClientRect();
+
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
 
-    return (
-      rect.width > 0 &&
-      rect.height > 0 &&
-      rect.bottom > 0 &&
-      rect.right > 0 &&
-      rect.top < viewportHeight &&
-      rect.left < viewportWidth
+    const offset = config.offset ?? 8;
+    const margin = 8;
+
+    let position = config.position ?? "bottom";
+
+    const calculate = (position: OverlayPositionName) => {
+      switch (position) {
+        case "top":
+          return {
+            top: rect.top - overlayRect.height - offset,
+            left: rect.left + (rect.width - overlayRect.width) / 2,
+          };
+
+        case "left":
+          return {
+            top: rect.top + (rect.height - overlayRect.height) / 2,
+            left: rect.left - overlayRect.width - offset,
+          };
+
+        case "right":
+          return {
+            top: rect.top + (rect.height - overlayRect.height) / 2,
+            left: rect.right + offset,
+          };
+
+        case "bottom":
+        default:
+          return {
+            top: rect.bottom + offset,
+            left: rect.left + (rect.width - overlayRect.width) / 2,
+          };
+      }
+    };
+
+    const fits = (top: number, left: number) =>
+      top >= margin &&
+      left >= margin &&
+      top + overlayRect.height <= viewportHeight - margin &&
+      left + overlayRect.width <= viewportWidth - margin;
+
+    let coordinates = calculate(position);
+
+    if (!fits(coordinates.top, coordinates.left)) {
+      switch (position) {
+        case "top":
+          position = "bottom";
+          break;
+
+        case "bottom":
+          position = "top";
+          break;
+
+        case "left":
+          position = "right";
+          break;
+
+        case "right":
+          position = "left";
+          break;
+      }
+
+      coordinates = calculate(position);
+    }
+
+    coordinates.top = Math.max(
+      margin,
+      Math.min(coordinates.top, viewportHeight - overlayRect.height - margin),
     );
+
+    coordinates.left = Math.max(
+      margin,
+      Math.min(coordinates.left, viewportWidth - overlayRect.width - margin),
+    );
+
+    element.style.top = `${coordinates.top}px`;
+    element.style.left = `${coordinates.left}px`;
+    element.style.visibility = "visible";
+    element.style.pointerEvents = "";
   }
 
   private dispose(

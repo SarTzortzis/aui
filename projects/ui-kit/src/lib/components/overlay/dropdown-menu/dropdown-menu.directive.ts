@@ -18,8 +18,8 @@ import { DropdownMenuComponent } from "./dropdown-menu.component";
 export class DropdownMenuDirective {
   private readonly elementRef = inject(ElementRef<HTMLElement>);
   private readonly overlayService = inject(OverlayService);
-
   private overlayRef?: OverlayRef;
+  private openingEvent?: MouseEvent;
 
   private previouslyFocused?: HTMLElement;
 
@@ -30,12 +30,23 @@ export class DropdownMenuDirective {
   onClick(event: MouseEvent): void {
     event.stopPropagation();
 
+    this.openingEvent = event;
+
     this.toggle();
+
+    queueMicrotask(() => {
+      this.openingEvent = undefined;
+    });
   }
 
   @HostListener("document:click", ["$event"])
   onDocumentClick(event: MouseEvent): void {
     if (!this.overlayRef) {
+      return;
+    }
+
+    // Ignore the click that opened this overlay.
+    if (event === this.openingEvent) {
       return;
     }
 
@@ -59,26 +70,25 @@ export class DropdownMenuDirective {
   }
 
   open(): void {
-    console.log(this.content);
     if (!this.content || this.overlayRef) {
       return;
     }
-
-    this.previouslyFocused = document.activeElement as HTMLElement;
 
     this.overlayRef = this.overlayService.open(DropdownMenuComponent, {
       origin: this.elementRef.nativeElement,
       position: "bottom",
       onOriginHidden: () => this.close(),
     });
+    this.overlayRef.afterClosed().subscribe(() => {
+      this.overlayRef = undefined;
+      this.elementRef.nativeElement.setAttribute("aria-expanded", "false");
+    });
+
+    this.previouslyFocused = document.activeElement as HTMLElement;
 
     const component = this.overlayRef.getComponentRef<DropdownMenuComponent>();
-    console.log(component.instance);
-    console.log(component.location.nativeElement);
 
-    component.instance.content = this.content!;
-    component.changeDetectorRef.detectChanges();
-    component.changeDetectorRef.detectChanges();
+    component.setInput("content", this.content);
 
     const trigger = this.elementRef.nativeElement;
 
@@ -92,22 +102,18 @@ export class DropdownMenuDirective {
     });
   }
 
-  close(): void {
+  close(restoreFocus = true): void {
     if (!this.overlayRef) {
       return;
     }
 
     const overlayRef = this.overlayRef;
 
-    this.overlayRef = undefined;
-
     overlayRef.close();
 
-    const trigger = this.elementRef.nativeElement;
-
-    trigger.setAttribute("aria-expanded", "false");
-
-    this.previouslyFocused?.focus();
+    if (restoreFocus) {
+      this.previouslyFocused?.focus();
+    }
   }
 
   toggle(): void {
