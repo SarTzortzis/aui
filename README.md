@@ -147,7 +147,7 @@ components/
     feedback/
     forms/
     layout/
-    overlays/
+    overlay/
 
 core/
 
@@ -217,11 +217,59 @@ shared/
 
 ## Overlays
 
-- ✅ Tooltip _(v1)_
-- 🚧 Popover _(in progress)_
-- 🚧 Dropdown Menu
-- 🚧 Context Menu
-- 🚧 Dialog Improvements
+### ✅ Tooltip (v1)
+
+Features:
+
+- Hover & Focus
+- Configurable delays
+- Escape to close
+- Disabled state
+- Four placements
+- Automatic flipping
+- Direction-aware arrow
+- Fade animation
+
+### ✅ Popover (v1)
+
+Features:
+
+- TemplateRef support
+- Overlay integration
+- Outside click close
+- Escape to close
+- Focus restoration
+- Accessibility support
+- Smart positioning
+- Scroll repositioning
+- Origin visibility detection
+
+### 🚧 Dropdown Menu (v1)
+
+Completed:
+
+- Overlay integration
+- TemplateRef support
+- MenuItem component
+- Divider support
+- Outside click
+- Escape to close
+- Smart positioning
+- Scroll repositioning
+- Origin visibility detection
+
+Remaining:
+
+- Keyboard navigation
+- Enter / Space activation
+- Auto close on selection
+- Disabled item navigation
+- Optional icons
+- Optional shortcuts
+
+### ⏳ Context Menu
+
+### ⏳ Dialog Improvements
 
 ---
 
@@ -249,13 +297,29 @@ Current capabilities:
 
 # Infrastructure
 
+## Theme
+
 - ✅ Theme System
 - ✅ Design Tokens
 - ✅ ThemeService
+
+## Services
+
 - ✅ StorageService
 - ✅ NotificationService
 - ✅ LoadingService
-- ✅ Overlay Infrastructure
+
+## Overlay Infrastructure
+
+- ✅ Dynamic Overlay Service
+- ✅ Automatic Positioning
+- ✅ Smart Position Flipping
+- ✅ Scroll Repositioning
+- ✅ Origin Visibility Detection
+- ✅ Focus Restoration
+
+## Shared
+
 - ✅ Base ControlValueAccessor
 - ✅ ClickOutside Directive
 - ✅ Interactive Playground
@@ -290,43 +354,51 @@ Every reusable feature follows the same lifecycle.
 
 AUI has reached its **first stable foundation**.
 
-The core infrastructure is considered stable and future work will primarily focus on expanding the component catalog rather than redesigning the platform.
+The underlying infrastructure is now considered stable.
 
-Current development is focused on completing the **Core UI Layer** before starting the first production application (**Barber Pro**).
+Future development is focused on expanding the component catalog and polishing existing APIs rather than redesigning the architecture.
+
+Current work is focused on completing the **Core UI Layer** before starting the first production application (**Barber Pro**).
 
 ---
 
 # Roadmap
 
-## Core UI
-
-### Overlays
+## Overlay Components
 
 - ✅ Tooltip
-- 🚧 Popover
-- ⏳ Dropdown Menu
+- ✅ Popover
+- 🚧 Dropdown Menu
 - ⏳ Context Menu
 - ⏳ Dialog Improvements
 
-### Navigation
+---
+
+## Navigation
 
 - Tabs
 - Breadcrumb
 - Standalone Pagination
 
-### Feedback
+---
+
+## Feedback
 
 - Skeleton
 - Progress Bar
 - Empty State
 
-### Forms
+---
+
+## Forms
 
 - Search Input
 - Autocomplete
 - Date Picker
 
-### Display
+---
+
+## Display
 
 - Avatar
 - Chip
@@ -356,9 +428,9 @@ Future capabilities:
 
 # Long-Term Vision
 
-The goal of AUI is not to replace Angular Material.
+AUI is not trying to replace Angular Material.
 
-The goal is to become the internal platform powering an ecosystem of business software.
+Its goal is to become a complete application platform for building modern business software.
 
 Every production application strengthens the platform.
 
