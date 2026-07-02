@@ -44,8 +44,10 @@ import {
   USER_COLUMNS,
   USERS,
   USER_ACTIONS,
+  CHART_DATA,
 } from "./mock-data";
 import { TooltipDirective } from "../../../ui-kit/src/lib/components/overlay/tooltip/tooltip.directive";
+import { LineChartComponent } from "aui-charts";
 
 @Component({
   selector: "app-root",
@@ -84,6 +86,7 @@ import { TooltipDirective } from "../../../ui-kit/src/lib/components/overlay/too
     MenuItemComponent,
     DropdownMenuComponent,
     DropdownMenuDirective,
+    LineChartComponent,
   ],
   templateUrl: "./app.component.html",
   styleUrl: "./app.component.css",
@@ -110,7 +113,7 @@ export class AppComponent {
   readonly statusOptions = STATUS_OPTIONS;
 
   readonly users = USERS;
-
+  readonly chartData = CHART_DATA;
   readonly columns = USER_COLUMNS;
   readonly userActions = USER_ACTIONS;
 

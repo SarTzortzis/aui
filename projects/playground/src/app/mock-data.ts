@@ -14,6 +14,17 @@ export const STATUS_OPTIONS = [
   { label: "Archived", value: "archived" },
 ];
 
+export const CHART_DATA = {
+  labels: ["January", "February", "March", "April", "May", "June", "July"],
+  datasets: [
+    {
+      label: "REVENUE",
+      data: [65, 59, 80, 81, 56, 55, 40],
+      color: "#4CAF50",
+    },
+  ],
+};
+
 export const USERS = [
   {
     id: 1,
