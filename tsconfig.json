@@ -19,10 +19,9 @@
     "module": "ES2022",
     "useDefineForClassFields": false,
     "paths": {
-      "aui-charts": [
-        "./dist/aui-charts"
-      ],
-      "ui-kit": ["./projects/ui-kit/src/public-api.ts"]
+      "ui-kit": ["./projects/ui-kit/src/public-api.ts"],
+
+      "aui-charts": ["./projects/aui-charts/src/public-api.ts"]
     },
     "lib": ["ES2022", "dom"]
   },
