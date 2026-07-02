@@ -139,28 +139,22 @@ AUI understands UI.
 # Architecture
 
 ```
-components/
+projects/
 
-    actions/
-    data/
-    display/
-    feedback/
-    forms/
-    layout/
-    overlay/
+    ui-kit/
+        components/
+        core/
+        directives/
+        shared/
+        themes/
 
-core/
+    aui-charts/
+        components/
+        core/
+        models/
+        services/
 
-    overlays/
-    services/
-    tokens/
-    models/
-
-directives/
-
-themes/
-
-shared/
+    playground/
 ```
 
 ---
@@ -295,6 +289,35 @@ Current capabilities:
 
 ---
 
+---
+
+## Visualization
+
+### 🚧 AUI Charts
+
+A dedicated visualization package built specifically for business applications.
+
+Current work:
+
+- Line Chart
+- Shared Chart Infrastructure
+- Theme Integration
+- Token-driven Styling
+
+Planned:
+
+- Bar Chart
+- Area Chart
+- Pie Chart
+- Doughnut Chart
+- Horizontal Bar Chart
+- Stacked Bar Chart
+- Mixed Charts
+- Radar Chart
+- Scatter Chart
+- Chart Cards
+- Statistic Cards
+
 # Infrastructure
 
 ## Theme
@@ -323,6 +346,13 @@ Current capabilities:
 - ✅ Base ControlValueAccessor
 - ✅ ClickOutside Directive
 - ✅ Interactive Playground
+
+## Visualization Infrastructure
+
+- 🚧 Chart Package
+- 🚧 Base Chart Component
+- 🚧 Chart Theme Service
+- 🚧 Shared Chart Models
 
 ---
 
@@ -354,11 +384,22 @@ Every reusable feature follows the same lifecycle.
 
 AUI has reached its **first stable foundation**.
 
-The underlying infrastructure is now considered stable.
+The core infrastructure and essential UI component library are now considered stable.
 
-Future development is focused on expanding the component catalog and polishing existing APIs rather than redesigning the architecture.
+Development is now expanding into dedicated packages that build on top of the existing foundation.
 
-Current work is focused on completing the **Core UI Layer** before starting the first production application (**Barber Pro**).
+The first package under active development is:
+
+- 🚧 AUI Charts
+
+Future packages include:
+
+- DataGrid Enterprise
+- AI Components
+- Maps
+- Calendar
+
+Current work is focused on completing the Core UI Layer and the Visualization package before starting the first production application.
 
 ---
 
@@ -406,6 +447,29 @@ Current work is focused on completing the **Core UI Layer** before starting the 
 
 ---
 
+#### v1
+
+- 🚧 Line Chart
+- ⏳ Bar Chart
+- ⏳ Area Chart
+- ⏳ Pie Chart
+- ⏳ Doughnut Chart
+
+#### v2
+
+- Horizontal Bar
+- Stacked Bar
+- Mixed Charts
+- Radar Chart
+- Scatter Chart
+
+#### Dashboard Components
+
+- Chart Card
+- Statistic Card
+- KPI Card
+- Sparkline
+
 ## DataGrid Enterprise Phase
 
 Future capabilities:
@@ -430,7 +494,23 @@ Future capabilities:
 
 AUI is not trying to replace Angular Material.
 
-Its goal is to become a complete application platform for building modern business software.
+Its goal is to become a complete ecosystem for building modern business applications.
+
+The platform is organized into focused packages that share the same architecture, design language and developer experience.
+
+Current ecosystem:
+
+- UI Kit
+- AUI Charts
+- Interactive Playground
+
+Future ecosystem:
+
+- DataGrid Enterprise
+- AI Components
+- Maps
+- Calendar
+- Dashboard Components
 
 Every production application strengthens the platform.
 
